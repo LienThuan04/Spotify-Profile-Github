@@ -1,0 +1,28 @@
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, progress, empty_art with context %}
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="{{height}}" viewBox="0 0 400 {{height}}" role="img">
+  <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
+  <foreignObject width="400" height="{{height}}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-bar{% if title_text == 'Not playing' %} offline{% endif %}">
+      <style>
+        {{styles()}}
+        .spotify-bar { padding: 16px; display: flex; gap: 14px; align-items: center; }
+        .art { width: 80px; height: 80px; border-radius: 4px; }
+        .label { font-size: 9px; line-height: 12px; margin-bottom: 4px; }
+        .artist { margin-top: 2px; }
+        .logo { align-self: flex-start; width: 20px; height: 20px; }
+        .progress-inline { margin-top: 10px; display: flex; align-items: center; gap: 8px; }
+        .progress-inline .track { flex: 1; }
+        .progress-inline .times { margin: 0; }
+        .song-row .eq { max-width: 64px; }
+      </style>
+      {% if cover_image %}<img class="art" src="data:image/png;base64,{{img}}" alt="Album cover"/>{% elif title_text == 'Not playing' %}{{empty_art()}}{% endif %}
+      <div class="details">
+        <div class="label">{{title_text|upper}}</div>
+        <div class="song-row">{{equalizer()}}<div class="song">{{song_name}}</div></div>
+        <div class="artist">{{artist_name}}</div>
+        {{progress(inline=true)}}
+      </div>
+      {{logo()}}
+    </div>
+  </foreignObject>
+</svg>

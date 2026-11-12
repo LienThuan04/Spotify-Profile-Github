@@ -123,8 +123,22 @@
             <option value="karaoke">karaoke</option>
             <option value="apple">apple</option>
             <option value="spotify-embed">spotify-embed</option>
+            <option value="spotify-card">spotify-card</option>
+            <option value="spotify-bar">spotify-bar</option>
+            <option value="spotify-album">spotify-album</option>
           </select>
           <label>Choose theme</label>
+        </div>
+        <div class="input-field col s12 m8 offset-m2" id="eq-style-row" style="display: none;">
+          <select id="eq-style-select">
+            <option value="bars" selected>bars — Spotify bars</option>
+            <option value="spectrum">spectrum — Thin bars</option>
+            <option value="mirror">mirror — Mirrored bars</option>
+            <option value="wave">wave — Smooth wave</option>
+            <option value="pulse">pulse — Three dots</option>
+            <option value="none">none — Hide equalizer</option>
+          </select>
+          <label>Equalizer style</label>
         </div>
         <div class="row bar-color">
           <div class="col s12 m4">
@@ -247,8 +261,15 @@
       hide_remaster: false
     };
     var openSong = false;
+    var spotifyThemes = ['spotify-card', 'spotify-bar', 'spotify-album'];
+    var barColorCustomized = false;
 
     function updateUrl() {
+      if (spotifyThemes.includes(urlParams.theme)) {
+        urlParams.eq_style = $('#eq-style-select').val();
+      } else {
+        delete urlParams.eq_style;
+      }
       var viewUrl = `{{BASE_URL}}/view?`;
       var viewUrlWithParams = viewUrl + $.param(urlParams, true);
       var url = "https://github.com/LienThuan04/Spotify-Profile-Github";
@@ -301,13 +322,20 @@
     });
 
     $('#theme-select').change(function() {
+      urlParams.theme = this.value;
+      var isSpotifyTheme = spotifyThemes.includes(this.value);
+      $('#eq-style-row').toggle(isSpotifyTheme);
+
       // Reset visibility defaults
       $('.bar-color').show();
       $('#mode-row').hide();
 
-      // Trigger color inputs to keep in sync when visible
-      $('#bar_color').trigger('change');
-      $('#bar_color_cover').trigger('change');
+      // Follow the theme default until the user chooses a custom color.
+      if (!barColorCustomized) {
+        $('#bar_color').val(isSpotifyTheme ? '#1ed760' : '#53b14f');
+      }
+      urlParams.bar_color = $('#bar_color').val().substring(1);
+      urlParams.bar_color_cover = $('#bar_color_cover').prop('checked');
 
       // Hide bar-color controls for themes that don't use them
       if (['compact', 'karaoke', 'apple'].includes(this.value)) {
@@ -324,11 +352,11 @@
         delete urlParams.mode;
       }
 
-      urlParams.theme = this.value;
       updateUrl();
     });
 
     $('#bar_color').change(function() {
+      barColorCustomized = true;
       urlParams.bar_color = this.value.substring(1);
       updateUrl();
     });
@@ -352,10 +380,13 @@
       }
       updateUrl();
     });
+
+    $('#eq-style-select').change(updateUrl);
  
     $(document).ready(function(){
       $('#theme-select').formSelect();
       $('#mode-select').formSelect();
+      $('#eq-style-select').formSelect();
     });
   </script>
 

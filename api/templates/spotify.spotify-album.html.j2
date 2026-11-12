@@ -1,0 +1,22 @@
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, progress with context %}
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="{{height}}" viewBox="0 0 240 {{height}}" role="img">
+  <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
+  <foreignObject width="240" height="{{height}}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-album{% if title_text == 'Not playing' %} offline{% endif %}">
+      <style>
+        {{styles()}}
+        .spotify-album { padding: 16px; }
+        .label { margin-bottom: 10px; }
+        .art { width: 208px; height: 208px; margin-bottom: 14px; }
+        .artist { margin-top: 2px; }
+        .progress { margin-top: 12px; }
+        .song-row .eq { max-width: 64px; }
+      </style>
+      <div class="label">{{logo()}}<span>{{title_text|upper}}</span></div>
+      {% if cover_image %}<img class="art" src="data:image/png;base64,{{img}}" alt="Album cover"/>{% endif %}
+      <div class="song-row">{{equalizer()}}<div class="song">{{song_name}}</div></div>
+      <div class="artist">{{artist_name}}</div>
+      {{progress()}}
+    </div>
+  </foreignObject>
+</svg>

@@ -32,6 +32,9 @@ CACHE_TOKEN_INFO = {}
 
 app = Flask(__name__)
 
+SPOTIFY_THEMES = ("spotify-card", "spotify-bar", "spotify-album")
+EQ_STYLES = ("bars", "spectrum", "mirror", "wave", "pulse", "none")
+
 
 @functools.lru_cache(maxsize=128)
 def generate_css_bar(num_bar=75):
@@ -143,15 +146,30 @@ def make_svg(
     border_radius="10",
     progress_ms=None,
     duration_ms=None,
+    eq_style="bars",
 ):
     height = 0
     num_bar = 75
+    if eq_style not in EQ_STYLES:
+        eq_style = "bars"
 
     # Sanitize input
     artist_name = encode_html_entities(artist_name)
     song_name = encode_html_entities(song_name)
 
-    if theme == "compact":
+    if theme in SPOTIFY_THEMES:
+        cover_image = cover_image and bool(img)
+        num_bar = {"bars": 4, "spectrum": 40, "mirror": 28, "pulse": 3}.get(eq_style, 0)
+        if theme == "spotify-card":
+            height = 200
+        elif theme == "spotify-bar":
+            height = 112
+        else:
+            height = 350 if cover_image else 128
+            if show_offline and not is_now_playing:
+                # no progress row (-33px); offline text may wrap to a 2nd line (+19px)
+                height -= 14
+    elif theme == "compact":
         if cover_image:
             height = 400
         else:
@@ -187,9 +205,9 @@ def make_svg(
         content_bar = ""
         css_bar = generate_css_bar(num_bar)
 
-    # Calculate progress data for Apple and Spotify Embed themes
+    # Calculate progress data for themes with a playback timeline.
     progress_data = {}
-    if theme in ["apple", "spotify-embed"] and duration_ms is not None:
+    if theme in ["apple", "spotify-embed", *SPOTIFY_THEMES] and duration_ms is not None:
         if is_now_playing and progress_ms is not None:
             # Currently playing - show real progress
             progress_data = calculate_progress_data(progress_ms, duration_ms)
@@ -213,6 +231,9 @@ def make_svg(
         "is_now_playing": is_now_playing,
         "progress_data": progress_data,
         "border_radius": border_radius,
+        "total_time": format_time_ms(duration_ms),
+        "progress_seconds": max(0, (duration_ms or 0) - max(0, progress_ms or 0)) / 1000,
+        "eq_style": eq_style,
     }
 
     return render_template(f"spotify.{theme}.html.j2", **rendered_data)
@@ -347,7 +368,12 @@ def catch_all(path):
     cover_image = request.args.get("cover_image", default="true") == "true"
     is_redirect = request.args.get("redirect", default="false") == "true"
     theme = request.args.get("theme", default="default")
-    bar_color = request.args.get("bar_color", default="53b14f")
+    bar_color = request.args.get(
+        "bar_color", default="1ed760" if theme in SPOTIFY_THEMES else "53b14f"
+    )
+    eq_style = request.args.get("eq_style", default="bars")
+    if eq_style not in EQ_STYLES:
+        eq_style = "bars"
     background_color = request.args.get("background_color", default="121212")
     is_bar_color_from_cover = (
         request.args.get("bar_color_cover", default="false") == "true"
@@ -394,12 +420,13 @@ def catch_all(path):
             cover_image,
             theme,
             bar_color,
-            show_offline,
+            show_offline or theme in SPOTIFY_THEMES,
             background_color,
             mode,
             border_radius,
             progress_ms,
             duration_ms,
+            eq_style=eq_style,
         )
         resp = Response(svg, mimetype="image/svg+xml")
         resp.headers["Cache-Control"] = "public, max-age=0, s-maxage=10, stale-while-revalidate=3600"
@@ -487,6 +514,7 @@ def catch_all(path):
         border_radius,
         progress_ms,
         duration_ms,
+        eq_style=eq_style,
     )
 
     resp = Response(svg, mimetype="image/svg+xml")

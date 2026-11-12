@@ -404,3 +404,174 @@ def test_generate_css_bar():
     css_10 = generate_css_bar(10)
     css_20 = generate_css_bar(20)
     assert len(css_20) > len(css_10)  # More bars should generate more CSS
+
+
+SPOTIFY_THEMES = ["spotify-card", "spotify-bar", "spotify-album"]
+XHTML = "{http://www.w3.org/1999/xhtml}"
+
+
+@pytest.fixture
+def render_spotify():
+    from api.view import app, make_svg
+    from xml.etree import ElementTree
+
+    def render(**overrides):
+        params = dict(
+            artist_name="Lazer Boomerang", song_name="Time To Pretend", img="sample",
+            is_now_playing=True, cover_image=True, theme="spotify-card",
+            bar_color="1ed760", show_offline=False, background_color="121212",
+            mode="light", progress_ms=196000, duration_ms=314000,
+        )
+        params.update(overrides)
+        with app.app_context():
+            svg = make_svg(**params)
+        return ElementTree.fromstring(svg), svg
+
+    return render
+
+
+@pytest.mark.parametrize("theme,cover,width,height", [
+    ("spotify-card", True, "400", "200"),
+    ("spotify-card", False, "400", "200"),
+    ("spotify-bar", True, "400", "112"),
+    ("spotify-bar", False, "400", "112"),
+    ("spotify-album", True, "240", "350"),
+    ("spotify-album", False, "240", "128"),
+])
+def test_spotify_dimensions_and_cover(render_spotify, theme, cover, width, height):
+    root, _ = render_spotify(theme=theme, cover_image=cover)
+    assert (root.get("width"), root.get("height")) == (width, height)
+    assert (root.find(f".//{XHTML}img") is not None) == cover
+    foreign = root.find("{http://www.w3.org/2000/svg}foreignObject")
+    assert foreign.get("height") == height
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("style,count", [
+    ("bars", 4), ("spectrum", 40), ("mirror", 28), ("wave", 0),
+    ("pulse", 3), ("none", 0), ("invalid", 4),
+])
+def test_spotify_equalizer_render(render_spotify, theme, style, count):
+    root, svg = render_spotify(theme=theme, eq_style=style)
+    expected = "bars" if style == "invalid" else style
+    equalizers = root.findall(f".//{XHTML}span")
+    equalizers = [node for node in equalizers if node.get("class", "").startswith("eq ")]
+    if style == "none":
+        assert equalizers == []
+    else:
+        assert len(equalizers) == 1
+        eq = equalizers[0]
+        assert eq.get("class") == f"eq eq-{expected}"
+        assert len(eq.findall(f"{XHTML}i")) == count
+        if style == "wave":
+            assert len(eq.findall(".//{http://www.w3.org/2000/svg}path")) == 2
+        if style in ["spectrum", "mirror"]:
+            import re
+            for bar in eq:
+                duration = int(re.search(r"animation-duration: (\d+)ms", bar.get("style")).group(1))
+                assert (350 <= duration <= 800) if style == "spectrum" else (500 <= duration <= 1000)
+    assert "<script" not in svg.lower()
+    assert 'href="{}"' not in svg
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("playing,offline,label,current,animated", [
+    (True, False, "NOW PLAYING", "3:16", True),
+    (False, False, "RECENTLY PLAYED", "0:00", False),
+    (False, True, "NOT PLAYING", None, False),
+])
+def test_spotify_playback_states(render_spotify, theme, playing, offline, label, current, animated):
+    root, svg = render_spotify(theme=theme, is_now_playing=playing, show_offline=offline)
+    assert label in "".join(root.itertext())
+    progress = root.find(f'.//{XHTML}div[@class="track"]')
+    eq = root.find(f'.//{XHTML}span[@class="eq eq-bars"]')
+    assert (progress is None) == offline
+    assert (eq is None) == offline
+    assert ("animation: progress 118.0s linear forwards" in svg) == animated
+    if not offline:
+        times = root.findall(f'.//{XHTML}div[@class="times"]') + root.findall(f'.//{XHTML}span[@class="times"]')
+        time_text = " ".join(" ".join(node.itertext()) for node in times)
+        assert current in time_text and "5:14" in time_text
+        if not playing:
+            assert "width: 0%;" in svg
+            assert ".eq i, .eq svg { animation: none; }" in svg
+
+
+@pytest.mark.parametrize("progress,duration,width,seconds,total", [
+    (0, 240000, "0", "240.0", "4:00"),
+    (120000, 240000, "50.0", "120.0", "4:00"),
+    (300000, 240000, "100.0", None, "4:00"),
+    (None, None, "0", None, "0:00"),
+    (0, 0, "0", None, "0:00"),
+])
+def test_spotify_progress_boundaries(render_spotify, progress, duration, width, seconds, total):
+    _, svg = render_spotify(progress_ms=progress, duration_ms=duration)
+    assert f"width: {width}%;" in svg
+    assert f"<span>{total}</span>" in svg
+    if seconds is None:
+        assert "animation: progress " not in svg
+    else:
+        assert f"animation: progress {seconds}s linear forwards" in svg
+
+
+@pytest.mark.parametrize("cover,height", [(True, "336"), (False, "114")])
+def test_spotify_album_offline_shrinks(render_spotify, cover, height):
+    root, _ = render_spotify(theme="spotify-album", cover_image=cover, is_now_playing=False, show_offline=True)
+    assert root.get("height") == height
+
+
+def test_spotify_album_missing_cover_shrinks(render_spotify):
+    root, _ = render_spotify(theme="spotify-album", img="")
+    assert root.get("height") == "128"
+    assert root.find(f".//{XHTML}img") is None
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("offline", [True, False])
+@pytest.mark.parametrize("style,expected", [("spectrum", "spectrum"), ("invalid", "bars"), ("", "bars")])
+def test_spotify_query_equalizer_and_default_color(client, theme, offline, style, expected):
+    item = {"name": "Time To Pretend", "artists": [{"name": "Lazer Boomerang"}], "currently_playing_type": "track"}
+    song = (None, False, None, None) if offline else (item, True, 196000, 314000)
+    with patch("api.view.get_song_info", return_value=song):
+        response = client.get(f"/?uid=test&theme={theme}&cover_image=false&eq_style={style}")
+    assert response.status_code == 200 and response.mimetype == "image/svg+xml"
+    svg = response.get_data(as_text=True)
+    assert "color: #1ed760;" in svg
+    if offline:
+        assert "NOT PLAYING" in svg and '<span class="eq ' not in svg
+    else:
+        assert f'class="eq eq-{expected}"' in svg
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+def test_spotify_query_custom_bar_color(client, theme):
+    item = {"name": "Song", "artists": [{"name": "Artist"}]}
+    with patch("api.view.get_song_info", return_value=(item, True, 120000, 240000)):
+        response = client.get(f"/?uid=test&theme={theme}&cover_image=false&bar_color=abcdef")
+    assert "color: #abcdef;" in response.get_data(as_text=True)
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+def test_spotify_query_cover_bar_color(client, theme):
+    import io
+    from PIL import Image
+    image = io.BytesIO()
+    Image.new("RGB", (20, 20), (255, 0, 0)).save(image, format="PNG")
+    item = {"name": "Song", "artists": [{"name": "Artist"}], "album": {"images": [{"url": "https://example.com/cover.png"}] * 3}}
+    with patch("api.view.get_song_info", return_value=(item, True, 120000, 240000)), patch("api.view.load_image", return_value=image.getvalue()):
+        response = client.get(f"/?uid=test&theme={theme}&bar_color_cover=true")
+    assert "color: #ff0000;" in response.get_data(as_text=True)
+
+
+def test_spotify_original_make_svg_call_still_works():
+    from api.view import app, make_svg
+    with app.app_context():
+        svg = make_svg("Artist", "Song", "", True, False, "spotify-card", "1ed760", False, "121212", "light")
+    assert 'class="eq eq-bars"' in svg
+
+
+def test_spotify_text_is_xml_safe_and_truncated(render_spotify):
+    root, svg = render_spotify(song_name='<script> & "Song" ' * 30, artist_name='Artist & Friends ' * 30)
+    assert "<script>" not in svg
+    assert root.find(f'.//{XHTML}div[@class="song"]').text.startswith('<script> & "Song"')
+    assert "text-overflow: ellipsis" in svg

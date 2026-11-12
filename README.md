@@ -48,16 +48,31 @@ Running on Vercel serverless function, store data in Firebase (store only access
 
 ![Spotify-Profile-Github](/img/spotify-embed.svg)
 
+- Spotify Card — 400×200
+
+![Spotify Card by Lian Harman](/img/spotify-card.svg)
+
+- Spotify Bar — 400×112
+
+![Spotify Bar by Lian Harman](/img/spotify-bar.svg)
+
+- Spotify Album — 240px wide, height adapts to the cover and playback state
+
+![Spotify Album by Lian Harman](/img/spotify-album.svg)
+
+Regenerate these three examples with `python scripts/generate_spotify_examples.py`.
+
 ## Customization
 
 You can customize the appearance by adding query parameters to your URL:
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
-| `theme` | Theme to use (`default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `spotify-embed`, `apple`) | `default` |
+| `theme` | Theme to use (`default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `spotify-embed`, `apple`, `spotify-card`, `spotify-bar`, `spotify-album`) | `default` |
 | `background_color` | Background color (hex without #) | `121212` |
 | `border_radius` | Border radius in pixels | `10` |
-| `bar_color` | Equalizer bar color (hex without #) | `53b14f` |
+| `bar_color` | Equalizer bar color (hex without #) | `1ed760` for `spotify-card`, `spotify-bar`, `spotify-album`; `53b14f` otherwise |
+| `eq_style` | Equalizer for `spotify-card`, `spotify-bar`, `spotify-album`: `bars`, `spectrum`, `mirror`, `wave`, `pulse`, `none`. Unknown values fall back to `bars`. | `bars` |
 | `bar_color_cover` | Extract bar color from album cover (`true`/`false`) | `false` |
 | `cover_image` | Show album cover image (`true`/`false`) | `true` |
 | `show_offline` | Show offline status when not playing (`true`/`false`) | `false` |

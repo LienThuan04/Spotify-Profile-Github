@@ -1,0 +1,125 @@
+{% macro styles() -%}
+.sp, .sp * { box-sizing: border-box; }
+.sp {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #{{background_color}}; border-radius: {{border_radius}}px;
+  color: #fff; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.art {
+  display: block; object-fit: cover; flex-shrink: 0; border-radius: 6px;
+  box-shadow: rgba(0,0,0,.5) 0 8px 24px;
+}
+.label {
+  display: flex; align-items: center; gap: 6px;
+  color: #b3b3b3; font-size: 11px; line-height: 16px; font-weight: 700;
+  letter-spacing: 1.4px; text-transform: uppercase; white-space: nowrap;
+}
+.art-empty {
+  background: #282828; display: flex; align-items: center; justify-content: center; box-shadow: none;
+}
+.art-empty svg { width: 40%; height: 40%; }
+.logo { width: 16px; height: 16px; flex-shrink: 0; }
+.details { flex: 1; min-width: 0; }
+.song, .artist { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.offline .song, .offline .artist { white-space: normal; }
+.song { font-size: 16px; line-height: 19px; font-weight: 700; min-width: 0; }
+.artist { font-size: 14px; line-height: 16px; color: #b3b3b3; }
+.song-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.track { height: 4px; border-radius: 9999px; background: #4d4d4d; overflow: hidden; }
+.fill {
+  height: 100%; border-radius: 9999px; background: #fff;
+  width: {{progress_data.get('progress_percentage', 0)}}%;
+  {% if is_now_playing and progress_seconds|default(0) > 0 %}
+  animation: progress {{progress_seconds}}s linear forwards;
+  {% endif %}
+}
+@keyframes progress {
+  from { width: {{progress_data.get('progress_percentage', 0)}}%; }
+  to { width: 100%; }
+}
+.times {
+  display: flex; justify-content: space-between; margin-top: 4px;
+  color: #b3b3b3; font-size: 11px; line-height: 13px;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.eq { display: inline-flex; flex-shrink: 0; color: #{{bar_color}}; }
+.eq-bars { align-items: flex-end; gap: 2px; height: 12px; }
+.eq-bars i {
+  display: block; width: 3px; height: 6px; border-radius: 1px;
+  background: currentColor; animation: bars 1.1s ease-in-out infinite;
+}
+.eq-bars i:nth-child(1) { animation-duration: .9s; }
+.eq-bars i:nth-child(2) { animation-duration: 1.3s; animation-delay: -.4s; }
+.eq-bars i:nth-child(3) { animation-duration: 1s; animation-delay: -.7s; }
+.eq-bars i:nth-child(4) { animation-duration: 1.2s; animation-delay: -.2s; }
+@keyframes bars { 0%, 100% { height: 3px; } 50% { height: 12px; } }
+.eq-spectrum, .eq-mirror { width: 100%; max-width: 176px; height: 20px; gap: 2px; }
+.eq-spectrum { align-items: flex-end; }
+.eq-mirror { align-items: center; }
+.eq-spectrum i, .eq-mirror i { display: block; flex: 1; min-width: 0; background: currentColor; }
+.eq-spectrum i { height: 45%; border-radius: 1px 1px 0 0; opacity: .9; animation: spectrum .8s ease-in-out infinite alternate; }
+.eq-mirror i { height: 45%; border-radius: 9999px; animation: mirror .9s ease-in-out infinite alternate; }
+.song-row .eq-spectrum, .song-row .eq-mirror { gap: 1px; height: 16px; }
+@keyframes spectrum { from { height: 8%; } to { height: 100%; } }
+@keyframes mirror { from { height: 10%; } to { height: 100%; } }
+.eq-wave { width: 100%; max-width: 176px; height: 20px; overflow: hidden; }
+.song-row .eq-wave { height: 16px; }
+.eq-wave svg { width: 200%; height: 100%; flex-shrink: 0; animation: wave 2s linear infinite; }
+@keyframes wave { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+.eq-pulse { height: 12px; align-items: center; gap: 3px; }
+.eq-pulse i { display: block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 1.2s ease-in-out infinite; }
+.eq-pulse i:nth-child(2) { animation-delay: .2s; }
+.eq-pulse i:nth-child(3) { animation-delay: .4s; }
+@keyframes pulse { 0%, 100% { transform: scale(.5); opacity: .4; } 50% { transform: scale(1); opacity: 1; } }
+{% if not is_now_playing %}
+.eq i, .eq svg { animation: none; }
+{% endif %}
+{%- endmacro %}
+
+{% macro empty_art() -%}
+<div class="art art-empty"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l11-2v12" fill="none" stroke="#7c7c7c" stroke-width="1.8" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" fill="none" stroke="#7c7c7c" stroke-width="1.8"/><circle cx="17.5" cy="16" r="2.5" fill="none" stroke="#7c7c7c" stroke-width="1.8"/></svg></div>
+{%- endmacro %}
+
+{% macro logo() -%}
+<svg xmlns="http://www.w3.org/2000/svg" class="logo" viewBox="0 0 24 24" aria-hidden="true">
+  <circle cx="12" cy="12" r="12" fill="#1ed760"/>
+  <path d="M6 9.2c3.9-1.2 8.3-.9 11.9 1M6.6 12.4c3.3-1 6.9-.7 9.9.9M7.2 15.4c2.6-.7 5.4-.5 7.7.7" stroke="#000" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</svg>
+{%- endmacro %}
+
+{% macro equalizer() -%}
+{% set style = eq_style|default('bars') %}
+{% if style not in ['bars', 'spectrum', 'mirror', 'wave', 'pulse', 'none'] %}{% set style = 'bars' %}{% endif %}
+{% if title_text != 'Not playing' and style != 'none' %}
+<span class="eq eq-{{style}}" aria-hidden="true">
+  {% if style == 'bars' %}
+  <i></i><i></i><i></i><i></i>
+  {% elif style in ['spectrum', 'mirror'] %}
+    {% for i in range(40 if style == 'spectrum' else 28) %}
+    <i style="height: {{range(20, 81)|random}}%; animation-duration: {{range(350, 801)|random if style == 'spectrum' else range(500, 1001)|random}}ms; animation-delay: -{{range(0, 901)|random}}ms;"></i>
+    {% endfor %}
+  {% elif style == 'wave' %}
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 44" preserveAspectRatio="none">
+    <path d="M0 22 Q32.5 2 65 22 T130 22 T195 22 T260 22 T325 22 T390 22 T455 22 T520 22" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    <path d="M0 22 Q32.5 38 65 22 T130 22 T195 22 T260 22 T325 22 T390 22 T455 22 T520 22" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="2"/>
+  </svg>
+  {% elif style == 'pulse' %}
+  <i></i><i></i><i></i>
+  {% endif %}
+</span>
+{% endif %}
+{%- endmacro %}
+
+{% macro progress(inline=false) -%}
+{% if title_text != 'Not playing' %}
+<div class="progress{% if inline %} progress-inline{% endif %}">
+  {% if inline %}<span class="times">{{progress_data.get('current_time', '0:00')}}</span>{% endif %}
+  <div class="track"><div class="fill"></div></div>
+  {% if inline %}
+  <span class="times">{{total_time|default('0:00')}}</span>
+  {% else %}
+  <div class="times"><span>{{progress_data.get('current_time', '0:00')}}</span><span>{{total_time|default('0:00')}}</span></div>
+  {% endif %}
+</div>
+{% endif %}
+{%- endmacro %}

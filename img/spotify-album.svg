@@ -1,0 +1,113 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="350" viewBox="0 0 240 350" role="img">
+  <title>Spotify — Now playing: Time To Pretend — Lazer Boomerang</title>
+  <foreignObject width="240" height="350">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-album">
+      <style>
+        .sp, .sp * { box-sizing: border-box; }
+.sp {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #121212; border-radius: 8px;
+  color: #fff; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.art {
+  display: block; object-fit: cover; flex-shrink: 0; border-radius: 6px;
+  box-shadow: rgba(0,0,0,.5) 0 8px 24px;
+}
+.label {
+  display: flex; align-items: center; gap: 6px;
+  color: #b3b3b3; font-size: 11px; line-height: 16px; font-weight: 700;
+  letter-spacing: 1.4px; text-transform: uppercase; white-space: nowrap;
+}
+.art-empty {
+  background: #282828; display: flex; align-items: center; justify-content: center; box-shadow: none;
+}
+.art-empty svg { width: 40%; height: 40%; }
+.logo { width: 16px; height: 16px; flex-shrink: 0; }
+.details { flex: 1; min-width: 0; }
+.song, .artist { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.offline .song, .offline .artist { white-space: normal; }
+.song { font-size: 16px; line-height: 19px; font-weight: 700; min-width: 0; }
+.artist { font-size: 14px; line-height: 16px; color: #b3b3b3; }
+.song-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.track { height: 4px; border-radius: 9999px; background: #4d4d4d; overflow: hidden; }
+.fill {
+  height: 100%; border-radius: 9999px; background: #fff;
+  width: 62.42038216560509%;
+  
+  animation: progress 118.0s linear forwards;
+  
+}
+@keyframes progress {
+  from { width: 62.42038216560509%; }
+  to { width: 100%; }
+}
+.times {
+  display: flex; justify-content: space-between; margin-top: 4px;
+  color: #b3b3b3; font-size: 11px; line-height: 13px;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.eq { display: inline-flex; flex-shrink: 0; color: #1ed760; }
+.eq-bars { align-items: flex-end; gap: 2px; height: 12px; }
+.eq-bars i {
+  display: block; width: 3px; height: 6px; border-radius: 1px;
+  background: currentColor; animation: bars 1.1s ease-in-out infinite;
+}
+.eq-bars i:nth-child(1) { animation-duration: .9s; }
+.eq-bars i:nth-child(2) { animation-duration: 1.3s; animation-delay: -.4s; }
+.eq-bars i:nth-child(3) { animation-duration: 1s; animation-delay: -.7s; }
+.eq-bars i:nth-child(4) { animation-duration: 1.2s; animation-delay: -.2s; }
+@keyframes bars { 0%, 100% { height: 3px; } 50% { height: 12px; } }
+.eq-spectrum, .eq-mirror { width: 100%; max-width: 176px; height: 20px; gap: 2px; }
+.eq-spectrum { align-items: flex-end; }
+.eq-mirror { align-items: center; }
+.eq-spectrum i, .eq-mirror i { display: block; flex: 1; min-width: 0; background: currentColor; }
+.eq-spectrum i { height: 45%; border-radius: 1px 1px 0 0; opacity: .9; animation: spectrum .8s ease-in-out infinite alternate; }
+.eq-mirror i { height: 45%; border-radius: 9999px; animation: mirror .9s ease-in-out infinite alternate; }
+.song-row .eq-spectrum, .song-row .eq-mirror { gap: 1px; height: 16px; }
+@keyframes spectrum { from { height: 8%; } to { height: 100%; } }
+@keyframes mirror { from { height: 10%; } to { height: 100%; } }
+.eq-wave { width: 100%; max-width: 176px; height: 20px; overflow: hidden; }
+.song-row .eq-wave { height: 16px; }
+.eq-wave svg { width: 200%; height: 100%; flex-shrink: 0; animation: wave 2s linear infinite; }
+@keyframes wave { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+.eq-pulse { height: 12px; align-items: center; gap: 3px; }
+.eq-pulse i { display: block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 1.2s ease-in-out infinite; }
+.eq-pulse i:nth-child(2) { animation-delay: .2s; }
+.eq-pulse i:nth-child(3) { animation-delay: .4s; }
+@keyframes pulse { 0%, 100% { transform: scale(.5); opacity: .4; } 50% { transform: scale(1); opacity: 1; } }
+
+        .spotify-album { padding: 16px; }
+        .label { margin-bottom: 10px; }
+        .art { width: 208px; height: 208px; margin-bottom: 14px; }
+        .artist { margin-top: 2px; }
+        .progress { margin-top: 12px; }
+        .song-row .eq { max-width: 64px; }
+      </style>
+      <div class="label"><svg xmlns="http://www.w3.org/2000/svg" class="logo" viewBox="0 0 24 24" aria-hidden="true">
+  <circle cx="12" cy="12" r="12" fill="#1ed760"/>
+  <path d="M6 9.2c3.9-1.2 8.3-.9 11.9 1M6.6 12.4c3.3-1 6.9-.7 9.9.9M7.2 15.4c2.6-.7 5.4-.5 7.7.7" stroke="#000" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</svg><span>NOW PLAYING</span></div>
+      <img class="art" src="data:image/png;base64,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" alt="Album cover"/>
+      <div class="song-row">
+
+
+<span class="eq eq-bars" aria-hidden="true">
+  
+  <i></i><i></i><i></i><i></i>
+  
+</span>
+<div class="song">Time To Pretend</div></div>
+      <div class="artist">Lazer Boomerang</div>
+      
+<div class="progress">
+  
+  <div class="track"><div class="fill"></div></div>
+  
+  <div class="times"><span>3:16</span><span>5:14</span></div>
+  
+</div>
+
+    </div>
+  </foreignObject>
+</svg>
