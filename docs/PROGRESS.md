@@ -4,7 +4,14 @@
 
 ## Đang làm
 
-(trống) — Đã push README live preview và **Card Studio** lên `master`: commit code `a84746d` (`feat: rebuild Spotify card customization studio`). Người dùng yêu cầu push ngày 2026-11-12 để tự kiểm giao diện. GitHub connector xác nhận cập nhật ref thành công; đã đồng bộ exact commit/tree vào git local. Checkpoint này được cập nhật tiếp sau commit code. Chưa xác nhận Vercel build/deploy live.
+(trống) — Hoàn tất đổi tên tác giả hiển thị thành `LianHarman(LienThuan04)` theo yêu cầu sau khi người dùng đã kiểm Card Studio. README, footer, metadata, LICENSE và hướng dẫn hiện hành đã đồng bộ; giấy phép upstream giữ nguyên. Kiểm mới: 215 pytest/11 Node pass. Phiên này tiếp nối yêu cầu push lên master; xem git log/ref để lấy SHA commit đổi tên (HEAD trước thay đổi: `8fb49a2`).
+
+### Tên tác giả hiển thị · 2026-11-12
+
+- Tên chính xác: `LianHarman(LienThuan04)`. Đã đổi README, footer Card Studio, `pyproject.toml` authors, LICENSE của bản hiện tại, AGENTS/PROJECT và quy ước trong memory.
+- Rà nguồn bằng `rg` (loại `.git`, graph, venv, cache): tên tác giả upstream chỉ còn đúng 1 dòng bản quyền trong `THIRD_PARTY_NOTICES.md`; file notice không có diff. URL GitHub/domain và logic không đổi.
+- Kiểm render footer/README/metadata đúng tên; 215 pytest + 11 Node pass, 93 SVG preview hợp lệ. Không thêm test mới cho thay đổi chữ.
+- Lỗi kiểm notice ban đầu: so byte working copy với `git show HEAD` báo `AssertionError` (`<stdin>:6`) do CRLF/LF; chuẩn hóa newline và `git diff --exit-code HEAD -- THIRD_PARTY_NOTICES.md` xác nhận nội dung nguyên vẹn.
 
 ### Push theo yêu cầu · 2026-11-12
 
@@ -84,7 +91,7 @@ Phạm vi: chỉ thêm mới. 7 theme cũ (kể cả `default`) giữ nguyên t�
 - Thêm 3 theme Spotify, 6 eq CSS, trang tạo link, 70 case kiểm thử và script/ảnh mẫu; tổng **204 tests passed**. Checklist và lỗi phiên hiện tại ở trên.
 - Repo mới: `https://github.com/LienThuan04/Spotify-Profile-Github.git`, branch `master`.
 - Thương hiệu/URL đã đổi sang Spotify-Profile-Github của Lian Harman; README đứng tên Lian Harman, không còn mục Credits; pyproject có `authors`.
-- `LICENSE` chỉ đứng tên Lian Harman (MIT 2026); giấy phép gốc Kittinan chuyển sang `THIRD_PARTY_NOTICES.md`. Theme API và template theme giữ nguyên.
+- `LICENSE` đứng tên `LianHarman(LienThuan04)` (MIT 2026); giấy phép gốc upstream ở `THIRD_PARTY_NOTICES.md`. Theme API và template theme giữ nguyên.
 - AGENTS/CLAUDE/GEMINI, PROJECT/PROGRESS, memory, skills nằm trong repo; `.gitignore` CRLF và `.graphifyignore` đã cấu hình.
 - `api/requirements.txt` cài thành công vào `.venv`. Bộ test trên bản sao tạm giải tham chiếu đúng symlink Windows: **134 passed in 2.66s** (`TESTING=true`, `PYTHONPATH=.`).
 - `python -m graphify update .`: exit 0; 407 nodes / 564 edges / 32 communities ở lần dựng đầu. Graph/report/HTML chỉ local, bị gitignore; lần refresh cuối có thể thêm node từ checkpoint.
@@ -93,7 +100,7 @@ Phạm vi: chỉ thêm mới. 7 theme cũ (kể cả `default`) giữ nguyên t�
 
 ## Bước tiếp theo
 
-- Người dùng chờ Vercel build rồi mở `/api/login` để vào lại Card Studio; kiểm giao diện desktop/mobile và card live. Không sửa kết nối Vercel nếu chưa có yêu cầu.
+- Người dùng chờ Vercel build từ master rồi kiểm footer/tên hiển thị qua `/api/login`. Không sửa kết nối Vercel.
 - Chạy lại JS: `node --test tests/test_builder.js`. Python: cập nhật bản sao giải symlink rồi dùng `.venv/Scripts/python.exe ../.task-tools/spotify-readme-xlbb9rpk/verify_readme.py` (script dùng bản sao `source/`, phải copy thay đổi code vào đó trước khi chạy). Không dùng helper `.pytest_cache` cũ không truy cập được.
 
 Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đang phục vụ `https://spotify-github-profile-lian-harman.vercel.app` với `LienThuan04/Spotify-Profile-Github`, branch `master`; giữ biến môi trường hiện có.
@@ -106,6 +113,7 @@ Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đan
 
 ## Nhật ký
 
+- 2026-11-12 · Codex · Đồng bộ tên hiển thị `LianHarman(LienThuan04)` ở README/LICENSE/footer/pyproject và docs hiện hành; tên upstream chỉ còn trong THIRD_PARTY_NOTICES.md, notice không thay đổi. 215 pytest/11 Node pass; phát hành theo yêu cầu push tiếp của người dùng.
 - 2026-11-12 · Codex · Đã push `a84746d` lên master bằng GitHub connector, tree khớp staged local, đã đồng bộ local; 215 pytest/11 Node pass trước push. Cập nhật checkpoint sau commit code; chưa xác nhận deploy live.
 - 2026-11-12 · Codex · Người dùng yêu cầu push; kiểm lại 215 pytest/11 Node pass. Git `ls-remote origin refs/heads/master` lỗi `Failed to connect to github.com:443`; connector đọc được master ở `b337d19`, đang dùng connector cho cùng yêu cầu đã được phép.
 - 2026-11-12 · Codex · Hoàn thiện README và xây lại Card Studio (10 theme/9 eq, tùy chỉnh, preview, Markdown/HTML/URL/copy/reset); 215 pytest + 11 Node pass, 123 SVG tích hợp builder; reviewer không có finding; chưa commit/push/deploy.

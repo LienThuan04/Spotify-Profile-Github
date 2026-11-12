@@ -1,6 +1,6 @@
 # Spotify-Profile-Github
 
-Spotify now playing cards for GitHub profiles, maintained by [Lian Harman (LienThuan04)](https://github.com/LienThuan04).
+Spotify now playing cards for GitHub profiles, maintained by [LianHarman(LienThuan04)](https://github.com/LienThuan04).
 
 Running on Vercel serverless function, store data in Firebase (store only access_token, refresh_token, token_expired_timestamp)
 

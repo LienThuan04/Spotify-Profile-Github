@@ -1,9 +1,14 @@
 # Decisions — Spotify-Profile-Github
 
+## 2026-11-12 — Tên tác giả hiển thị thống nhất
+
+- Người dùng yêu cầu tên `LianHarman(LienThuan04)`; dùng đúng chuỗi này trong README, footer, metadata và LICENSE của bản hiện tại.
+- Giấy phép upstream trong `THIRD_PARTY_NOTICES.md` giữ nguyên. Các URL/username GitHub, domain deploy và lịch sử commit giữ nguyên.
+
 ## 2026-11-12 — Repo độc lập của Lian Harman
 
 - **Lý do:** người dùng yêu cầu tên sản phẩm/repo mới và lịch sử commit mới; giữ ghi công tác giả gốc.
-- **Hệ quả:** origin là `https://github.com/LienThuan04/Spotify-Profile-Github.git`, branch `master`. README/LICENSE đứng tên Lian Harman, giấy phép gốc Kittinan ở `THIRD_PARTY_NOTICES.md`; code giữ nguyên hành vi; commit không thêm `Co-authored-by`. Push theo yêu cầu người dùng.
+- **Hệ quả:** origin là `https://github.com/LienThuan04/Spotify-Profile-Github.git`, branch `master`. README/LICENSE đứng tên tác giả hiện tại theo quy ước ở trên, giấy phép gốc upstream ở `THIRD_PARTY_NOTICES.md`; code giữ nguyên hành vi; commit không thêm `Co-authored-by`. Push theo yêu cầu người dùng.
 
 ## 2026-11-12 — Bộ nhớ và hướng dẫn nằm trong repo
 

@@ -1,6 +1,6 @@
 # Spotify-Profile-Github — Spotify "Now Playing" card
 
-- Repo: `github.com/LienThuan04/Spotify-Profile-Github` (branch **`master`**), duy trì bởi Lian Harman. Giấy phép gốc: `THIRD_PARTY_NOTICES.md`.
+- Repo: `github.com/LienThuan04/Spotify-Profile-Github` (branch **`master`**), duy trì bởi `LianHarman(LienThuan04)`. Giấy phép gốc: `THIRD_PARTY_NOTICES.md`.
 - Deploy: Vercel → `https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=<spotify_uid>`.
 - Stack: Python ≥3.12 (CI chạy 3.11 + 3.12), Flask 3, Firebase Firestore, Pillow + colorgram, Jinja2 templates, pytest.
 

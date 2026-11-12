@@ -1,6 +1,6 @@
 # AGENTS.md — Spotify-Profile-Github
 
-Spotify-Profile-Github của Lian Harman (`LienThuan04`). API sinh card Spotify now playing bằng Python, Flask và Firestore.
+Spotify-Profile-Github của `LianHarman(LienThuan04)`. API sinh card Spotify now playing bằng Python, Flask và Firestore.
 Repo: `https://github.com/LienThuan04/Spotify-Profile-Github`. Branch: `master`.
 
 ## Bắt đầu phiên
@@ -29,5 +29,5 @@ Repo: `https://github.com/LienThuan04/Spotify-Profile-Github`. Branch: `master`.
 - Với câu hỏi file/symbol/quan hệ, chạy `python -m graphify query "<câu hỏi>"` (hoặc `path` / `explain`) trước khi grep/mở code, rồi mở đúng `source_file:source_location`. Nếu graph thiếu hoặc lệnh lỗi, ghi lỗi trong checkpoint rồi đọc trực tiếp các file liên quan.
 - Chạy git trong repo này (`git -C <đường dẫn repo> ...` khi đứng ngoài repo).
 - Commit/push chỉ khi người dùng yêu cầu; commit không thêm `Co-authored-by`.
-- Mọi chỗ hiển thị (README, LICENSE, trang, metadata) đứng tên Lian Harman. Giấy phép MIT gốc của Kittinan nằm ở `THIRD_PARTY_NOTICES.md` — giữ file đó (điều kiện của MIT).
+- Tên tác giả hiển thị trong README, LICENSE, trang và metadata dùng đúng `LianHarman(LienThuan04)`. Giữ nguyên giấy phép MIT gốc trong `THIRD_PARTY_NOTICES.md`.
 - Code giữ nguyên hành vi như bản gốc; chỉ sửa logic khi người dùng yêu cầu.
