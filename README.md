@@ -38,7 +38,7 @@ Everything else lives in the [wiki](https://github.com/LienThuan04/Spotify-Profi
 
 ## Contributing
 
-Bugs and ideas go to [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues). Development setup is in [wiki/Development.md](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Development).
+Bugs and ideas go to [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues). Development setup is in the [Development wiki page](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Development).
 
 Known bug: local files (not from Spotify's catalogue) can return a 404/500 card.
 
