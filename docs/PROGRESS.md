@@ -4,7 +4,14 @@
 
 ## Đang làm
 
-Đã hoàn thiện README live preview và **Card Studio**. Người dùng đã yêu cầu commit/push lên `master` ngày 2026-11-12 để tự kiểm giao diện. Đang đưa thay đổi lên GitHub qua connector vì Git trong sandbox không kết nối được github.com:443. Chưa kiểm hình bằng browser thực hoặc deploy live.
+(trống) — Đã push README live preview và **Card Studio** lên `master`: commit code `a84746d` (`feat: rebuild Spotify card customization studio`). Người dùng yêu cầu push ngày 2026-11-12 để tự kiểm giao diện. GitHub connector xác nhận cập nhật ref thành công; đã đồng bộ exact commit/tree vào git local. Checkpoint này được cập nhật tiếp sau commit code. Chưa xác nhận Vercel build/deploy live.
+
+### Push theo yêu cầu · 2026-11-12
+
+- Kiểm trước push: 215 pytest pass, 11 Node pass, 93 SVG README hợp lệ, diff check qua.
+- Commit code `a84746d9e1d1597e864098e79a56af1f74b29c2b`, tree `e6fb97fcbbdb435bb5989eb46b928dccf2854e0e`, parent `b337d19`; 10 file, tác giả Lian Harman, không có Co-authored-by.
+- Git `ls-remote` bị chặn mạng; connector tạo tree trực tiếp với 10 nội dung trả `RemoteProtocolError: Server disconnected without sending a response.`; kiểm tree SHA trả 404 nên chưa có ref bị đổi. Đã tải từng blob rồi tạo tree bằng SHA, khớp tree staged local; create commit và update_ref master fast-forward với expected SHA thành công.
+- Đồng bộ local: API GitHub chuẩn hóa date về UTC nhưng raw commit giữ timezone `+0700`. Lần dựng raw với `+0000` báo `AssertionError: Cannot reconstruct exact remote commit; local refs left unchanged`; xác định đúng timezone, kiểm SHA object khớp tuyệt đối rồi mới fast-forward local master/origin/master. Không force-push, không sửa Discord/profile.
 
 ### README đã kiểm tra · 2026-11-12
 
@@ -86,7 +93,7 @@ Phạm vi: chỉ thêm mới. 7 theme cũ (kể cả `default`) giữ nguyên t�
 
 ## Bước tiếp theo
 
-- Hoàn tất push đã được người dùng yêu cầu, xác nhận SHA remote và đồng bộ local; sau đó người dùng kiểm giao diện desktop/mobile trên deploy.
+- Người dùng chờ Vercel build rồi mở `/api/login` để vào lại Card Studio; kiểm giao diện desktop/mobile và card live. Không sửa kết nối Vercel nếu chưa có yêu cầu.
 - Chạy lại JS: `node --test tests/test_builder.js`. Python: cập nhật bản sao giải symlink rồi dùng `.venv/Scripts/python.exe ../.task-tools/spotify-readme-xlbb9rpk/verify_readme.py` (script dùng bản sao `source/`, phải copy thay đổi code vào đó trước khi chạy). Không dùng helper `.pytest_cache` cũ không truy cập được.
 
 Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đang phục vụ `https://spotify-github-profile-lian-harman.vercel.app` với `LienThuan04/Spotify-Profile-Github`, branch `master`; giữ biến môi trường hiện có.
@@ -99,6 +106,7 @@ Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đan
 
 ## Nhật ký
 
+- 2026-11-12 · Codex · Đã push `a84746d` lên master bằng GitHub connector, tree khớp staged local, đã đồng bộ local; 215 pytest/11 Node pass trước push. Cập nhật checkpoint sau commit code; chưa xác nhận deploy live.
 - 2026-11-12 · Codex · Người dùng yêu cầu push; kiểm lại 215 pytest/11 Node pass. Git `ls-remote origin refs/heads/master` lỗi `Failed to connect to github.com:443`; connector đọc được master ở `b337d19`, đang dùng connector cho cùng yêu cầu đã được phép.
 - 2026-11-12 · Codex · Hoàn thiện README và xây lại Card Studio (10 theme/9 eq, tùy chỉnh, preview, Markdown/HTML/URL/copy/reset); 215 pytest + 11 Node pass, 123 SVG tích hợp builder; reviewer không có finding; chưa commit/push/deploy.
 - 2026-11-12 · Codex · Tiếp nhận README live preview đang dở; đối chiếu HEAD/ref ở `b337d19`, chỉ README thay đổi trước phiên. Đã đồng bộ checkpoint với hai commit theme của Claude, không commit/push.

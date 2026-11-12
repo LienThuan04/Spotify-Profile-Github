@@ -19,6 +19,7 @@ Triệu chứng → nguyên nhân → cách xử lý. Ghi thêm sau khi xác min
 
 ## Môi trường và graphify
 
+- Nếu Git bị chặn mạng nhưng connector GitHub hoạt động: upload blob riêng rồi create_tree theo SHA, kiểm tree khớp `git write-tree`, tạo commit và update_ref fast-forward có expected SHA. API date có thể hiển thị UTC dù raw commit dùng `+0700`; khi nhập commit local phải kiểm SHA object khớp tuyệt đối trước khi update-ref, không tự giả định `+0000` hoặc force-push.
 - Preview Card Studio có thể render thành file HTML độc lập vì CSS/JS được Jinja include inline. Khi thêm asset builder, giữ cách include này; không đổi sang URL static nếu chưa kiểm route Vercel.
 - Helper test `.pytest_cache/run_spotify_tests.py` từ phiên cũ có thể không truy cập được. Artifact mới ở `../.task-tools/spotify-readme-xlbb9rpk/`; script `verify_readme.py` chạy bản sao `source/` giải symlink, phải đồng bộ code vào bản sao trước khi chạy lại.
 - Kiểm mạng ngày 2026-11-12: connector Vercel thiếu quyền project/team (403 lookup), urllib bị sandbox chặn socket WinError 10013 và CUA không có browser. Test Flask/Node local không xác nhận ảnh live hoặc clipboard/browser thực; ghi rõ giới hạn đó khi bàn giao.
