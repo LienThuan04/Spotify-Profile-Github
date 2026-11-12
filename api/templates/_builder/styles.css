@@ -220,7 +220,7 @@ legend {
   font-size:12px;
   font-weight:600;
 }
-.control-section>legend+* {
+.control-section>legend~* {
   clear:both;
 }
 .step-number {
@@ -375,7 +375,7 @@ select {
 }
 .color-grid {
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,130px),1fr));
   gap:12px;
 }
 .color-control {

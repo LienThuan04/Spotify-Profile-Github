@@ -8,6 +8,7 @@ Triệu chứng → nguyên nhân → cách xử lý. Ghi thêm sau khi xác min
 
 ## Repo
 
+- Card Studio dùng `legend` float full-width: clearance phải áp dụng cho mọi sibling (`legend~*`), vì sibling đầu `equalizer-field` bị ẩn khi chọn layout cũ. Selector `legend+*` khiến các ô màu/mode bị ép sang mép phải. Grid màu dùng auto-fit để một màu không để trống nửa hàng.
 - **`python api/app.py` báo `ModuleNotFoundError: No module named 'util'` trên Windows** → `api/util` (→ `../util/`) và `api/view.svg.py` (→ `view.py`) là git symlink; Windows checkout với `core.symlinks=false` biến chúng thành file text → chạy với `PYTHONPATH` = gốc repo: PowerShell `$env:PYTHONPATH='.'; python api/app.py`, bash `PYTHONPATH=. python api/app.py`. Giữ nguyên hai file symlink đó, đừng thay bằng bản copy (Vercel/Linux cần symlink).
 - `api/callback.py` tự khởi tạo Firebase lúc import (đọc `FIREBASE`), không qua `util/firestore.py` → import module này mà thiếu env `FIREBASE` là crash, kể cả khi `TESTING=true`.
 - `api/theme_dev.py` hỏng: gọi `make_svg(..., background_color)` nhưng biến chưa định nghĩa (dòng gán nhầm tên `rendered_data`) → `NameError`.
