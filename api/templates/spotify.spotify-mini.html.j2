@@ -1,0 +1,33 @@
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, empty_art with context %}
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="{{height}}" viewBox="0 0 320 {{height}}" role="img">
+  <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
+  <foreignObject width="320" height="{{height}}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-mini{% if title_text == 'Not playing' %} offline{% endif %}">
+      <style>
+        {{styles()}}
+        .spotify-mini {
+          border-radius: 9999px; padding: 12px 16px 12px 12px;
+          display: flex; gap: 12px; align-items: center;
+        }
+        .art { width: 48px; height: 48px; border-radius: 50%; box-shadow: rgba(0,0,0,.4) 0 4px 12px; }
+        .art-empty { width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0; }
+        .details { display: flex; flex-direction: column; justify-content: center; min-width: 0; flex: 1; }
+        .song { font-size: 13px; line-height: 16px; font-weight: 700; }
+        .artist { font-size: 11px; line-height: 14px; color: #b3b3b3; margin-top: 2px; }
+        .mini-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .spotify-mini .eq { max-width: 44px; height: 12px; }
+        .spotify-mini .logo { width: 18px; height: 18px; }
+      </style>
+      {% if cover_image %}<img class="art" src="data:image/png;base64,{{img}}" alt="Album cover"/>{% elif title_text == 'Not playing' %}{{empty_art()}}{% endif %}
+      <div class="details">
+        <div class="label" style="font-size: 8px; line-height: 10px; margin-bottom: 2px;">{{title_text|upper}}</div>
+        <div class="song">{{song_name}}</div>
+        <div class="artist">{{artist_name}}</div>
+      </div>
+      <div class="mini-right">
+        {% if title_text != 'Not playing' and eq_style|default('bars') != 'none' %}{{equalizer()}}{% endif %}
+        {{logo()}}
+      </div>
+    </div>
+  </foreignObject>
+</svg>

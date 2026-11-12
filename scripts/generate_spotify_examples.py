@@ -69,7 +69,7 @@ def main():
     with app.app_context():
         for theme in SPOTIFY_THEMES:
             (image_dir / f"{theme}.svg").write_text(render_example(theme, cover), encoding="utf-8")
-        print(f"Đã sinh 3 ảnh README tại {image_dir}")
+        print(f"Đã sinh {len(SPOTIFY_THEMES)} ảnh README tại {image_dir}")
         if args.review_dir:
             args.review_dir.mkdir(parents=True, exist_ok=True)
             for theme in SPOTIFY_THEMES:
@@ -81,7 +81,8 @@ def main():
             for eq_style in EQ_STYLES:
                 path = args.review_dir / f"spotify-card-eq-{eq_style}.svg"
                 path.write_text(render_example("spotify-card", cover, eq_style=eq_style), encoding="utf-8")
-            print(f"Đã sinh 18 SVG duyệt tại {args.review_dir.resolve()}")
+            total_review = len(SPOTIFY_THEMES) * 4 + len(EQ_STYLES)
+            print(f"Đã sinh {total_review} SVG duyệt tại {args.review_dir.resolve()}")
 
 
 if __name__ == "__main__":

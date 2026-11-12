@@ -1,0 +1,55 @@
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, progress, empty_art with context %}
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="{{height}}" viewBox="0 0 800 {{height}}" role="img">
+  <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
+  <foreignObject width="800" height="{{height}}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-banner{% if title_text == 'Not playing' %} offline{% endif %}">
+      <style>
+        {{styles()}}
+        {% if cover_image and img %}
+        :root, .spotify-banner { --cover: url('data:image/png;base64,{{img}}'); }
+        {% endif %}
+        .spotify-banner { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .banner-bg {
+          position: absolute; inset: -20px;
+          background: var(--cover, none) center/cover no-repeat;
+          filter: blur(28px); opacity: .35; transform: scale(1.15);
+        }
+        .banner-overlay {
+          position: absolute; inset: 0;
+          background: linear-gradient(90deg, rgba(18,18,18,.9) 0%, rgba(18,18,18,.75) 100%);
+        }
+        .banner-content {
+          position: relative; z-index: 1; padding: 20px 24px;
+          display: flex; gap: 20px; align-items: center; width: 100%; height: 100%;
+        }
+        .art {
+          width: 140px; height: 140px; border-radius: 8px; flex-shrink: 0;
+          background: var(--cover, #282828) center/cover no-repeat;
+          box-shadow: rgba(0,0,0,.6) 0 8px 24px;
+        }
+        .art-empty { width: 140px; height: 140px; flex-shrink: 0; }
+        .details { display: flex; flex-direction: column; justify-content: center; gap: 6px; flex: 1; min-width: 0; }
+        .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .song { font-size: 22px; line-height: 26px; font-weight: 700; }
+        .artist { font-size: 15px; line-height: 18px; color: #b3b3b3; }
+        .banner-eq { display: flex; align-items: center; }
+        .banner-eq .eq { max-width: 220px; }
+        .progress { margin-top: 6px; }
+      </style>
+      <div class="banner-bg" aria-hidden="true"></div>
+      <div class="banner-overlay" aria-hidden="true"></div>
+      <div class="banner-content">
+        {% if cover_image and img %}<div class="art"></div>{% elif title_text == 'Not playing' %}{{empty_art()}}{% endif %}
+        <div class="details">
+          <div class="header-row">
+            <div class="label">{{logo()}}<span>{{title_text|upper}}</span></div>
+            {% if title_text != 'Not playing' and eq_style|default('bars') != 'none' %}<div class="banner-eq">{{equalizer()}}</div>{% endif %}
+          </div>
+          <div class="song">{{song_name}}</div>
+          <div class="artist">{{artist_name}}</div>
+          {{progress()}}
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>

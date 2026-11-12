@@ -17,9 +17,12 @@ test('default export is a Spotify card whose click target redirects without redi
   assert.ok(!result.html.includes('src="https://example.test/api/view?uid=user +'));
 });
 
-test('all nine equalizer choices survive export on each of the three Spotify themes', () => {
-  for (const theme of ['spotify-card', 'spotify-bar', 'spotify-album']) {
-    for (const eq_style of ['bars', 'spectrum', 'mirror', 'wave', 'pulse', 'iso', 'ribbon', 'floor', 'none']) {
+test('all nineteen equalizer choices survive export on each of the eight Spotify themes', () => {
+  const SPOTIFY_THEMES = ['spotify-card', 'spotify-bar', 'spotify-album', 'spotify-mini', 'spotify-vinyl', 'spotify-banner', 'spotify-glass', 'spotify-mobile'];
+  const ALL_EQ_STYLES = ['bars', 'spectrum', 'mirror', 'wave', 'pulse', 'iso', 'ribbon', 'floor', 'dots', 'vu', 'ring', 'ripple', 'heartbeat', 'pixel', 'glow', 'bubbles', 'skyline', 'tunnel', 'none'];
+  for (const theme of SPOTIFY_THEMES) {
+    assert.equal(getThemeFeatures(theme).equalizer, true);
+    for (const eq_style of ALL_EQ_STYLES) {
       const params = query(build({ theme, eq_style }));
       assert.equal(params.get('eq_style'), eq_style);
       assert.equal(params.get('bar_color'), '1ed760');

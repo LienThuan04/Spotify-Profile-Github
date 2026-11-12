@@ -32,8 +32,37 @@ CACHE_TOKEN_INFO = {}
 
 app = Flask(__name__)
 
-SPOTIFY_THEMES = ("spotify-card", "spotify-bar", "spotify-album")
-EQ_STYLES = ("bars", "spectrum", "mirror", "wave", "pulse", "iso", "ribbon", "floor", "none")
+SPOTIFY_THEMES = (
+    "spotify-card",
+    "spotify-bar",
+    "spotify-album",
+    "spotify-mini",
+    "spotify-vinyl",
+    "spotify-banner",
+    "spotify-glass",
+    "spotify-mobile",
+)
+EQ_STYLES = (
+    "bars",
+    "spectrum",
+    "mirror",
+    "wave",
+    "pulse",
+    "iso",
+    "ribbon",
+    "floor",
+    "dots",
+    "vu",
+    "ring",
+    "ripple",
+    "heartbeat",
+    "pixel",
+    "glow",
+    "bubbles",
+    "skyline",
+    "tunnel",
+    "none",
+)
 
 
 @functools.lru_cache(maxsize=128)
@@ -180,16 +209,43 @@ def make_svg(
 
     if theme in SPOTIFY_THEMES:
         cover_image = cover_image and bool(img)
-        num_bar = {"bars": 4, "spectrum": 40, "mirror": 28, "pulse": 3, "iso": 7, "floor": 60}.get(eq_style, 0)
+        num_bar = {
+            "bars": 4,
+            "spectrum": 40,
+            "mirror": 28,
+            "pulse": 3,
+            "iso": 7,
+            "floor": 60,
+            "dots": 7,
+            "vu": 10,
+            "ring": 12,
+            "ripple": 3,
+            "heartbeat": 0,
+            "pixel": 5,
+            "glow": 4,
+            "bubbles": 5,
+            "skyline": 7,
+            "tunnel": 4,
+        }.get(eq_style, 0)
         if theme == "spotify-card":
             height = 200
         elif theme == "spotify-bar":
             height = 112
-        else:
+        elif theme == "spotify-album":
             height = 350 if cover_image else 128
             if show_offline and not is_now_playing:
                 # no progress row (-33px); offline text may wrap to a 2nd line (+19px)
                 height -= 14
+        elif theme == "spotify-mini":
+            height = 72
+        elif theme == "spotify-vinyl":
+            height = 200
+        elif theme == "spotify-banner":
+            height = 180
+        elif theme == "spotify-glass":
+            height = 200
+        elif theme == "spotify-mobile":
+            height = 500
     elif theme == "compact":
         if cover_image:
             height = 400

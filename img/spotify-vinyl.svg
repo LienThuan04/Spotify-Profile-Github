@@ -1,0 +1,275 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200" role="img">
+  <title>Spotify — Now playing: Time To Pretend — Lazer Boomerang</title>
+  <foreignObject width="400" height="200">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-vinyl">
+      <style>
+        .sp, .sp * { box-sizing: border-box; }
+.sp {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #121212; border-radius: 8px;
+  color: #fff; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.art {
+  display: block; object-fit: cover; flex-shrink: 0; border-radius: 6px;
+  box-shadow: rgba(0,0,0,.5) 0 8px 24px;
+}
+.label {
+  display: flex; align-items: center; gap: 6px;
+  color: #b3b3b3; font-size: 11px; line-height: 16px; font-weight: 700;
+  letter-spacing: 1.4px; text-transform: uppercase; white-space: nowrap;
+}
+.art-empty {
+  background: #282828; display: flex; align-items: center; justify-content: center; box-shadow: none;
+}
+.art-empty svg { width: 40%; height: 40%; }
+.logo { width: 16px; height: 16px; flex-shrink: 0; }
+.details { flex: 1; min-width: 0; }
+.song, .artist { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.offline .song, .offline .artist { white-space: normal; }
+.song { font-size: 16px; line-height: 19px; font-weight: 700; min-width: 0; }
+.artist { font-size: 14px; line-height: 16px; color: #b3b3b3; }
+.song-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.track { height: 4px; border-radius: 9999px; background: #4d4d4d; overflow: hidden; }
+.fill {
+  height: 100%; border-radius: 9999px; background: #fff;
+  width: 62.42038216560509%;
+  
+  animation: progress 118.0s linear forwards;
+  
+}
+@keyframes progress {
+  from { width: 62.42038216560509%; }
+  to { width: 100%; }
+}
+.times {
+  display: flex; justify-content: space-between; margin-top: 4px;
+  color: #b3b3b3; font-size: 11px; line-height: 13px;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+
+.clock { display: inline-grid; vertical-align: top; }
+.clock > span { grid-area: 1 / 1; }
+.clock-snapshot { visibility: hidden; }
+.clock-running {
+  display: inline-flex; height: 13px; overflow: hidden;
+  animation: clock-hide var(--clock-remaining) step-end forwards;
+}
+.clock-final {
+  visibility: hidden; text-align: right;
+  animation: clock-show var(--clock-remaining) step-end forwards;
+}
+.clock-window { display: block; width: 1ch; height: 13px; overflow: hidden; }
+.clock-reel { display: block; text-align: right; animation-name: clock-reel; animation-iteration-count: infinite; }
+.clock-reel > span { display: block; height: 13px; line-height: 13px; }
+@keyframes clock-reel {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-13px * var(--clock-rows))); }
+}
+@keyframes clock-hide { to { visibility: hidden; } }
+@keyframes clock-show { to { visibility: visible; } }
+
+.eq { display: inline-flex; flex-shrink: 0; color: #1ed760; }
+.eq-bars { align-items: flex-end; gap: 2px; height: 12px; }
+.eq-bars i {
+  display: block; width: 3px; height: 6px; border-radius: 1px;
+  background: currentColor; animation: bars 1.1s ease-in-out infinite;
+}
+.eq-bars i:nth-child(1) { animation-duration: .9s; }
+.eq-bars i:nth-child(2) { animation-duration: 1.3s; animation-delay: -.4s; }
+.eq-bars i:nth-child(3) { animation-duration: 1s; animation-delay: -.7s; }
+.eq-bars i:nth-child(4) { animation-duration: 1.2s; animation-delay: -.2s; }
+@keyframes bars { 0%, 100% { height: 3px; } 50% { height: 12px; } }
+.eq-spectrum, .eq-mirror { width: 100%; max-width: 176px; height: 20px; gap: 2px; }
+.eq-spectrum { align-items: flex-end; }
+.eq-mirror { align-items: center; }
+.eq-spectrum i, .eq-mirror i { display: block; flex: 1; min-width: 0; background: currentColor; }
+.eq-spectrum i { height: 45%; border-radius: 1px 1px 0 0; opacity: .9; animation: spectrum .8s ease-in-out infinite alternate; }
+.eq-mirror i { height: 45%; border-radius: 9999px; animation: mirror .9s ease-in-out infinite alternate; }
+.song-row .eq-spectrum, .song-row .eq-mirror { gap: 1px; height: 16px; }
+@keyframes spectrum { from { height: 8%; } to { height: 100%; } }
+@keyframes mirror { from { height: 10%; } to { height: 100%; } }
+.eq-wave { width: 100%; max-width: 176px; height: 20px; overflow: hidden; }
+.song-row .eq-wave { height: 16px; }
+.eq-wave svg { width: 200%; height: 100%; flex-shrink: 0; animation: wave 2s linear infinite; }
+@keyframes wave { from { transform: translateX(0); } to { transform: translateX(-25%); } }
+.eq-pulse { height: 12px; align-items: center; gap: 3px; }
+.eq-pulse i { display: block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 1.2s ease-in-out infinite; }
+.eq-pulse i:nth-child(2) { animation-delay: .2s; }
+.eq-pulse i:nth-child(3) { animation-delay: .4s; }
+@keyframes pulse { 0%, 100% { transform: scale(.5); opacity: .4; } 50% { transform: scale(1); opacity: 1; } }
+.eq-iso { align-items: flex-end; gap: 6px; height: 22px; padding: 4px 4px 0 0; }
+.song-row .eq-iso { height: 16px; gap: 5px; }
+.eq-iso i { position: relative; display: block; width: 6px; height: 50%; background: currentColor; animation: iso .9s ease-in-out infinite alternate; }
+.eq-iso i::after { content: ""; position: absolute; top: 0; left: 100%; width: 3px; height: 100%; background: currentColor; filter: brightness(.55); transform: skewY(-45deg); transform-origin: top left; }
+.eq-iso i::before { content: ""; position: absolute; bottom: 100%; left: 0; width: 6px; height: 3px; background: currentColor; filter: brightness(1.4); transform: skewX(-45deg); transform-origin: bottom left; }
+@keyframes iso { from { height: 15%; } to { height: 100%; } }
+.eq-ribbon { position: relative; width: 100%; max-width: 176px; height: 22px; overflow: hidden; }
+.song-row .eq-ribbon { height: 16px; }
+.eq-ribbon svg { position: absolute; left: 0; top: 0; width: 200%; height: 100%; animation: wave 2s linear infinite; }
+.eq-ribbon .l1 { opacity: .25; animation-duration: 3.2s; }
+.eq-ribbon .l2 { opacity: .55; animation-duration: 2.2s; }
+.eq-ribbon .l3 { animation-duration: 1.4s; }
+.eq-floor { flex-direction: column; align-items: center; justify-content: flex-end; width: 100%; max-width: 176px; height: 26px; }
+.song-row .eq-floor { height: 18px; }
+.eq-floor b { display: flex; align-items: flex-end; gap: 2px; width: 100%; height: 12px; }
+.eq-floor b i { display: block; flex: 1; min-width: 0; height: 45%; background: currentColor; border-radius: 1px 1px 0 0; animation: spectrum .8s ease-in-out infinite alternate; }
+.eq-floor .back { transform: scale(.62); opacity: .35; margin-bottom: -6px; }
+.eq-floor .mid { transform: scale(.8); opacity: .6; margin-bottom: -4px; }
+.eq-dots { align-items: flex-end; gap: 2px; height: 16px; }
+.song-row .eq-dots { height: 14px; }
+.eq-dots i { display: block; width: 3px; border-radius: 1px; background: repeating-linear-gradient(to top, currentColor 0, currentColor 2px, transparent 2px, transparent 4px); animation: dots .8s ease-in-out infinite alternate; }
+@keyframes dots { from { height: 4px; } to { height: 16px; } }
+.eq-vu { align-items: flex-end; gap: 2px; height: 14px; }
+.eq-vu i { display: block; width: 3px; border-radius: 1px; background: currentColor; opacity: .2; animation: vu 1.2s ease-in-out infinite; }
+@keyframes vu { 0%, 100% { opacity: .2; } 50% { opacity: 1; filter: brightness(1.2); } }
+.eq-ring { align-items: center; justify-content: center; width: 18px; height: 18px; }
+.eq-ring .ring-svg { width: 18px; height: 18px; }
+.eq-ring .ring-g { transform-origin: 18px 18px; animation: ring-spin 6s linear infinite; }
+@keyframes ring-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.eq-ripple { align-items: center; justify-content: center; width: 20px; height: 20px; }
+.eq-ripple .ripple-svg { width: 20px; height: 20px; }
+.eq-ripple .rip { transform-origin: 20px 20px; animation: rip 1.8s cubic-bezier(0,.2,.8,1) infinite; }
+.eq-ripple .rip-2 { animation-delay: -.6s; }
+.eq-ripple .rip-3 { animation-delay: -1.2s; }
+@keyframes rip { 0% { transform: scale(.15); opacity: 1; } 100% { transform: scale(1.1); opacity: 0; } }
+.eq-heartbeat { width: 100%; max-width: 176px; height: 18px; overflow: hidden; align-items: center; }
+.song-row .eq-heartbeat { height: 16px; max-width: 64px; }
+.eq-heartbeat svg { width: 200%; height: 100%; flex-shrink: 0; animation: heartbeat 2.2s linear infinite; }
+@keyframes heartbeat { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.eq-pixel { align-items: flex-end; gap: 3px; height: 14px; }
+.eq-pixel i { display: block; width: 4px; height: 4px; background: currentColor; animation: pixel-bounce .6s steps(4, end) infinite alternate; }
+@keyframes pixel-bounce { 0% { height: 3px; } 33% { height: 6px; } 66% { height: 10px; } 100% { height: 14px; } }
+.eq-glow { align-items: flex-end; gap: 3px; height: 14px; filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 6px currentColor); }
+.eq-glow i { display: block; width: 3px; height: 5px; border-radius: 2px; background: currentColor; animation: glow-bar 1s ease-in-out infinite alternate; }
+@keyframes glow-bar { from { height: 3px; opacity: .7; } to { height: 14px; opacity: 1; } }
+.eq-bubbles { position: relative; width: 100%; max-width: 90px; height: 16px; overflow: hidden; }
+.song-row .eq-bubbles { max-width: 64px; }
+.eq-bubbles i { position: absolute; bottom: -6px; border-radius: 50%; background: currentColor; opacity: 0; animation: bubble-up 1.6s ease-in infinite; }
+@keyframes bubble-up { 0% { transform: translateY(0) scale(.5); opacity: 0; } 30% { opacity: .8; } 80% { opacity: .8; } 100% { transform: translateY(-20px) scale(1.1); opacity: 0; } }
+.eq-skyline { align-items: flex-end; gap: 5px; height: 20px; padding: 4px 4px 0 0; }
+.song-row .eq-skyline { height: 16px; gap: 4px; }
+.eq-skyline i { position: relative; display: block; width: 6px; height: 45%; background: currentColor; animation: skyline .9s ease-in-out infinite alternate; }
+.eq-skyline i::after { content: ""; position: absolute; top: 0; left: 100%; width: 3px; height: 100%; background: currentColor; filter: brightness(.5); transform: skewY(-35deg); transform-origin: top left; }
+.eq-skyline i::before { content: ""; position: absolute; bottom: 100%; left: 0; width: 6px; height: 3px; background: currentColor; filter: brightness(1.35); transform: skewX(-55deg); transform-origin: bottom left; }
+@keyframes skyline { from { height: 20%; } to { height: 100%; } }
+.eq-tunnel { width: 22px; height: 16px; align-items: center; justify-content: center; }
+.eq-tunnel .tunnel-box { position: relative; width: 22px; height: 16px; display: flex; align-items: center; justify-content: center; }
+.eq-tunnel i { position: absolute; box-sizing: border-box; width: 20px; height: 14px; border: 1.5px solid currentColor; border-radius: 2px; animation: tunnel-run 2s linear infinite; }
+.eq-tunnel i:nth-child(1) { animation-delay: 0s; }
+.eq-tunnel i:nth-child(2) { animation-delay: -.5s; }
+.eq-tunnel i:nth-child(3) { animation-delay: -1s; }
+.eq-tunnel i:nth-child(4) { animation-delay: -1.5s; }
+@keyframes tunnel-run { 0% { transform: scale(.1); opacity: 0; } 20% { opacity: .3; } 80% { opacity: .9; } 100% { transform: scale(1.15); opacity: 0; } }
+
+        
+        :root, .spotify-vinyl { --cover: url('data:image/png;base64,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'); }
+        
+        .spotify-vinyl {
+          padding: 20px; display: flex; gap: 18px; align-items: center; position: relative;
+        }
+        .deck {
+          position: relative; width: 156px; height: 156px; flex-shrink: 0;
+          display: flex; align-items: center; justify-content: center;
+        }
+        .disc {
+          position: relative; width: 150px; height: 150px; border-radius: 50%;
+          
+          /* picture disc: the whole record is the album cover */
+          background: var(--cover) center/cover no-repeat, #121212;
+          
+          box-shadow: rgba(0,0,0,.6) 0 8px 24px, inset rgba(255,255,255,.05) 0 0 0 2px;
+          display: flex; align-items: center; justify-content: center;
+          animation: vinyl-spin 7s linear infinite;
+        }
+        
+        .disc::before {
+          content: ""; position: absolute; inset: 0; border-radius: 50%;
+          background: repeating-radial-gradient(circle at center, rgba(0,0,0,.22) 0 1px, transparent 1px 3px);
+          box-shadow: inset 0 0 0 3px rgba(0,0,0,.55);
+        }
+        .sheen {
+          position: absolute; width: 150px; height: 150px; border-radius: 50%; pointer-events: none;
+          background: linear-gradient(135deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,0) 62%, rgba(255,255,255,.10) 100%);
+        }
+        
+        @keyframes vinyl-spin { to { transform: rotate(360deg); } }
+        .label-circle {
+          position: relative; border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          
+          width: 30px; height: 30px; background: rgba(18,18,18,.85);
+          box-shadow: 0 0 0 2px rgba(255,255,255,.15);
+          
+        }
+        .spindle-hole {
+          width: 8px; height: 8px; border-radius: 50%; background: #000;
+          border: 1.5px solid #666;
+        }
+        .tonearm {
+          position: absolute; top: 0; right: 0; width: 44px; height: 100px;
+          pointer-events: none; transform-origin: 34px 12px;
+          transform: rotate(18deg);
+        }
+        
+        .details { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+        .equalizer-row { margin-top: 2px; height: 12px; display: flex; align-items: center; }
+        .progress { margin-top: 8px; }
+      </style>
+      <div class="deck">
+        <div class="disc">
+          <div class="label-circle">
+            <div class="spindle-hole"></div>
+          </div>
+        </div>
+        <div class="sheen"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="tonearm" viewBox="0 0 44 100" aria-hidden="true">
+          <circle cx="34" cy="12" r="8" fill="#252525" stroke="#4d4d4d" stroke-width="1.5"/>
+          <circle cx="34" cy="12" r="3.5" fill="#7c7c7c"/>
+          <path d="M34 12 L30 55 L16 82 L12 88" fill="none" stroke="#bbb" stroke-width="2" stroke-linecap="round"/>
+          <rect x="6" y="84" width="9" height="5" rx="1" transform="rotate(-30 10.5 86.5)" fill="#1ed760"/>
+        </svg>
+      </div>
+      <div class="details">
+        <div class="label"><svg xmlns="http://www.w3.org/2000/svg" class="logo" viewBox="0 0 24 24" aria-hidden="true">
+  <circle cx="12" cy="12" r="12" fill="#1ed760"/>
+  <path d="M6 9.2c3.9-1.2 8.3-.9 11.9 1M6.6 12.4c3.3-1 6.9-.7 9.9.9M7.2 15.4c2.6-.7 5.4-.5 7.7.7" stroke="#000" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+</svg><span>NOW PLAYING</span></div>
+        <div class="song">Time To Pretend</div>
+        <div class="artist">Lazer Boomerang</div>
+        <div class="equalizer-row">
+
+
+<span class="eq eq-bars" aria-hidden="true">
+  
+  <i></i><i></i><i></i><i></i>
+  
+</span>
+</div>
+        
+<div class="progress">
+  
+  <div class="track"><div class="fill"></div></div>
+  
+  <div class="times"><span>
+<span class="clock" style="--clock-remaining: 118.0s;" role="timer" aria-live="off" aria-label="3:16">
+  <span class="clock-snapshot" aria-hidden="true">3:16</span>
+  <span class="clock-running" aria-hidden="true">
+    <span class="clock-window" style="width: 1ch;">
+      <span class="clock-reel" style="--clock-rows: 3; animation-duration: 180s; animation-timing-function: steps(3, end); animation-delay: -16.0s;"><span>3</span><span>4</span><span>5</span><span>6</span></span>
+    </span><span>:</span><span class="clock-window">
+      <span class="clock-reel" style="--clock-rows: 6; animation-duration: 60s; animation-timing-function: steps(6, end); animation-delay: -16.0s;"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>0</span></span>
+    </span><span class="clock-window">
+      <span class="clock-reel" style="--clock-rows: 10; animation-duration: 10s; animation-timing-function: steps(10, end); animation-delay: -6.0s;"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></span>
+    </span>
+  </span>
+  <span class="clock-final" aria-hidden="true">5:14</span>
+</span>
+</span><span>5:14</span></div>
+  
+</div>
+
+      </div>
+    </div>
+  </foreignObject>
+</svg>

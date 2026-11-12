@@ -47,6 +47,28 @@
   color: #b3b3b3; font-size: 11px; line-height: 13px;
   font-variant-numeric: tabular-nums; white-space: nowrap;
 }
+
+.clock { display: inline-grid; vertical-align: top; }
+.clock > span { grid-area: 1 / 1; }
+.clock-snapshot { visibility: hidden; }
+.clock-running {
+  display: inline-flex; height: 13px; overflow: hidden;
+  animation: clock-hide var(--clock-remaining) step-end forwards;
+}
+.clock-final {
+  visibility: hidden; text-align: right;
+  animation: clock-show var(--clock-remaining) step-end forwards;
+}
+.clock-window { display: block; width: 1ch; height: 13px; overflow: hidden; }
+.clock-reel { display: block; text-align: right; animation-name: clock-reel; animation-iteration-count: infinite; }
+.clock-reel > span { display: block; height: 13px; line-height: 13px; }
+@keyframes clock-reel {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-13px * var(--clock-rows))); }
+}
+@keyframes clock-hide { to { visibility: hidden; } }
+@keyframes clock-show { to { visibility: visible; } }
+
 .eq { display: inline-flex; flex-shrink: 0; color: #1ed760; }
 .eq-bars { align-items: flex-end; gap: 2px; height: 12px; }
 .eq-bars i {
@@ -94,6 +116,51 @@
 .eq-floor b i { display: block; flex: 1; min-width: 0; height: 45%; background: currentColor; border-radius: 1px 1px 0 0; animation: spectrum .8s ease-in-out infinite alternate; }
 .eq-floor .back { transform: scale(.62); opacity: .35; margin-bottom: -6px; }
 .eq-floor .mid { transform: scale(.8); opacity: .6; margin-bottom: -4px; }
+.eq-dots { align-items: flex-end; gap: 2px; height: 16px; }
+.song-row .eq-dots { height: 14px; }
+.eq-dots i { display: block; width: 3px; border-radius: 1px; background: repeating-linear-gradient(to top, currentColor 0, currentColor 2px, transparent 2px, transparent 4px); animation: dots .8s ease-in-out infinite alternate; }
+@keyframes dots { from { height: 4px; } to { height: 16px; } }
+.eq-vu { align-items: flex-end; gap: 2px; height: 14px; }
+.eq-vu i { display: block; width: 3px; border-radius: 1px; background: currentColor; opacity: .2; animation: vu 1.2s ease-in-out infinite; }
+@keyframes vu { 0%, 100% { opacity: .2; } 50% { opacity: 1; filter: brightness(1.2); } }
+.eq-ring { align-items: center; justify-content: center; width: 18px; height: 18px; }
+.eq-ring .ring-svg { width: 18px; height: 18px; }
+.eq-ring .ring-g { transform-origin: 18px 18px; animation: ring-spin 6s linear infinite; }
+@keyframes ring-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.eq-ripple { align-items: center; justify-content: center; width: 20px; height: 20px; }
+.eq-ripple .ripple-svg { width: 20px; height: 20px; }
+.eq-ripple .rip { transform-origin: 20px 20px; animation: rip 1.8s cubic-bezier(0,.2,.8,1) infinite; }
+.eq-ripple .rip-2 { animation-delay: -.6s; }
+.eq-ripple .rip-3 { animation-delay: -1.2s; }
+@keyframes rip { 0% { transform: scale(.15); opacity: 1; } 100% { transform: scale(1.1); opacity: 0; } }
+.eq-heartbeat { width: 100%; max-width: 176px; height: 18px; overflow: hidden; align-items: center; }
+.song-row .eq-heartbeat { height: 16px; max-width: 64px; }
+.eq-heartbeat svg { width: 200%; height: 100%; flex-shrink: 0; animation: heartbeat 2.2s linear infinite; }
+@keyframes heartbeat { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.eq-pixel { align-items: flex-end; gap: 3px; height: 14px; }
+.eq-pixel i { display: block; width: 4px; height: 4px; background: currentColor; animation: pixel-bounce .6s steps(4, end) infinite alternate; }
+@keyframes pixel-bounce { 0% { height: 3px; } 33% { height: 6px; } 66% { height: 10px; } 100% { height: 14px; } }
+.eq-glow { align-items: flex-end; gap: 3px; height: 14px; filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 6px currentColor); }
+.eq-glow i { display: block; width: 3px; height: 5px; border-radius: 2px; background: currentColor; animation: glow-bar 1s ease-in-out infinite alternate; }
+@keyframes glow-bar { from { height: 3px; opacity: .7; } to { height: 14px; opacity: 1; } }
+.eq-bubbles { position: relative; width: 100%; max-width: 90px; height: 16px; overflow: hidden; }
+.song-row .eq-bubbles { max-width: 64px; }
+.eq-bubbles i { position: absolute; bottom: -6px; border-radius: 50%; background: currentColor; opacity: 0; animation: bubble-up 1.6s ease-in infinite; }
+@keyframes bubble-up { 0% { transform: translateY(0) scale(.5); opacity: 0; } 30% { opacity: .8; } 80% { opacity: .8; } 100% { transform: translateY(-20px) scale(1.1); opacity: 0; } }
+.eq-skyline { align-items: flex-end; gap: 5px; height: 20px; padding: 4px 4px 0 0; }
+.song-row .eq-skyline { height: 16px; gap: 4px; }
+.eq-skyline i { position: relative; display: block; width: 6px; height: 45%; background: currentColor; animation: skyline .9s ease-in-out infinite alternate; }
+.eq-skyline i::after { content: ""; position: absolute; top: 0; left: 100%; width: 3px; height: 100%; background: currentColor; filter: brightness(.5); transform: skewY(-35deg); transform-origin: top left; }
+.eq-skyline i::before { content: ""; position: absolute; bottom: 100%; left: 0; width: 6px; height: 3px; background: currentColor; filter: brightness(1.35); transform: skewX(-55deg); transform-origin: bottom left; }
+@keyframes skyline { from { height: 20%; } to { height: 100%; } }
+.eq-tunnel { width: 22px; height: 16px; align-items: center; justify-content: center; }
+.eq-tunnel .tunnel-box { position: relative; width: 22px; height: 16px; display: flex; align-items: center; justify-content: center; }
+.eq-tunnel i { position: absolute; box-sizing: border-box; width: 20px; height: 14px; border: 1.5px solid currentColor; border-radius: 2px; animation: tunnel-run 2s linear infinite; }
+.eq-tunnel i:nth-child(1) { animation-delay: 0s; }
+.eq-tunnel i:nth-child(2) { animation-delay: -.5s; }
+.eq-tunnel i:nth-child(3) { animation-delay: -1s; }
+.eq-tunnel i:nth-child(4) { animation-delay: -1.5s; }
+@keyframes tunnel-run { 0% { transform: scale(.1); opacity: 0; } 20% { opacity: .3; } 80% { opacity: .9; } 100% { transform: scale(1.15); opacity: 0; } }
 
         .spotify-card { padding: 20px; display: flex; gap: 16px; align-items: center; }
         .art { width: 160px; height: 160px; }
@@ -123,7 +190,21 @@
   
   <div class="track"><div class="fill"></div></div>
   
-  <div class="times"><span>3:16</span><span>5:14</span></div>
+  <div class="times"><span>
+<span class="clock" style="--clock-remaining: 118.0s;" role="timer" aria-live="off" aria-label="3:16">
+  <span class="clock-snapshot" aria-hidden="true">3:16</span>
+  <span class="clock-running" aria-hidden="true">
+    <span class="clock-window" style="width: 1ch;">
+      <span class="clock-reel" style="--clock-rows: 3; animation-duration: 180s; animation-timing-function: steps(3, end); animation-delay: -16.0s;"><span>3</span><span>4</span><span>5</span><span>6</span></span>
+    </span><span>:</span><span class="clock-window">
+      <span class="clock-reel" style="--clock-rows: 6; animation-duration: 60s; animation-timing-function: steps(6, end); animation-delay: -16.0s;"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>0</span></span>
+    </span><span class="clock-window">
+      <span class="clock-reel" style="--clock-rows: 10; animation-duration: 10s; animation-timing-function: steps(10, end); animation-delay: -6.0s;"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>0</span></span>
+    </span>
+  </span>
+  <span class="clock-final" aria-hidden="true">5:14</span>
+</span>
+</span><span>5:14</span></div>
   
 </div>
 

@@ -406,7 +406,11 @@ def test_generate_css_bar():
     assert len(css_20) > len(css_10)  # More bars should generate more CSS
 
 
-SPOTIFY_THEMES = ["spotify-card", "spotify-bar", "spotify-album"]
+SPOTIFY_THEMES = [
+    "spotify-card", "spotify-bar", "spotify-album",
+    "spotify-mini", "spotify-vinyl", "spotify-banner", "spotify-glass", "spotify-mobile",
+]
+SPOTIFY_THEMES_WITH_CLOCK = [t for t in SPOTIFY_THEMES if t != "spotify-mini"]
 XHTML = "{http://www.w3.org/1999/xhtml}"
 
 
@@ -446,10 +450,36 @@ def test_spotify_dimensions_and_cover(render_spotify, theme, cover, width, heigh
     assert foreign.get("height") == height
 
 
+@pytest.mark.parametrize("theme,cover,width,height", [
+    ("spotify-mini", True, "320", "72"),
+    ("spotify-mini", False, "320", "72"),
+    ("spotify-vinyl", True, "400", "200"),
+    ("spotify-vinyl", False, "400", "200"),
+    ("spotify-banner", True, "800", "180"),
+    ("spotify-banner", False, "800", "180"),
+    ("spotify-glass", True, "400", "200"),
+    ("spotify-glass", False, "400", "200"),
+    ("spotify-mobile", True, "280", "500"),
+    ("spotify-mobile", False, "280", "500"),
+])
+def test_spotify_new_layouts_dimensions(render_spotify, theme, cover, width, height):
+    root, svg = render_spotify(theme=theme, cover_image=cover)
+    assert (root.get("width"), root.get("height")) == (width, height)
+    foreign = root.find("{http://www.w3.org/2000/svg}foreignObject")
+    assert foreign.get("height") == height
+    if theme in ["spotify-banner", "spotify-glass", "spotify-vinyl"]:
+        assert ("--cover: url('data:image/png;base64,sample')" in svg) == cover
+    else:
+        assert (root.find(f".//{XHTML}img") is not None) == cover
+
+
 @pytest.mark.parametrize("theme", SPOTIFY_THEMES)
 @pytest.mark.parametrize("style,count", [
     ("bars", 4), ("spectrum", 40), ("mirror", 28), ("wave", 0),
-    ("pulse", 3), ("iso", 7), ("ribbon", 0), ("floor", 0), ("none", 0), ("invalid", 4),
+    ("pulse", 3), ("iso", 7), ("ribbon", 0), ("floor", 0),
+    ("dots", 7), ("vu", 10), ("ring", 0), ("ripple", 0), ("heartbeat", 0),
+    ("pixel", 5), ("glow", 4), ("bubbles", 5), ("skyline", 7), ("tunnel", 0),
+    ("none", 0), ("invalid", 4),
 ])
 def test_spotify_equalizer_render(render_spotify, theme, style, count):
     root, svg = render_spotify(theme=theme, eq_style=style)
@@ -485,16 +515,23 @@ def test_spotify_playback_states(render_spotify, theme, playing, offline, label,
     assert label in "".join(root.itertext())
     progress = root.find(f'.//{XHTML}div[@class="track"]')
     eq = root.find(f'.//{XHTML}span[@class="eq eq-bars"]')
-    assert (progress is None) == offline
+    if theme != "spotify-mini":
+        assert (progress is None) == offline
+        assert ("animation: progress 118.0s linear forwards" in svg) == animated
     assert (eq is None) == offline
-    assert ("animation: progress 118.0s linear forwards" in svg) == animated
     if not offline:
-        times = root.findall(f'.//{XHTML}div[@class="times"]') + root.findall(f'.//{XHTML}span[@class="times"]')
-        time_text = " ".join(" ".join(node.itertext()) for node in times)
-        assert current in time_text and "5:14" in time_text
+        if theme != "spotify-mini":
+            times = root.findall(f'.//{XHTML}div[@class="times"]') + root.findall(f'.//{XHTML}span[@class="times"]')
+            time_text = " ".join(" ".join(node.itertext()) for node in times)
+            assert current in time_text and "5:14" in time_text
+            if not playing:
+                assert "width: 0%;" in svg
         if not playing:
-            assert "width: 0%;" in svg
             assert ".eq i, .eq svg { animation: none; }" in svg
+            assert ".eq b, .eq div, .eq circle, .eq rect, .eq path, .eq line, .eq g { animation: none !important; }" in svg
+            if theme == "spotify-vinyl":
+                # the record spins only while a track is playing
+                assert ".disc { animation: none !important; }" in svg
 
 
 @pytest.mark.parametrize("progress,duration,width,seconds,total", [
@@ -540,7 +577,7 @@ def _clock_label_at(root, elapsed_seconds):
     return digits[0] + ":" + "".join(digits[1:])
 
 
-@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES_WITH_CLOCK)
 @pytest.mark.parametrize("progress,duration,samples", [
     (196000, 314000, [(0, "3:16"), (1, "3:17"), (4, "3:20"), (118, "5:14"), (160, "5:14")]),
     (59800, 62000, [(0, "0:59"), (.19, "0:59"), (.2, "1:00"), (1.2, "1:01"), (2.2, "1:02"), (8, "1:02")]),
@@ -558,7 +595,7 @@ def test_spotify_elapsed_clock_ticks_and_stops(render_spotify, theme, progress, 
     assert "<script" not in svg.lower()
 
 
-@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES_WITH_CLOCK)
 @pytest.mark.parametrize("overrides", [
     {"is_now_playing": False},
     {"is_now_playing": False, "show_offline": True},

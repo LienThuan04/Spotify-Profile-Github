@@ -1,0 +1,48 @@
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, progress, empty_art with context %}
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="{{height}}" viewBox="0 0 400 {{height}}" role="img">
+  <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
+  <foreignObject width="400" height="{{height}}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-glass{% if title_text == 'Not playing' %} offline{% endif %}">
+      <style>
+        {{styles()}}
+        {% if cover_image and img %}
+        :root, .spotify-glass { --cover: url('data:image/png;base64,{{img}}'); }
+        {% endif %}
+        .spotify-glass { position: relative; width: 100%; height: 100%; overflow: hidden; }
+        .glass-bg {
+          position: absolute; inset: -20px;
+          background: var(--cover, none) center/cover no-repeat;
+          filter: blur(28px); opacity: .4; transform: scale(1.15);
+        }
+        .glass-card {
+          position: relative; z-index: 1; margin: 12px; height: calc(100% - 24px);
+          border-radius: {{border_radius}}px;
+          background: rgba(255, 255, 255, .08);
+          border: 1px solid rgba(255, 255, 255, .18);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, .45);
+          padding: 16px; display: flex; gap: 16px; align-items: center;
+        }
+        .art {
+          width: 140px; height: 140px; border-radius: 6px; flex-shrink: 0;
+          background: var(--cover, #282828) center/cover no-repeat;
+          box-shadow: rgba(0,0,0,.5) 0 8px 24px;
+        }
+        .art-empty { width: 140px; height: 140px; flex-shrink: 0; }
+        .details { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+        .equalizer-row { margin-top: 2px; height: 12px; display: flex; align-items: center; }
+        .progress { margin-top: 8px; }
+      </style>
+      <div class="glass-bg" aria-hidden="true"></div>
+      <div class="glass-card">
+        {% if cover_image and img %}<div class="art"></div>{% elif title_text == 'Not playing' %}{{empty_art()}}{% endif %}
+        <div class="details">
+          <div class="label">{{logo()}}<span>{{title_text|upper}}</span></div>
+          <div class="song">{{song_name}}</div>
+          <div class="artist">{{artist_name}}</div>
+          {% if title_text != 'Not playing' and eq_style|default('bars') != 'none' %}<div class="equalizer-row">{{equalizer()}}</div>{% endif %}
+          {{progress()}}
+        </div>
+      </div>
+    </div>
+  </foreignObject>
+</svg>

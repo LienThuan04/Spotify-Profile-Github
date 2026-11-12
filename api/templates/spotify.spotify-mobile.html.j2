@@ -1,0 +1,82 @@
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, progress, empty_art with context %}
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="{{height}}" viewBox="0 0 280 {{height}}" role="img">
+  <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
+  <foreignObject width="280" height="{{height}}">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="sp spotify-mobile{% if title_text == 'Not playing' %} offline{% endif %}">
+      <style>
+        {{styles()}}
+        .spotify-mobile {
+          padding: 20px 24px; display: flex; flex-direction: column;
+          justify-content: space-between; height: 100%;
+        }
+        .mobile-header {
+          display: flex; align-items: center; justify-content: space-between;
+          height: 24px;
+        }
+        .header-center {
+          display: flex; align-items: center; gap: 6px; font-size: 10px;
+          line-height: 14px; font-weight: 700; letter-spacing: 1.2px;
+          color: #b3b3b3; text-transform: uppercase;
+        }
+        .header-center .logo { width: 14px; height: 14px; }
+        .art-wrap {
+          display: flex; justify-content: center; align-items: center;
+          margin: 10px 0;
+        }
+        .art {
+          width: 232px; height: 232px; border-radius: 8px;
+          box-shadow: rgba(0,0,0,.6) 0 12px 32px;
+        }
+        .art-empty { width: 232px; height: 232px; border-radius: 8px; }
+        .track-info {
+          display: flex; justify-content: space-between; align-items: center;
+          gap: 12px; margin-bottom: 4px;
+        }
+        .meta { min-width: 0; flex: 1; }
+        .song { font-size: 17px; line-height: 21px; font-weight: 700; }
+        .artist { font-size: 13px; line-height: 16px; color: #b3b3b3; margin-top: 3px; }
+        .equalizer-row { height: 14px; display: flex; align-items: center; margin: 4px 0 2px; }
+        .progress { margin: 6px 0 10px; }
+        .controls {
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 0 4px;
+        }
+        .play-btn {
+          width: 44px; height: 44px; border-radius: 50%; background: #1ed760;
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: rgba(0,0,0,.4) 0 4px 12px;
+        }
+      </style>
+      <div class="mobile-header">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        <div class="header-center">{{logo()}}<span>{{title_text|upper}}</span></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#b3b3b3" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+      </div>
+      <div class="art-wrap">
+        {% if cover_image %}<img class="art" src="data:image/png;base64,{{img}}" alt="Album cover"/>{% else %}{{empty_art()}}{% endif %}
+      </div>
+      <div class="track-info">
+        <div class="meta">
+          <div class="song">{{song_name}}</div>
+          <div class="artist">{{artist_name}}</div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1ed760" stroke-width="2" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      {% if title_text != 'Not playing' and eq_style|default('bars') != 'none' %}<div class="equalizer-row">{{equalizer()}}</div>{% endif %}
+      {{progress()}}
+      <div class="controls" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        <div class="play-btn">
+          {% if is_now_playing %}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          {% else %}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M8 5v14l11-7z"/></svg>
+          {% endif %}
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b3b3b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>
+      </div>
+    </div>
+  </foreignObject>
+</svg>
