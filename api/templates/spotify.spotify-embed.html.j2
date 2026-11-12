@@ -1,7 +1,9 @@
+{% from 'spotify._shared.html.j2' import timeline_styles, progress with context %}
 <svg width="460" height="152" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-labelledby="cardTitle" role="img">
   <title id="cardTitle">Now playing on Spotify</title>
   <foreignObject width="460" height="152">
     <style>
+      {{timeline_styles()}}
       * {
         margin: 0;
         padding: 0;
@@ -116,12 +118,12 @@
         {% endif %}
       }
 
-      .progress-container {
+      .progress {
         width: 100%;
         margin-top: auto;
       }
 
-      .progress-bar-bg {
+      .progress .track {
         width: 100%;
         height: 4px;
         {% if mode == 'dark' %}
@@ -134,7 +136,7 @@
         margin-bottom: 6px;
       }
 
-      .progress-bar-fill {
+      .progress .fill {
         height: 100%;
         {% if is_now_playing %}
         background-color: #1db954;
@@ -149,7 +151,7 @@
         transition: width 1s linear;
       }
 
-      .progress-times {
+      .progress .times {
         display: flex;
         justify-content: space-between;
         {% if mode == 'dark' %}
@@ -198,24 +200,7 @@
               <span class="status-text">{{ title_text }}</span>
             </div>
           </div>
-          <div class="progress-container">
-            <div class="progress-bar-bg">
-              {% if progress_data %}
-                <div class="progress-bar-fill" style="width: {{ progress_data.progress_percentage }}%"></div>
-              {% else %}
-                <div class="progress-bar-fill" style="width: 0%"></div>
-              {% endif %}
-            </div>
-            <div class="progress-times">
-              {% if progress_data %}
-                <span>{{ progress_data.current_time }}</span>
-                <span>{{ progress_data.remaining_time }}</span>
-              {% else %}
-                <span>0:00</span>
-                <span>-{{song_name|length // 10}}:{{(song_name|length % 10) * 6}}</span>
-              {% endif %}
-            </div>
-          </div>
+          {{progress()}}
         </div>
       {% else %}
         <div class="album-cover-container">

@@ -237,7 +237,7 @@ def make_svg(
                 # no progress row (-33px); offline text may wrap to a 2nd line (+19px)
                 height -= 14
         elif theme == "spotify-mini":
-            height = 72
+            height = 72 if show_offline and not is_now_playing else 96
         elif theme == "spotify-vinyl":
             height = 200
         elif theme == "spotify-banner":
@@ -269,6 +269,11 @@ def make_svg(
         else:
             height = 145
 
+    if theme in ["default", "compact", "karaoke", "natemoo-re", "novatorem"] and (
+        is_now_playing or not show_offline
+    ):
+        height += 33
+
     if is_now_playing:
         title_text = "Now playing"
         content_bar = "".join(["<div class='bar'></div>" for i in range(num_bar)])
@@ -284,10 +289,10 @@ def make_svg(
 
     # Calculate progress data for themes with a playback timeline.
     progress_data = {}
-    if theme in ["apple", "spotify-embed", *SPOTIFY_THEMES] and duration_ms is not None:
+    if duration_ms is not None:
         if is_now_playing and progress_ms is not None:
             # Currently playing - show real progress
-            timeline_progress = max(0, progress_ms) if theme in SPOTIFY_THEMES else progress_ms
+            timeline_progress = max(0, progress_ms)
             progress_data = calculate_progress_data(timeline_progress, duration_ms)
         else:
             # Recently played - show 0 progress but real duration
@@ -312,7 +317,7 @@ def make_svg(
         "total_time": format_time_ms(duration_ms),
         "progress_seconds": max(0, (duration_ms or 0) - max(0, progress_ms or 0)) / 1000,
         "clock_data": calculate_clock_data(progress_ms, duration_ms)
-        if theme in SPOTIFY_THEMES and is_now_playing else None,
+        if is_now_playing else None,
         "eq_style": eq_style,
     }
 

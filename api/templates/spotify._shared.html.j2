@@ -1,30 +1,4 @@
-{% macro styles() -%}
-.sp, .sp * { box-sizing: border-box; }
-.sp {
-  width: 100%; height: 100%; overflow: hidden;
-  background: #{{background_color}}; border-radius: {{border_radius}}px;
-  color: #fff; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-.art {
-  display: block; object-fit: cover; flex-shrink: 0; border-radius: 6px;
-  box-shadow: rgba(0,0,0,.5) 0 8px 24px;
-}
-.label {
-  display: flex; align-items: center; gap: 6px;
-  color: #b3b3b3; font-size: 11px; line-height: 16px; font-weight: 700;
-  letter-spacing: 1.4px; text-transform: uppercase; white-space: nowrap;
-}
-.art-empty {
-  background: #282828; display: flex; align-items: center; justify-content: center; box-shadow: none;
-}
-.art-empty svg { width: 40%; height: 40%; }
-.logo { width: 16px; height: 16px; flex-shrink: 0; }
-.details { flex: 1; min-width: 0; }
-.song, .artist { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.offline .song, .offline .artist { white-space: normal; }
-.song { font-size: 16px; line-height: 19px; font-weight: 700; min-width: 0; }
-.artist { font-size: 14px; line-height: 16px; color: #b3b3b3; }
-.song-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+{% macro timeline_styles() -%}
 .track { height: 4px; border-radius: 9999px; background: #4d4d4d; overflow: hidden; }
 .fill {
   height: 100%; border-radius: 9999px; background: #fff;
@@ -64,6 +38,36 @@
 @keyframes clock-hide { to { visibility: hidden; } }
 @keyframes clock-show { to { visibility: visible; } }
 {% endif %}
+{%- endmacro %}
+
+{% macro styles() -%}
+.sp, .sp * { box-sizing: border-box; }
+.sp {
+  width: 100%; height: 100%; overflow: hidden;
+  background: #{{background_color}}; border-radius: {{border_radius}}px;
+  color: #fff; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.art {
+  display: block; object-fit: cover; flex-shrink: 0; border-radius: 6px;
+  box-shadow: rgba(0,0,0,.5) 0 8px 24px;
+}
+.label {
+  display: flex; align-items: center; gap: 6px;
+  color: #b3b3b3; font-size: 11px; line-height: 16px; font-weight: 700;
+  letter-spacing: 1.4px; text-transform: uppercase; white-space: nowrap;
+}
+.art-empty {
+  background: #282828; display: flex; align-items: center; justify-content: center; box-shadow: none;
+}
+.art-empty svg { width: 40%; height: 40%; }
+.logo { width: 16px; height: 16px; flex-shrink: 0; }
+.details { flex: 1; min-width: 0; }
+.song, .artist { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.offline .song, .offline .artist { white-space: normal; }
+.song { font-size: 16px; line-height: 19px; font-weight: 700; min-width: 0; }
+.artist { font-size: 14px; line-height: 16px; color: #b3b3b3; }
+.song-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+{{timeline_styles()}}
 .eq { display: inline-flex; flex-shrink: 0; color: #{{bar_color}}; }
 .eq-bars { align-items: flex-end; gap: 2px; height: 12px; }
 .eq-bars i {

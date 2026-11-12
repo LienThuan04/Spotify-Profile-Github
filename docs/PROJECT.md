@@ -36,9 +36,9 @@ catch_all(uid, query params)
 
 ## Themes
 
-`api/templates/spotify.<theme>.html.j2`: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed`, `spotify-card`, `spotify-bar`, `spotify-album`. Ba theme mới dùng macro CSS/SVG trong `spotify._shared.html.j2`, hỗ trợ `eq_style` (`bars`, `spectrum`, `mirror`, `wave`, `pulse`, `iso`, `ribbon`, `floor`, `none`). Chiều cao + số thanh equalizer của mỗi theme nằm trong `make_svg()` (`api/view.py`). Thiết kế đã duyệt: `docs/DESIGN-spotify.md`. Thêm theme mới: `docs/skills/spotify-card/SKILL.md`.
+15 theme: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed` và 8 theme Spotify (`card`, `bar`, `album`, `mini`, `vinyl`, `banner`, `glass`, `mobile`, có tiền tố `spotify-`). Nhóm Spotify hỗ trợ 19 `eq_style`; macro CSS/SVG ở `spotify._shared.html.j2`. Chiều cao + số thanh equalizer của mỗi theme nằm trong `make_svg()` (`api/view.py`). Thiết kế: `docs/DESIGN-spotify.md`; hướng dẫn: `docs/skills/spotify-card/SKILL.md`.
 
-Ba theme Spotify mới có đồng hồ elapsed CSS steps/reels từ `calculate_clock_data()` và macro `elapsed_time()`: giữ pha milliseconds bằng delay âm, dừng ở tổng thời lượng cùng thanh tiến độ. Chỉ chạy khi đang phát và có progress/duration hợp lệ; recent tĩnh 0:00, offline ẩn player. Đây là dự đoán từ snapshot ảnh; pause/seek/đổi bài cần ảnh mới. Tổng thời lượng bên phải luôn tĩnh.
+Cả 15 theme dùng timeline chung (`timeline_styles()`, `progress()`, `elapsed_time()`) và `calculate_clock_data()`: đồng hồ CSS steps/reels giữ pha milliseconds bằng delay âm, dừng cùng thanh tiến độ ở tổng thời lượng. Chỉ chạy khi đang phát và có progress/duration hợp lệ; recent tĩnh 0:00, offline ẩn timeline, thiếu timing giữ tĩnh. Đây là dự đoán từ snapshot ảnh; pause/seek/đổi bài cần ảnh mới. Tổng thời lượng bên phải luôn tĩnh, gồm Apple/Embed (đã bỏ thời gian mẫu). Mini cao 96px (offline 72px); default/compact/karaoke/natemoo-re/novatorem thêm 33px khi có timeline.
 
 ## Query params
 

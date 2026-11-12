@@ -1,6 +1,8 @@
+{% from 'spotify._shared.html.j2' import timeline_styles, progress with context %}
 <svg xmlns="http://www.w3.org/2000/svg" width="345" height="534">
   <foreignObject width="343" height="534">
     <style>
+      {{timeline_styles()}}
       .container {
         border-radius: {{border_radius}}px;
         {% if mode == 'dark' %}
@@ -96,10 +98,10 @@
         margin: -2px 0 0;
         font-weight: inherit;
       }
-      .slider {
+      .progress {
         margin-top: 12px;
       }
-      .slider-pill {
+      .progress .track {
         width: 100%;
         height: 8px;
         {% if mode == 'dark' %}
@@ -111,7 +113,7 @@
         overflow: hidden;
         margin-bottom: 8px;
       }
-      .slider-pill-inner {
+      .progress .fill {
         height: 100%;
         {% if mode == 'dark' %}
         background-color: #a8b1bc;
@@ -119,14 +121,8 @@
         background-color: #4b5563;
         {% endif %}
       }
-      .slider-container {
-        display: flex;
-        justify-content: space-between;
-      }
-      .slider-content {
-        font-size: 12px;
-        line-height: 16px;
-        margin: 0;
+      .progress .times {
+        color: {% if mode == 'dark' %}#acacac{% else %}#4b5563{% endif %};
       }
       .player-container {
         display: flex;
@@ -163,24 +159,7 @@
         <h1 class="song-title text-gray-900 truncate">{{song_name}}</h1>
         <h2 class="song-artist text-gray-500 truncate">{{artist_name}}</h2>
       </div>
-      <div class="slider">
-        <div class="slider-pill">
-          {% if progress_data %}
-            <div class="slider-pill-inner" style="width:{{ progress_data.progress_percentage }}%"></div>
-          {% else %}
-            <div class="slider-pill-inner" style="width:33.33%"></div>
-          {% endif %}
-        </div>
-        <div class="slider-container">
-          {% if progress_data %}
-            <p class="slider-content text-gray-600">{{ progress_data.current_time }}</p>
-            <p class="slider-content text-gray-600">{{ progress_data.remaining_time }}</p>
-          {% else %}
-            <p class="slider-content text-gray-600">1:14</p>
-            <p class="slider-content text-gray-600">-2:28</p>
-          {% endif %}
-        </div>
-      </div>
+      {{progress()}}
       <div class="player-container text-gray-900">
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="player-item" viewBox="0 0 24 24">
           <path d="M9.195 18.44c1.25.713 2.805-.19 2.805-1.629v-2.34l6.945 3.968c1.25.714 2.805-.188 2.805-1.628V8.688c0-1.44-1.555-2.342-2.805-1.628L12 11.03V8.69c0-1.44-1.555-2.343-2.805-1.629l-7.108 4.062c-1.26.72-1.26 2.536 0 3.256l7.108 4.061z" />

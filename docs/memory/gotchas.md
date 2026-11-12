@@ -16,7 +16,7 @@ Triệu chứng → nguyên nhân → cách xử lý. Ghi thêm sau khi xác min
 - CI (`ci.yml`) đặt `SPOTIFY_CLIENT_SECRET`, `REDIRECT_URI` nhưng code đọc `SPOTIFY_SECRET_ID` và tự suy `REDIRECT_URI` từ `BASE_URL`. Test vẫn qua vì mock; đừng lấy CI làm mẫu cấu hình env.
 - `Dockerfile` dùng `python:3.11` trong khi `pyproject.toml` yêu cầu `>=3.12`.
 - 5 template (`compact`, `default`, `karaoke`, `natemoo-re`, `novatorem`) bọc ảnh bìa trong `<a href="{}">` — placeholder kiểu `str.format` không bao giờ được điền, link chết (GitHub cũng không cho click bên trong SVG nên không ai thấy).
-- `spotify.spotify-embed.html.j2` (dòng ~215): khi không có `progress_data`, thời gian còn lại được **bịa** từ độ dài tên bài (`song_name|length`).
+- Timeline hiện dùng chung cho 15 theme. Apple/Embed đã bỏ thời gian mẫu/suy từ tên bài; thiếu timing giữ 0:00 tĩnh. Import `timeline_styles()` riêng cho theme cũ, không dùng cả `styles()` vì macro đó còn định dạng bố cục Spotify và equalizer.
 - `compact`, `karaoke` vẫn chèn `css_bar` + keyframes `sound` nhưng không có thanh equalizer — code thừa, vô hại.
 
 ## Môi trường và graphify

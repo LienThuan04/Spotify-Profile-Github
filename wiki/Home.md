@@ -34,7 +34,7 @@ Every parameter Card Studio sets is documented in [Options](#options), so you ca
 | `spotify-card` | 400×200 | Default choice; sits next to other 400×200 cards |
 | `spotify-bar` | 400×112 | Compact strip under your bio |
 | `spotify-album` | 240 wide | Artwork-first column |
-| `spotify-mini` | 320×72 | Tiny pill, minimal footprint |
+| `spotify-mini` | 320×96 (offline: 320×72) | Tiny pill with playback timeline |
 | `spotify-vinyl` | 400×200 | Spinning picture disc made from the album cover |
 | `spotify-banner` | 800×180 | Full-width hero banner |
 | `spotify-glass` | 400×200 | Frosted glass over the blurred cover |
@@ -43,6 +43,8 @@ Every parameter Card Studio sets is documented in [Options](#options), so you ca
 
 
 Every preview below uses this project's deployment. Cards show the current track, a randomly selected recently played track when playback stops, or an offline status if no track is available. Connect your Spotify account above to generate a URL with your own `uid`.
+
+All 15 themes include a progress bar with elapsed time and total duration. During playback, CSS advances the bar and elapsed clock together, stopping at the end of the track. Recently played tracks stay at 0:00; offline cards hide the timeline. If Spotify does not provide timing, the timeline stays static. Pause, seeking and track changes require a fresh image response. Classic layouts grow by 33px to fit the timeline; Apple and Spotify Embed keep their existing size.
 
 <table>
   <tr>

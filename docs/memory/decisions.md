@@ -1,5 +1,10 @@
 # Decisions — Spotify-Profile-Github
 
+## 2026-11-12 — Timeline cho mọi theme
+
+- Người dùng yêu cầu sửa tất cả theme còn thiếu thanh tiến trình và đồng hồ. Cả 15 theme dùng macro CSS timeline chung, chạy từ snapshot Spotify và dừng cùng cuối bài; không thêm JavaScript hoặc đổi fetching/cache.
+- Apple/Embed hiển thị elapsed và tổng thời lượng thật, bỏ số mẫu; thiếu timing giữ tĩnh. Mini tăng lên 96px, 5 theme cũ thêm 33px khi có timeline để dành chỗ cho mốc thời gian; offline giữ chiều cao cũ.
+
 ## 2026-11-12 — Tên tác giả hiển thị thống nhất
 
 - Người dùng yêu cầu tên `LianHarman(LienThuan04)`; dùng đúng chuỗi này trong README, footer, metadata và LICENSE của bản hiện tại.

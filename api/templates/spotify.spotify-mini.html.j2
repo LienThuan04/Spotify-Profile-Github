@@ -1,4 +1,4 @@
-{% from 'spotify._shared.html.j2' import styles, logo, equalizer, empty_art with context %}
+{% from 'spotify._shared.html.j2' import styles, logo, equalizer, progress, empty_art with context %}
 <svg xmlns="http://www.w3.org/2000/svg" width="320" height="{{height}}" viewBox="0 0 320 {{height}}" role="img">
   <title>Spotify — {{title_text}}: {{song_name}} — {{artist_name}}</title>
   <foreignObject width="320" height="{{height}}">
@@ -14,6 +14,7 @@
         .details { display: flex; flex-direction: column; justify-content: center; min-width: 0; flex: 1; }
         .song { font-size: 13px; line-height: 16px; font-weight: 700; }
         .artist { font-size: 11px; line-height: 14px; color: #b3b3b3; margin-top: 2px; }
+        .progress { margin-top: 6px; }
         .mini-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
         .spotify-mini .eq { max-width: 44px; height: 12px; }
         .spotify-mini .logo { width: 18px; height: 18px; }
@@ -23,6 +24,7 @@
         <div class="label" style="font-size: 8px; line-height: 10px; margin-bottom: 2px;">{{title_text|upper}}</div>
         <div class="song">{{song_name}}</div>
         <div class="artist">{{artist_name}}</div>
+        {{progress()}}
       </div>
       <div class="mini-right">
         {% if title_text != 'Not playing' and eq_style|default('bars') != 'none' %}{{equalizer()}}{% endif %}

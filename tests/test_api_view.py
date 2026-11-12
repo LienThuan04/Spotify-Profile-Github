@@ -410,7 +410,8 @@ SPOTIFY_THEMES = [
     "spotify-card", "spotify-bar", "spotify-album",
     "spotify-mini", "spotify-vinyl", "spotify-banner", "spotify-glass", "spotify-mobile",
 ]
-SPOTIFY_THEMES_WITH_CLOCK = [t for t in SPOTIFY_THEMES if t != "spotify-mini"]
+LEGACY_THEMES = ["default", "compact", "karaoke", "natemoo-re", "novatorem", "apple", "spotify-embed"]
+TIMELINE_THEMES = [*SPOTIFY_THEMES, *LEGACY_THEMES]
 XHTML = "{http://www.w3.org/1999/xhtml}"
 
 
@@ -451,8 +452,8 @@ def test_spotify_dimensions_and_cover(render_spotify, theme, cover, width, heigh
 
 
 @pytest.mark.parametrize("theme,cover,width,height", [
-    ("spotify-mini", True, "320", "72"),
-    ("spotify-mini", False, "320", "72"),
+    ("spotify-mini", True, "320", "96"),
+    ("spotify-mini", False, "320", "96"),
     ("spotify-vinyl", True, "400", "200"),
     ("spotify-vinyl", False, "400", "200"),
     ("spotify-banner", True, "800", "180"),
@@ -515,17 +516,15 @@ def test_spotify_playback_states(render_spotify, theme, playing, offline, label,
     assert label in "".join(root.itertext())
     progress = root.find(f'.//{XHTML}div[@class="track"]')
     eq = root.find(f'.//{XHTML}span[@class="eq eq-bars"]')
-    if theme != "spotify-mini":
-        assert (progress is None) == offline
-        assert ("animation: progress 118.0s linear forwards" in svg) == animated
+    assert (progress is None) == offline
+    assert ("animation: progress 118.0s linear forwards" in svg) == animated
     assert (eq is None) == offline
     if not offline:
-        if theme != "spotify-mini":
-            times = root.findall(f'.//{XHTML}div[@class="times"]') + root.findall(f'.//{XHTML}span[@class="times"]')
-            time_text = " ".join(" ".join(node.itertext()) for node in times)
-            assert current in time_text and "5:14" in time_text
-            if not playing:
-                assert "width: 0%;" in svg
+        times = root.findall(f'.//{XHTML}div[@class="times"]') + root.findall(f'.//{XHTML}span[@class="times"]')
+        time_text = " ".join(" ".join(node.itertext()) for node in times)
+        assert current in time_text and "5:14" in time_text
+        if not playing:
+            assert "width: 0%;" in svg
         if not playing:
             assert ".eq i, .eq svg { animation: none; }" in svg
             assert ".eq b, .eq div, .eq circle, .eq rect, .eq path, .eq line, .eq g { animation: none !important; }" in svg
@@ -577,7 +576,7 @@ def _clock_label_at(root, elapsed_seconds):
     return digits[0] + ":" + "".join(digits[1:])
 
 
-@pytest.mark.parametrize("theme", SPOTIFY_THEMES_WITH_CLOCK)
+@pytest.mark.parametrize("theme", TIMELINE_THEMES)
 @pytest.mark.parametrize("progress,duration,samples", [
     (196000, 314000, [(0, "3:16"), (1, "3:17"), (4, "3:20"), (118, "5:14"), (160, "5:14")]),
     (59800, 62000, [(0, "0:59"), (.19, "0:59"), (.2, "1:00"), (1.2, "1:01"), (2.2, "1:02"), (8, "1:02")]),
@@ -595,7 +594,7 @@ def test_spotify_elapsed_clock_ticks_and_stops(render_spotify, theme, progress, 
     assert "<script" not in svg.lower()
 
 
-@pytest.mark.parametrize("theme", SPOTIFY_THEMES_WITH_CLOCK)
+@pytest.mark.parametrize("theme", TIMELINE_THEMES)
 @pytest.mark.parametrize("overrides", [
     {"is_now_playing": False},
     {"is_now_playing": False, "show_offline": True},
@@ -608,6 +607,52 @@ def test_spotify_elapsed_clock_requires_active_known_progress(render_spotify, th
     root, svg = render_spotify(theme=theme, **overrides)
     assert root.find(f'.//{XHTML}span[@class="clock"]') is None
     assert "animation: progress " not in svg
+
+
+@pytest.mark.parametrize("theme", TIMELINE_THEMES)
+@pytest.mark.parametrize("overrides,current,total,width,animated", [
+    ({}, "3:16", "5:14", "62.42038216560509", True),
+    ({"is_now_playing": False}, "0:00", "5:14", "0", False),
+    ({"progress_ms": None}, "0:00", "5:14", "0", False),
+    ({"duration_ms": None}, "0:00", "0:00", "0", False),
+    ({"duration_ms": 0}, "0:00", "0:00", "0", False),
+    ({"duration_ms": -1000}, "0:00", "0:00", "0", False),
+    ({"progress_ms": -500}, "0:00", "5:14", "0", True),
+    ({"progress_ms": 400000}, "5:14", "5:14", "100.0", False),
+])
+def test_all_theme_timelines_use_real_playback(render_spotify, theme, overrides, current, total, width, animated):
+    root, svg = render_spotify(theme=theme, **overrides)
+    progress = root.find(f'.//{XHTML}div[@class="progress"]')
+    if progress is None:
+        progress = root.find(f'.//{XHTML}div[@class="progress progress-inline"]')
+    assert progress is not None, f"{theme} must show a playback timeline"
+    assert progress.find(f'{XHTML}div[@class="track"]') is not None
+    times = progress.findall(f'.//{XHTML}div[@class="times"]') + progress.findall(f'.//{XHTML}span[@class="times"]')
+    assert current in " ".join(" ".join(node.itertext()) for node in times)
+    total_label = times[-1][-1] if len(times) == 1 else times[-1]
+    assert total_label.text == total
+    assert f"width: {width}%;" in svg
+    assert ('class="clock"' in svg) == animated
+
+
+@pytest.mark.parametrize("theme", TIMELINE_THEMES)
+def test_all_theme_timelines_hidden_offline(render_spotify, theme):
+    root, svg = render_spotify(theme=theme, is_now_playing=False, show_offline=True)
+    assert root.find(f'.//{XHTML}div[@class="track"]') is None
+    assert 'class="clock"' not in svg
+
+
+@pytest.mark.parametrize("theme,cover,height", [
+    ("default", True, "478"), ("default", False, "178"),
+    ("compact", True, "433"), ("compact", False, "133"),
+    ("karaoke", True, "478"), ("karaoke", False, "178"),
+    ("natemoo-re", True, "117"), ("natemoo-re", False, "117"),
+    ("novatorem", True, "133"), ("novatorem", False, "133"),
+])
+def test_legacy_timelines_have_room_below_content(render_spotify, theme, cover, height):
+    root, _ = render_spotify(theme=theme, cover_image=cover)
+    assert root.get("height") == height
+    assert root.find("{http://www.w3.org/2000/svg}foreignObject").get("height") == height
 
 
 def test_spotify_elapsed_clock_scales_by_minutes_for_long_tracks(render_spotify):
