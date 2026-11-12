@@ -1,409 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>Spotify-Profile-Github</title>
-
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-  <style>
-    .green-spotify {
-      background-color: #1db954 !important;
-    }
-
-    @media only screen and (max-width: 992px) {
-      nav .brand-logo {
-        width: 100%;
-        text-align: center;
-      }
-    }
-
-    .page-footer {
-      padding-top: 0;
-    }
-
-    .page-footer .footer-copyright {
-      padding: 20px 0 16px;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .footer-content > i {
-      margin: 0 5px;
-    }
-
-    {# sticky footer #}
-    body {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-
-    .section.no-pad-bot {
-      flex: 1 0 auto;
-    }
-  </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Card Studio · Spotify-Profile-Github</title>
+  <style>{% include '_builder/styles.css' %}</style>
 </head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="https://github.com/LienThuan04/Spotify-Profile-Github" aria-label="Spotify-Profile-Github on GitHub">
+      <svg class="brand-mark" width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M5.3 8.8c4.4-1.3 9.3-.9 13.2 1.4M6.2 12c3.8-1.1 7.7-.7 11.2 1.1M7.1 15.1c3-.8 6.1-.5 9 .9" fill="none" stroke="#0b120d" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span>Spotify<span class="brand-divider"> / </span><strong>Card Studio</strong></span>
+    </a>
+    <div class="header-actions"><span class="connection"><span class="status-dot"></span>Spotify connected</span><a class="text-link" href="https://github.com/LienThuan04/Spotify-Profile-Github" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+  </header>
 
-<body class="">
-  <nav class="green-spotify" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Spotify-Profile-Github</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="https://github.com/LienThuan04/Spotify-Profile-Github" target="_BLANK">Github</a></li>
-      </ul>
+  <main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow"><span></span> YOUR MUSIC, YOUR PROFILE</p>
+      <h1 id="page-title">Good music deserves<br>a place on your <em>README.</em></h1>
+      <p class="intro-description">Make your now playing card feel like you. Pick a look, fine-tune the details, and take the code.</p>
+    </section>
 
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="https://github.com/LienThuan04/Spotify-Profile-Github" target="_BLANK">Github</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <br><br>
-      <div class="row center">
-        <h2 class="header center orange-text">Markdown Code</h2>
-      </div>
+    <div class="builder-layout">
+      <form id="builder-form" class="controls-panel" aria-label="Customize your Spotify card">
+        <div class="panel-heading"><h2>Make it yours</h2><button id="reset-button" class="quiet-button" type="button">Reset settings <span aria-hidden="true">↺</span></button></div>
 
-      <div class="row center">
-        <div class="col s12 m3">
-          <label class="row">
-            <input type="checkbox" class="filled-in" checked="checked" id="cover-image-checkbox" />
-            <span>Cover Image</span>
-          </label>
-        </div>
-        <div class="col s12 m3">
-          <label class="row">
-            <input type="checkbox" class="filled-in" id="open-song-checkbox" />
-            <span>Open in Spotify</span>
-          </label>
-        </div>
-        <div class="col s12 m3">
-          <label class="row">
-            <input type="checkbox" class="filled-in" id="show-offline-checkbox" />
-            <span>Show Offline</span>
-          </label>
-        </div>
-        
-        <div class="col s12 m3">
-            <label  class="row">
-              <input type="checkbox" class="filled-in" id="interchange" />
-              <span>Interchange Artist with Song name</span>
+        <fieldset class="control-section">
+          <legend><span class="step-number">01</span> Choose your layout <span class="count-badge">10 themes</span></legend>
+          <div class="theme-grid">
+            {% set themes = [('spotify-card', 'Spotify Card', 'The full experience', 'card'), ('spotify-bar', 'Spotify Bar', 'Small footprint', 'bar'), ('spotify-album', 'Spotify Album', 'Artwork first', 'album'), ('default', 'Classic', 'The original', 'classic'), ('compact', 'Compact', 'Keep it minimal', 'bar'), ('natemoo-re', 'Natemoo-re', 'Clean and simple', 'classic'), ('novatorem', 'Novatorem', 'A little waveform', 'classic'), ('karaoke', 'Karaoke', 'Let the lyrics lead', 'bar'), ('apple', 'Apple', 'A softer look', 'card'), ('spotify-embed', 'Spotify Embed', 'The familiar player', 'card')] %}
+            {% for value, title, description, shape in themes %}
+            <label class="theme-option">
+              <input type="radio" name="theme" value="{{value}}" {% if loop.first %}checked{% endif %}>
+              <span class="theme-option-content"><span class="theme-mini theme-mini-{{shape}}" aria-hidden="true"><i></i><b></b><b></b><b></b></span><span><strong>{{title}}</strong><small>{{description}}</small></span><span class="theme-check" aria-hidden="true">✓</span></span>
             </label>
+            {% endfor %}
           </div>
-        <div class="col s12 m3">
-          <label class="row">
-            <input type="checkbox" class="filled-in" id="profanity-checkbox" />
-            <span>Censor Profanity</span>
-          </label>
-        </div>
-        <div class="col s12 m3">
-          <label class="row">
-            <input type="checkbox" class="filled-in" id="hide-remaster-checkbox" />
-            <span>Hide Remaster</span>
-          </label>
-        </div>
-      </div>
+        </fieldset>
 
-      <div class="row center">
-        <div class="input-field col s12 m8 offset-m2">
-          <select id="theme-select">
-            <option value="default" selected>default</option>
-            <option value="compact">compact</option>
-            <option value="natemoo-re">natemoo-re</option>
-            <option value="novatorem">novatorem</option>
-            <option value="karaoke">karaoke</option>
-            <option value="apple">apple</option>
-            <option value="spotify-embed">spotify-embed</option>
-            <option value="spotify-card">spotify-card</option>
-            <option value="spotify-bar">spotify-bar</option>
-            <option value="spotify-album">spotify-album</option>
-          </select>
-          <label>Choose theme</label>
-        </div>
-        <div class="input-field col s12 m8 offset-m2" id="eq-style-row" style="display: none;">
-          <select id="eq-style-select">
-            <option value="bars" selected>bars — Spotify bars</option>
-            <option value="spectrum">spectrum — Thin bars</option>
-            <option value="mirror">mirror — Mirrored bars</option>
-            <option value="wave">wave — Smooth wave</option>
-            <option value="pulse">pulse — Three dots</option>
-            <option value="iso">iso — 3D isometric bars</option>
-            <option value="ribbon">ribbon — Layered 3D waves</option>
-            <option value="floor">floor — Perspective equalizer floor</option>
-            <option value="none">none — Hide equalizer</option>
-          </select>
-          <label>Equalizer style</label>
-        </div>
-        <div class="row bar-color">
-          <div class="col s12 m4">
-            <label  class="row">
-              <span>Bar Color</span>
-              <input type="color" id="bar_color" name="bar_color" value="#53b14f">
-            </label>
+        <fieldset class="control-section">
+          <legend><span class="step-number">02</span> Set the mood</legend>
+          <div class="field" id="equalizer-field"><label for="eq-style-select">Equalizer style</label><select id="eq-style-select" name="eq_style"><option value="bars">Bars · Spotify classic</option><option value="spectrum">Spectrum · Thin bars</option><option value="mirror">Mirror · Both sides</option><option value="wave">Wave · Smooth curves</option><option value="pulse">Pulse · Three dots</option><option value="iso">Isometric · 3D bars</option><option value="ribbon">Ribbon · Layered waves</option><option value="floor">Floor · 3D perspective</option><option value="none">None · Just the music</option></select><p class="field-hint">Animations play while you listen and pause for recent tracks.</p></div>
+          <div class="field" id="mode-field" hidden><label for="mode-select">Appearance</label><select id="mode-select" name="mode"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+          <div class="color-grid">
+            <div class="field" id="background-field"><label for="background-color">Background</label><div class="color-control"><input id="background-color" name="background_color" type="color" value="#121212"><output id="background-value" for="background-color">#121212</output></div></div>
+            <div class="field" id="bar-color-field"><label for="bar-color">Equalizer color</label><div class="color-control"><input id="bar-color" name="bar_color" type="color" value="#1ed760"><output id="bar-color-value" for="bar-color">#1ED760</output></div></div>
           </div>
-          <div class="col s12 m4">
-            <label  class="row">
-              <span>Background Color</span>
-              <input type="color" id="background_color" name="background_color" value="#121212">
-            </label>
-          </div>
-          <div class="col s12 m4">
-            <label  class="row">
-              <input type="checkbox" class="filled-in" id="bar_color_cover" />
-              <span>Automatic bar color</span>
-            </label>
-          </div>
-          
-          
-        </div>
-      </div>
+          <label class="toggle-row compact-toggle" id="auto-color-field"><span><strong>Match album artwork</strong><small id="auto-color-hint">Let the cover choose the equalizer color.</small></span><input id="auto-color" name="bar_color_cover" type="checkbox" role="switch"><span class="switch-track" aria-hidden="true"></span></label>
+          <div class="field radius-field"><div class="label-row"><label for="border-radius">Corner radius</label><output id="radius-value" for="border-radius">10 px</output></div><input id="border-radius" name="border_radius" type="range" min="0" max="50" step="1" value="10"><div class="range-labels" aria-hidden="true"><span>Sharp</span><span>Rounded</span></div></div>
+        </fieldset>
 
-      <div class="row center" id="mode-row" style="display: none;">
-        <div class="input-field col s12 m8 offset-m2">
-          <select id="mode-select">
-            <option value="light" selected>Light</option>
-            <option value="dark">Dark</option>
-          </select>
-          <label>Choose mode</label>
-        </div>
-      </div>
+        <fieldset class="control-section behavior-section">
+          <legend><span class="step-number">03</span> The little details</legend>
+          <label class="toggle-row"><span><strong>Album artwork</strong><small>Give your music a face.</small></span><input id="cover-image" name="cover_image" type="checkbox" role="switch" checked><span class="switch-track" aria-hidden="true"></span></label>
+          <label class="toggle-row"><span><strong>Open song on click</strong><small>Take visitors straight to Spotify.</small></span><input id="open-song" name="open_song" type="checkbox" role="switch" checked><span class="switch-track" aria-hidden="true"></span></label>
+          <label class="toggle-row"><span><strong>Show offline status</strong><small>Show “Not playing” instead of a recent song.</small></span><input id="show-offline" name="show_offline" type="checkbox" role="switch"><span class="switch-track" aria-hidden="true"></span></label>
+          <label class="toggle-row"><span><strong>Artist name first</strong><small>Swap the song and artist positions.</small></span><input id="interchange" name="interchange" type="checkbox" role="switch"><span class="switch-track" aria-hidden="true"></span></label>
+          <label class="toggle-row"><span><strong>Clean up song titles</strong><small>Remove remaster annotations.</small></span><input id="hide-remaster" name="hide_remaster" type="checkbox" role="switch"><span class="switch-track" aria-hidden="true"></span></label>
+          <label class="toggle-row"><span><strong>Filter explicit words</strong><small>Censor profanity in song and artist names.</small></span><input id="profanity" name="profanity" type="checkbox" role="switch"><span class="switch-track" aria-hidden="true"></span></label>
+        </fieldset>
+      </form>
 
-      <div class="row center">
-        <div class="col s0 m1"></div>
-        <div class="col s12 m10">
-          <textarea id="markdown-code"
-            style="width: 100%;height: 100px; padding: 10px;"></textarea>
-        </div>
-        <div class="col s0 m1"></div>
-      </div>
+      <div class="output-column">
+        <section class="preview-panel" aria-labelledby="preview-title">
+          <div class="preview-heading"><h2 id="preview-title">Live preview</h2><span class="live-badge"><span class="status-dot"></span>YOUR SPOTIFY</span></div>
+          <div class="preview-stage" id="preview-stage"><div class="preview-halo" aria-hidden="true"></div><img id="example-view" alt="Your Spotify now playing card"><p id="preview-message" role="status">Loading your music…</p></div>
+          <div class="preview-footer"><span id="preview-theme">Spotify Card</span><button type="button" id="refresh-preview" class="quiet-button">Refresh preview <span aria-hidden="true">↻</span></button></div>
+          <div id="preview-error" class="preview-error" hidden><p>We couldn’t load your card. You can still copy the code, refresh the preview, or reconnect Spotify.</p><a href="{{BASE_URL.rstrip('/')}}/login">Reconnect Spotify ↗</a></div>
+        </section>
 
-      <div class="row center">
-        <div style="margin-top: 20px; margin-bottom: 20px;">
-          <button class="waves-effect waves-light btn green darken-3" data-clipboard-target="#markdown-code">
-            <i class="material-icons left">content_copy</i> Copy to clipboard
-          </button>
-        </div>
-      </div>
-
-      <div class="row center">
-        <img id="example-view" />
-      </div>
-
-      <div class="row center">
-        <h2 class="header center orange-text">HTML Code</h2>
-      </div>
-
-      <div class="row center">
-        <div class="col s0 m1"></div>
-        <div class="col s12 m10">
-          <textarea id="html-code"
-            style="width: 100%;height: 100px; padding: 10px;"></textarea>
-        </div>
-        <div class="col s0 m1"></div>
-      </div>
-
-      <div class="row center">
-        <div style="margin-top: 20px; margin-bottom: 20px;">
-          <button class="waves-effect waves-light btn green darken-3" data-clipboard-target="#html-code">
-            <i class="material-icons left">content_copy</i> Copy to clipboard
-          </button>
-        </div>
-      </div>
-
-      
-      <br><br>
-
-    </div>
-  </div>
-
-  <footer class="page-footer green-spotify">
-    <div class="footer-copyright">
-      <div class="container center footer-content">
-        <span>Made with</span>
-        <i class="material-icons red-text">favorite</i></i>
-        <span>
-          by
-          <a class="grey-text text-darken-4"
-            href="https://github.com/LienThuan04/Spotify-Profile-Github"
-            target="_BLANK">
-            Spotify-Profile-Github
-          </a>
-        <span>
+        <section class="export-panel" aria-labelledby="export-title">
+          <div class="export-heading"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2 id="export-title">Take it to your profile.</h2></div><span class="code-symbol" aria-hidden="true">&lt;/&gt;</span></div>
+          <div class="code-toolbar"><div class="code-tabs" role="tablist" aria-label="Embed format"><button type="button" id="tab-markdown" role="tab" aria-selected="true" aria-controls="code-panel" data-tab="markdown">Markdown</button><button type="button" id="tab-html" role="tab" aria-selected="false" aria-controls="code-panel" tabindex="-1" data-tab="html">HTML</button><button type="button" id="tab-url" role="tab" aria-selected="false" aria-controls="code-panel" tabindex="-1" data-tab="url">Image URL</button></div><button id="copy-button" class="copy-button" type="button">Copy code <span aria-hidden="true">↗</span></button></div>
+          <div id="code-panel" role="tabpanel" aria-labelledby="tab-markdown"><label id="code-label" for="embed-code" class="sr-only">Markdown embed code</label><textarea id="embed-code" spellcheck="false" readonly aria-describedby="code-hint"></textarea></div>
+          <div class="export-footer"><p id="code-hint">Paste this into your GitHub profile README.md.</p><span id="copy-status" role="status" aria-live="polite"></span></div>
+          <a id="open-preview" class="text-link preview-link" target="_blank" rel="noopener noreferrer">Open card in a new tab <span aria-hidden="true">↗</span></a>
+        </section>
+        <p class="studio-note"><span aria-hidden="true">♪</span> Your card updates with your listening. No need to change the embed code.</p>
       </div>
     </div>
-  </footer>
+  </main>
 
-
-  <!--  Scripts-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
-
-  <script>
-    var uid = "{{uid}}";
-    var markdownCodeTextArea = $('#markdown-code');
-    var htmlCodeTextArea = $('#html-code');
-    var exampleView = $("#example-view");
-    var urlParams = {
-      uid: uid,
-      cover_image: true,
-      theme: 'default',
-      show_offline: false,
-      background_color: "121212",
-      interchange:false,
-      profanity: false,
-      hide_remaster: false
-    };
-    var openSong = false;
-    var spotifyThemes = ['spotify-card', 'spotify-bar', 'spotify-album'];
-    var barColorCustomized = false;
-
-    function updateUrl() {
-      if (spotifyThemes.includes(urlParams.theme)) {
-        urlParams.eq_style = $('#eq-style-select').val();
-      } else {
-        delete urlParams.eq_style;
-      }
-      var viewUrl = `{{BASE_URL}}/view?`;
-      var viewUrlWithParams = viewUrl + $.param(urlParams, true);
-      var url = "https://github.com/LienThuan04/Spotify-Profile-Github";
-      if (openSong) {
-        url = viewUrl + $.param({uid: uid, redirect: true}, true);;
-      }
-
-      exampleView.attr('src', viewUrlWithParams);
-      markdownCodeTextArea.text(`[![Spotify-Profile-Github](${viewUrlWithParams})](${url})`);
-      
-      // Generate HTML code
-      var htmlCode = `<p align="center">
-  <a href="${url}">
-    <img src="${viewUrlWithParams}">
-  </a>
-</p>`;
-      htmlCodeTextArea.text(htmlCode);
-    }
-
-    updateUrl();
-
-    $("#cover-image-checkbox").change(function() {
-      urlParams.cover_image = this.checked;
-      updateUrl();
-    });
-    $("#interchange").change(function() {
-      urlParams.interchange = this.checked;
-      updateUrl();
-    });
-
-    $("#open-song-checkbox").change(function() {
-      openSong = this.checked;
-      updateUrl();
-    });
-
-
-    $("#show-offline-checkbox").change(function() {
-      urlParams.show_offline = this.checked;
-      updateUrl();
-    });
-
-    $("#profanity-checkbox").change(function() {
-      urlParams.profanity = this.checked;
-      updateUrl();
-    });
-
-    $("#hide-remaster-checkbox").change(function() {
-      urlParams.hide_remaster = this.checked;
-      updateUrl();
-    });
-
-    $('#theme-select').change(function() {
-      urlParams.theme = this.value;
-      var isSpotifyTheme = spotifyThemes.includes(this.value);
-      $('#eq-style-row').toggle(isSpotifyTheme);
-
-      // Reset visibility defaults
-      $('.bar-color').show();
-      $('#mode-row').hide();
-
-      // Follow the theme default until the user chooses a custom color.
-      if (!barColorCustomized) {
-        $('#bar_color').val(isSpotifyTheme ? '#1ed760' : '#53b14f');
-      }
-      urlParams.bar_color = $('#bar_color').val().substring(1);
-      urlParams.bar_color_cover = $('#bar_color_cover').prop('checked');
-
-      // Hide bar-color controls for themes that don't use them
-      if (['compact', 'karaoke', 'apple'].includes(this.value)) {
-        $('.bar-color').hide();
-        delete urlParams.bar_color_cover;
-        delete urlParams.bar_color;
-      }
-
-      // Manage Apple-specific mode selector and param
-      if (this.value === 'apple' || this.value === 'spotify-embed') {
-        $('#mode-row').show();
-        urlParams.mode = $('#mode-select').val();
-      } else {
-        delete urlParams.mode;
-      }
-
-      updateUrl();
-    });
-
-    $('#bar_color').change(function() {
-      barColorCustomized = true;
-      urlParams.bar_color = this.value.substring(1);
-      updateUrl();
-    });
-
-    $('#background_color').change(function() {
-      urlParams.background_color = this.value.substring(1);
-      updateUrl();
-    });
-
-    $('#bar_color_cover').change(function() {
-      urlParams.bar_color_cover = this.checked;
-      updateUrl();
-    });
-
-    $('#mode-select').change(function() {
-      var themeSelected = $('#theme-select').val();
-      if (themeSelected === 'apple' || themeSelected === 'spotify-embed') {
-        urlParams.mode = this.value;
-      } else {
-        delete urlParams.mode;
-      }
-      updateUrl();
-    });
-
-    $('#eq-style-select').change(updateUrl);
- 
-    $(document).ready(function(){
-      $('#theme-select').formSelect();
-      $('#mode-select').formSelect();
-      $('#eq-style-select').formSelect();
-    });
-  </script>
-
-  <script>
-    var clipboard = new ClipboardJS('.btn');
-    clipboard.on('success', function (e) {
-      M.toast({
-        html: 'Copied!'
-      })
-
-      e.clearSelection();
-    });
-  </script>
-
+  <footer class="site-footer"><span>Spotify-Profile-Github <span class="footer-dot">·</span> By <a href="https://github.com/LienThuan04">Lian Harman</a></span><a href="https://github.com/LienThuan04/Spotify-Profile-Github#options" target="_blank" rel="noopener noreferrer">Explore the docs ↗</a></footer>
+  <noscript><p class="noscript-message">Enable JavaScript to customize your card and generate embed code.</p></noscript>
+  <script id="builder-config" type="application/json">{{ {'uid': uid, 'baseUrl': BASE_URL} | tojson }}</script>
+  <script>{% include '_builder/builder.js' %}</script>
 </body>
-
 </html>

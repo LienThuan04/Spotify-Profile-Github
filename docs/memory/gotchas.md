@@ -19,6 +19,9 @@ Triệu chứng → nguyên nhân → cách xử lý. Ghi thêm sau khi xác min
 
 ## Môi trường và graphify
 
+- Preview Card Studio có thể render thành file HTML độc lập vì CSS/JS được Jinja include inline. Khi thêm asset builder, giữ cách include này; không đổi sang URL static nếu chưa kiểm route Vercel.
+- Helper test `.pytest_cache/run_spotify_tests.py` từ phiên cũ có thể không truy cập được. Artifact mới ở `../.task-tools/spotify-readme-xlbb9rpk/`; script `verify_readme.py` chạy bản sao `source/` giải symlink, phải đồng bộ code vào bản sao trước khi chạy lại.
+- Kiểm mạng ngày 2026-11-12: connector Vercel thiếu quyền project/team (403 lookup), urllib bị sandbox chặn socket WinError 10013 và CUA không có browser. Test Flask/Node local không xác nhận ảnh live hoặc clipboard/browser thực; ghi rõ giới hạn đó khi bàn giao.
 - Windows sandbox có thể báo `fatal: detected dubious ownership in repository at '<repo>'`: dùng `git -c safe.directory=<đường dẫn tuyệt đối của repo> -C <repo> ...` cho từng lệnh.
 - Graphify không có lệnh trần trên PATH; dùng `python -m graphify`. Graph local ở `graphify-out/`, bị gitignore; ảnh và lockfile bị loại qua `.graphifyignore`.
 - PowerShell 5 có `$OutputEncoding` mặc định ASCII; khi pipe mã Python có tiếng Việt, đặt `$OutputEncoding = [System.Text.UTF8Encoding]::new()`. Đặt `$env:PYTHONIOENCODING='utf-8'` để in Unicode an toàn.

@@ -4,11 +4,38 @@
 
 ## Đang làm
 
-(trống) — Mục 1–7 bên dưới đã hoàn tất; chờ Claude duyệt ảnh trong thư mục review. Không commit/push.
+Đã hoàn thiện README live preview và **Card Studio**. Người dùng đã yêu cầu commit/push lên `master` ngày 2026-11-12 để tự kiểm giao diện. Đang đưa thay đổi lên GitHub qua connector vì Git trong sandbox không kết nối được github.com:443. Chưa kiểm hình bằng browser thực hoặc deploy live.
 
-## Đã hoàn tất — 3 theme kiểu Spotify + 6 kiểu sóng nhạc (người dùng đã duyệt 2026-11-12)
+### README đã kiểm tra · 2026-11-12
 
-Tham chiếu bắt buộc đọc: `DESIGN-spotify.md` (gốc repo, file người dùng thêm — giữ nguyên, không commit), mockup đã duyệt `D:\Coding\profileLienThuan04\.superpowers\brainstorm\1305-1794455217\content\card-layout.html` (bố cục A/B/C) và `...\eq-styles.html` (6 kiểu sóng nhạc). Bám sát mockup.
+- Hoàn thiện bản live preview Claude để dở: 10 theme, 9 kiểu sóng, 13 tùy chọn; sửa mục lục, mô tả bài gần đây/animation/redirect, mặc định màu và escape URL trong thuộc tính HTML.
+- Kiểm mới: **213 passed in 1.24s**; 31 URL ảnh × 3 trạng thái = **93 SVG local hợp lệ**, đủ theme/eq/params và 14 anchor. Artifact: `../.task-tools/spotify-readme-xlbb9rpk/{pytest.log,pytest.xml,readme-check.json,verify_readme.py}`; script dùng bản sao giải symlink Windows, không sửa symlink gốc.
+- Graph refresh đã thành công: 468 nodes / 658 edges / 32 communities, commit nguồn `b337d197`, không còn lỗi `.rebuild.lock` ở lần kiểm này.
+- Chưa xác minh ảnh live: Vercel connector `web_fetch_vercel_url` trả 403 (`lookup_deployment`, chưa được cấp quyền project/team); web fetch không đọc được SVG; urllib bị `PermissionError: [WinError 10013]`; CUA inventory `apps=[]`, `browsers=[]`.
+- Lỗi kiểm đã xử lý: parser ban đầu đọc cả `<img>` trong code fence nên thấy `uid=YOUR_UID` và fail `AssertionError` tại `<stdin>:66`; bỏ code fence trước khi parse HTML, toàn bộ kiểm tra qua. Lần apply_patch đầu không khớp dòng bảng `bar_color`; đã áp dụng lại đúng nội dung.
+- Helper `.pytest_cache/run_spotify_tests.py` của phiên cũ không đọc được (`Access is denied` / `Cannot find path`); helper mới ở artifact trên. Python hệ thống không có pytest/Flask; dùng `.venv/Scripts/python.exe`.
+
+### Builder hoàn tất · 2026-11-12
+
+- Kế hoạch: `docs/superpowers/plans/2026-11-12-card-builder.md`. Callback dùng template mới, CSS/JS partial trong `api/templates/_builder/`, include inline không thêm CDN/route/dependency.
+- Đã dựng layout responsive, 10 theme, 9 eq, bo góc/màu/mode/toggle, preview, tab Markdown/HTML/URL, copy/reset. OAuth/fetching/card template không sửa.
+- Node test 8 case URL đã chạy xanh sau RED thiếu module; bổ sung 3 case controller. Case preview error sau load thành công đã RED đúng `hidden=true`; sửa handler để hiện thông báo. Kết quả: **11 Node tests pass**, **215 pytest pass** (gồm 2 case render/JSON escape của builder).
+- Kiểm tích hợp từ URL thật do `buildEmbed()` sinh: **41 URL × 3 trạng thái = 123 SVG local hợp lệ**. Bộ README vẫn có 93 SVG local hợp lệ. OAuth/fetching/10 template card đối chiếu `git diff --exit-code` không thay đổi.
+- Reviewer độc lập đã đọc cả file untracked, đối chiếu API/template và chạy Node 11/11; không có finding cần sửa. Browser/clipboard/keyboard thực và deploy live chưa kiểm; không dùng kết quả local để khẳng định live.
+- Bản HTML để người dùng xem: `../.task-tools/spotify-readme-xlbb9rpk/card-studio-preview.html`. Artifact khác: `builder-urls.json`, `builder-integration.json`, log pytest/XML và script kiểm README trong cùng thư mục.
+- Thay đổi thêm: README giới thiệu Card Studio và lệnh test Node; PROJECT mô tả partial/JS. Màu sáng/tối hỗ trợ cả `apple` và `spotify-embed` (đã sửa dòng README cũ chỉ nhắc apple).
+- Refresh graph cuối thành công: **510 nodes / 720 edges / 36 communities**, built from `b337d197`; output bị gitignore. Không có `vercel.json` local (lệnh đọc báo `Cannot find path`); không thêm cấu hình deploy.
+- Lưu nhật ký workspace: lần đầu tìm heading tiếng Việt qua PowerShell pipe ASCII báo `ValueError: substring not found` (`<stdin>:11`); đặt `$OutputEncoding` UTF-8 rồi chuyển thành công 2 dòng cũ sang history, giữ 20 dòng. HTML preview đã sinh trước lỗi và được kiểm tồn tại ở lần chạy lại.
+
+### Tiếp nhận README 2026-11-12 · Codex
+
+- Phần triển khai/checkpoint bên dưới là lịch sử trước hai commit theme của Claude; không dùng SHA hoặc trạng thái chưa push ở đó làm trạng thái hiện tại.
+- Đã đọc PROJECT, skill repo, memory và graph; graph vẫn ở commit `2cd1a79e`, chưa chứa các theme mới. `graphify query` chạy được nhưng kết quả bị giới hạn budget, dùng vị trí `api/view.py`, README và template để kiểm tra trực tiếp.
+- Reference graphify toàn cục `C:/Users/lient/.codex/skills/graphify/references/query.md` không đọc được (`Access is denied` / `Cannot find path`); dùng skill điều hướng trong repo.
+
+## Lịch sử — 3 theme kiểu Spotify + 6 kiểu sóng ban đầu (người dùng đã duyệt 2026-11-12)
+
+Tham chiếu thiết kế card: `docs/DESIGN-spotify.md` (Claude đã chuyển vào docs ở `b337d19`), mockup đã duyệt `D:\Coding\profileLienThuan04\.superpowers\brainstorm\1305-1794455217\content\card-layout.html` (bố cục A/B/C) và `...\eq-styles.html` (6 kiểu sóng ban đầu).
 
 Phạm vi: chỉ thêm mới. 7 theme cũ (kể cả `default`) giữ nguyên từng byte; logic lấy dữ liệu Spotify giữ nguyên.
 
@@ -54,14 +81,13 @@ Phạm vi: chỉ thêm mới. 7 theme cũ (kể cả `default`) giữ nguyên t�
 - AGENTS/CLAUDE/GEMINI, PROJECT/PROGRESS, memory, skills nằm trong repo; `.gitignore` CRLF và `.graphifyignore` đã cấu hình.
 - `api/requirements.txt` cài thành công vào `.venv`. Bộ test trên bản sao tạm giải tham chiếu đúng symlink Windows: **134 passed in 2.66s** (`TESTING=true`, `PYTHONPATH=.`).
 - `python -m graphify update .`: exit 0; 407 nodes / 564 edges / 32 communities ở lần dựng đầu. Graph/report/HTML chỉ local, bị gitignore; lần refresh cuối có thể thêm node từ checkpoint.
-- Đúng hai commit hiện có: root `64f5304` (`Initial commit: Spotify-Profile-Github by Lian Harman`), sau đó `2cd1a79` (`docs: add agent handoff docs, skills and memory`, HEAD). Thay đổi theme phiên này chưa commit. Branch/ref origin cũ đã xoá local; không push/gc. Tác giả theo git config hiện có; commit không có trailer Co-authored-by.
+- Lịch sử hiện tại có root `64f5304`, docs `2cd1a79`, theme `ba38dde` và sóng giả 3D `b337d19` (HEAD, bằng ref `origin/master`). README live preview đang thay đổi local; phiên Codex tiếp nhận không commit/push.
 - Backup lịch sử cũ đã verify: `spotify-github-profile-full-history.bundle` ở đường dẫn ghi trong checkpoint workspace.
 
 ## Bước tiếp theo
 
-- Claude mở SVG trong `D:\Coding\profileLienThuan04\.superpowers\brainstorm\1305-1794455217\content\review\`, đối chiếu hai mockup ở thư mục cha; đặc biệt kiểm ellipsis, sóng spectrum/mirror/wave, trạng thái recent/offline và bản không bìa.
-- Sinh lại ảnh: `.venv/Scripts/python.exe scripts/generate_spotify_examples.py --review-dir "D:\Coding\profileLienThuan04\.superpowers\brainstorm\1305-1794455217\content\review"`.
-- Nếu sửa tiếp: đọc phần checkpoint, chạy lại test Windows bằng `.venv/Scripts/python.exe .pytest_cache/run_spotify_tests.py`; thử refresh graph khi môi trường cho ghi `.rebuild.lock`. Không commit/push nếu chưa được yêu cầu.
+- Hoàn tất push đã được người dùng yêu cầu, xác nhận SHA remote và đồng bộ local; sau đó người dùng kiểm giao diện desktop/mobile trên deploy.
+- Chạy lại JS: `node --test tests/test_builder.js`. Python: cập nhật bản sao giải symlink rồi dùng `.venv/Scripts/python.exe ../.task-tools/spotify-readme-xlbb9rpk/verify_readme.py` (script dùng bản sao `source/`, phải copy thay đổi code vào đó trước khi chạy). Không dùng helper `.pytest_cache` cũ không truy cập được.
 
 Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đang phục vụ `https://spotify-github-profile-lian-harman.vercel.app` với `LienThuan04/Spotify-Profile-Github`, branch `master`; giữ biến môi trường hiện có.
 
@@ -73,6 +99,9 @@ Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đan
 
 ## Nhật ký
 
+- 2026-11-12 · Codex · Người dùng yêu cầu push; kiểm lại 215 pytest/11 Node pass. Git `ls-remote origin refs/heads/master` lỗi `Failed to connect to github.com:443`; connector đọc được master ở `b337d19`, đang dùng connector cho cùng yêu cầu đã được phép.
+- 2026-11-12 · Codex · Hoàn thiện README và xây lại Card Studio (10 theme/9 eq, tùy chỉnh, preview, Markdown/HTML/URL/copy/reset); 215 pytest + 11 Node pass, 123 SVG tích hợp builder; reviewer không có finding; chưa commit/push/deploy.
+- 2026-11-12 · Codex · Tiếp nhận README live preview đang dở; đối chiếu HEAD/ref ở `b337d19`, chỉ README thay đổi trước phiên. Đã đồng bộ checkpoint với hai commit theme của Claude, không commit/push.
 - 2026-11-12 · Claude Code · Thêm 3 kiểu sóng giả 3D (`iso`, `ribbon`, `floor`) vào `eq_style` + trang tạo link; three.js không dùng được vì ảnh SVG trên GitHub không chạy JS. `DESIGN-spotify.md` chuyển vào `docs/`. Push lên `Spotify-Profile-Github`.
 - 2026-11-12 · Claude Code · Sửa theo duyệt: offline có ô ảnh xám (spotify-card/bar), chữ offline xuống dòng ở cả 3 theme, album offline cao 114 (có bìa 336). 204 test pass, 7 theme cũ không đổi. Commit `feat`. Kế tiếp: mockup sóng giả 3D (CSS) chờ người dùng duyệt; three.js không chạy được trong ảnh SVG của GitHub.
 - 2026-11-12 · Codex · Spotify-Profile-Github · Hoàn tất mục 1–7: 3 theme, 6 eq, callback, 204 tests qua, 3 SVG README + 18 SVG review; giữ nguyên theme cũ/fetching; lỗi browser/graph đã ghi; chưa commit/push.

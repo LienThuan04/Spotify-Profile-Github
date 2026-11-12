@@ -1,6 +1,6 @@
 # Spotify-Profile-Github — Spotify "Now Playing" card
 
-- Repo: `github.com/LienThuan04/Spotify-Profile-Github` (branch **`master`**), duy trì bởi Lian Harman. Nguồn gốc và credits: `README.md`.
+- Repo: `github.com/LienThuan04/Spotify-Profile-Github` (branch **`master`**), duy trì bởi Lian Harman. Giấy phép gốc: `THIRD_PARTY_NOTICES.md`.
 - Deploy: Vercel → `https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=<spotify_uid>`.
 - Stack: Python ≥3.12 (CI chạy 3.11 + 3.12), Flask 3, Firebase Firestore, Pillow + colorgram, Jinja2 templates, pytest.
 
@@ -12,6 +12,12 @@
 | `/api/login` | `api/login.py` | redirect sang Spotify OAuth (scope `user-read-currently-playing,user-read-recently-played`) |
 | `/api/callback` | `api/callback.py` | đổi `code` → token, lưu `users/<spotify_uid>` vào Firestore, render `callback.html.j2` |
 | `/api/view`, `/api/view.svg` | `api/view.py:catch_all` | render card SVG |
+
+## Trang tạo mã nhúng
+
+`api/templates/callback.html.j2` là **Card Studio** sau khi kết nối Spotify. Partial `api/templates/_builder/styles.css` và `builder.js` được Jinja include inline, không cần CDN hay route static. JS thuần: `buildEmbed(config, state)` sinh URL/Markdown/HTML; `getThemeFeatures(theme)` xác định tùy chọn hợp lệ; `mount(document, config)` nối form, preview (debounce 300ms), tab/copy/reset. Cấu hình `uid`/`BASE_URL` truyền bằng `tojson`.
+
+Mặc định: `spotify-card`, eq `bars`, xanh `1ed760`, nền `121212`, bo 10px, ảnh bìa và mở bài khi click bật. `mode` chỉ cho Apple/Spotify Embed; background/equalizer chỉ hiện khi theme hỗ trợ. Tắt ảnh bìa sẽ vô hiệu lấy màu từ bìa. Kiểm JS bằng `node --test tests/test_builder.js` (Node.js 22+); pytest render template trong `tests/test_builder_template.py` không import OAuth/Firebase.
 
 ## Luồng `/api/view`
 
@@ -30,11 +36,11 @@ catch_all(uid, query params)
 
 ## Themes
 
-`api/templates/spotify.<theme>.html.j2`: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed`, `spotify-card`, `spotify-bar`, `spotify-album`. Ba theme mới dùng macro CSS/SVG trong `spotify._shared.html.j2`, hỗ trợ `eq_style` (`bars`, `spectrum`, `mirror`, `wave`, `pulse`, `none`). Chiều cao + số thanh equalizer của mỗi theme nằm trong `make_svg()` (`api/view.py`). Thêm theme mới: `docs/skills/spotify-card/SKILL.md`.
+`api/templates/spotify.<theme>.html.j2`: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed`, `spotify-card`, `spotify-bar`, `spotify-album`. Ba theme mới dùng macro CSS/SVG trong `spotify._shared.html.j2`, hỗ trợ `eq_style` (`bars`, `spectrum`, `mirror`, `wave`, `pulse`, `iso`, `ribbon`, `floor`, `none`). Chiều cao + số thanh equalizer của mỗi theme nằm trong `make_svg()` (`api/view.py`). Thiết kế đã duyệt: `docs/DESIGN-spotify.md`. Thêm theme mới: `docs/skills/spotify-card/SKILL.md`.
 
 ## Query params
 
-Bảng đầy đủ trong `README.md` của repo. Ba tham số có trong code (`catch_all`) nhưng thiếu trong bảng đó: `profanity=true`, `hide_remaster=true`, `redirect=true` (302 sang bài hát).
+Bảng Options trong `README.md` của repo có đầy đủ 13 tùy chọn của `catch_all()` (gồm `profanity`, `hide_remaster`, `redirect`); `uid` lấy từ trang tạo link sau khi kết nối Spotify. README có preview live cho 10 theme, 9 kiểu sóng và 12 tùy chọn có ảnh; `redirect=true` dùng làm URL liên kết vì trả 302 sang bài hát.
 
 ## Env (`.env` ở gốc repo, mẫu: `.env.example`)
 
