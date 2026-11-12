@@ -1,27 +1,28 @@
-# PROGRESS — Spotify-Profile-Github
+# PROGRESS - Spotify-Profile-Github
 
-> Cập nhật: 2026-11-12 · Codex. HEAD trước phát hành `31bdbc7`.
+Updated: 2026-11-12 by Codex. Timeline fix published as `3e5f70d412d121c1edd6c9e2b64a5685d3c51154`.
 
-## Đang làm
+## In progress
 
-- Người dùng đã yêu cầu commit/push bản sửa và xác nhận **tạo tag + Release `V1.0.1` mới**, giữ `V1.0.0` hiện tại tại `31bdbc7`.
-- Kiểm lại trước phát hành: **706 pytest pass in 2.40s**, **11 Node pass**, 105 SVG hợp lệ; remote master/tag V1.0.0 cùng `31bdbc74ab50af9c2928e9c3de32cabd9cb1f530`. Đang commit/push rồi tạo V1.0.1 tại HEAD mới.
-- Git mạng trong sandbox lỗi `Failed to connect to github.com:443`; chạy ngoài sandbox đã đọc remote thành công. Connector đọc Release được nhưng không có tool tạo Release; `gh` không cài (`The term 'gh' is not recognized`), dùng Git và GitHub REST qua credential helper hiện có khi phát hành.
+- The user approved pushing the timeline fix and selected version `V1.0.1`. Master and the annotated tag were pushed atomically. The tag currently resolves to `3e5f70d`; `V1.0.0` remains at `31bdbc7`.
+- Release ID `442704488` was changed externally from V1.0.0 to V1.0.1 during publication. Its title and notes were updated after checking its ID and update timestamp. Release: https://github.com/LienThuan04/Spotify-Profile-Github/releases/tag/V1.0.1
+- The user then requested English project content. Release notes and this task's documentation additions are now English; AGENTS.md records the preference. English-only additions and whitespace checks passed. A follow-up commit will be pushed and V1.0.1 will be moved to that final commit with a lease protecting the current tag.
+- GitHub Wiki was synchronized at `956a583`: only the Mini size and shared timeline description changed in Home.md; other Wiki pages were preserved.
 
-## Kết quả gần nhất
+## Verified implementation
 
-- Đã sửa 8 theme thiếu timeline/clock: default, compact, karaoke, natemoo-re, novatorem, apple, spotify-embed, spotify-mini. Cả 15 theme dùng chung thanh CSS + đồng hồ elapsed, dừng cùng cuối bài; recent tĩnh, offline ẩn, thiếu timing không chạy. Apple/Embed dùng thời gian thật, bên phải là tổng thời lượng.
-- Mini cao 96px (offline 72px); 5 theme cũ thêm 33px khi có timeline. Chỉ thay make_svg/template/test, không đổi fetching/cache/Firestore hoặc symlink gốc. PROJECT/wiki/gotchas đã cập nhật; checkpoint cũ và chẩn đoán nằm trong `docs/memory/history.md`.
-- RED tái hiện lỗi trước sửa. GREEN: **706 pytest pass in 2.24s**, **11 Node pass**; reviewer độc lập chạy thêm **602 test_api_view pass**, không có finding cần sửa. So AST: chỉ make_svg thay đổi; `git diff --check` qua.
-- Preview: `graphify-out/timeline-review/index.html` + 105 SVG hợp lệ; runner `verify.py`, log `pytest.log`, `pytest.xml` cùng thư mục. Chạy `.venv/Scripts/python.exe graphify-out/timeline-review/verify.py` từ gốc repo để tạo snapshot giải symlink và kiểm lại. Sandbox chặn ghi snapshot nên lượt này chạy ngoài sandbox. JS: `node --test tests/test_builder.js`.
-- Graph refresh: ban đầu `PermissionError: [Errno 13] Permission denied: 'graphify-out\\.rebuild.lock'`; chạy lại ngoài sandbox thành công **545 nodes / 772 edges / 38 communities**. Graph/artifact ignored, không đưa vào commit.
-- Giới hạn: CUA `apps=[]`, `browsers=[]`; chưa xác nhận geometry/animation trong browser thật hoặc bản deploy. Đồng hồ dự đoán từ snapshot, pause/seek/đổi bài cần ảnh mới.
+- All 15 themes now share a CSS progress bar and elapsed clock; eight previously unsupported themes were fixed. The bar and clock stop together. Recent tracks remain static, offline cards hide the timeline, and missing timing never animates. Apple/Embed use real elapsed and total times.
+- Mini is 96px tall (72px offline). Five classic themes gain 33px when a timeline is visible. Only make_svg and templates changed at runtime; fetching, caching, Firestore, and original symlinks are unchanged.
+- Full tests before publication: 706 pytest passed in 2.40s, 11 Node tests passed, and 105 SVG previews validated. Independent review found no issues and ran 602 view tests. AST comparison and git diff checks passed.
+- Preview: `graphify-out/timeline-review/index.html`. Runner: `.venv/Scripts/python.exe graphify-out/timeline-review/verify.py`; logs: `pytest.log`, `pytest.xml` in the same directory. Windows tests use a temporary snapshot that resolves the two Git symlink stubs.
+- Graph refresh succeeded outside the sandbox: 545 nodes, 772 edges, 38 communities. CUA inventory was empty; actual browser geometry, animation, and deployment remain unverified.
+- GitHub REST authentication requires `username=LienThuan04` in credential fill. Omitting it failed because prompting was disabled; the existing account credentials work without a new login. Never print or persist the returned token.
 
-## Bước tiếp theo
+## Next step
 
-- Commit các thay đổi timeline/docs/test, push master; tạo tag và Release V1.0.1 tại cùng commit, kiểm lại remote master/tag và release. Không sửa cấu hình deploy.
+Commit and push the English documentation correction, update V1.0.1 to that commit, publish English release notes, sync the changed Wiki page, and verify all remote refs and release metadata.
 
-## Nhật ký
+## Journal
 
-- 2026-11-12 · Codex · Người dùng duyệt push và chọn tạo V1.0.1 mới; xác minh remote V1.0.0/master ở 31bdbc7, kiểm lại 706 pytest/11 Node pass.
-- 2026-11-12 · Codex · Hoàn tất timeline cho 15 theme theo yêu cầu sửa tất cả theme thiếu; 706 pytest/11 Node pass, 105 SVG, reviewer không finding; chưa commit/push.
+- 2026-11-12 - Codex - User requested English project content after publication; translating this task's additions and updating the language rule.
+- 2026-11-12 - Codex - Published timeline fix 3e5f70d and V1.0.1; 706 pytest, 11 Node, 105 SVG previews passed; no independent review findings.

@@ -36,9 +36,9 @@ catch_all(uid, query params)
 
 ## Themes
 
-15 theme: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed` và 8 theme Spotify (`card`, `bar`, `album`, `mini`, `vinyl`, `banner`, `glass`, `mobile`, có tiền tố `spotify-`). Nhóm Spotify hỗ trợ 19 `eq_style`; macro CSS/SVG ở `spotify._shared.html.j2`. Chiều cao + số thanh equalizer của mỗi theme nằm trong `make_svg()` (`api/view.py`). Thiết kế: `docs/DESIGN-spotify.md`; hướng dẫn: `docs/skills/spotify-card/SKILL.md`.
+There are 15 themes: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed`, and eight Spotify themes (`card`, `bar`, `album`, `mini`, `vinyl`, `banner`, `glass`, `mobile`, prefixed with `spotify-`). The Spotify group supports 19 `eq_style` values through CSS/SVG macros in `spotify._shared.html.j2`. Theme heights and equalizer bar counts are configured in `make_svg()` (`api/view.py`). Design reference: `docs/DESIGN-spotify.md`; workflow: `docs/skills/spotify-card/SKILL.md`.
 
-Cả 15 theme dùng timeline chung (`timeline_styles()`, `progress()`, `elapsed_time()`) và `calculate_clock_data()`: đồng hồ CSS steps/reels giữ pha milliseconds bằng delay âm, dừng cùng thanh tiến độ ở tổng thời lượng. Chỉ chạy khi đang phát và có progress/duration hợp lệ; recent tĩnh 0:00, offline ẩn timeline, thiếu timing giữ tĩnh. Đây là dự đoán từ snapshot ảnh; pause/seek/đổi bài cần ảnh mới. Tổng thời lượng bên phải luôn tĩnh, gồm Apple/Embed (đã bỏ thời gian mẫu). Mini cao 96px (offline 72px); default/compact/karaoke/natemoo-re/novatorem thêm 33px khi có timeline.
+All 15 themes share `timeline_styles()`, `progress()`, `elapsed_time()`, and `calculate_clock_data()`. CSS step animations preserve millisecond phase through negative delays; the clock and bar stop together at the track duration. Animation requires active playback and valid timing. Recently played tracks stay at 0:00, offline cards hide the timeline, and missing timing stays static. Playback is projected from the image snapshot; pause, seeking, and track changes require a fresh image. The right label shows the static total duration, including Apple/Embed, whose sample timestamps have been removed. Mini is 96px tall (72px offline); default/compact/karaoke/natemoo-re/novatorem gain 33px when the timeline is shown.
 
 ## Query params
 

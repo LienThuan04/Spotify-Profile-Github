@@ -25,7 +25,7 @@ Repo: `https://github.com/LienThuan04/Spotify-Profile-Github`. Branch: `master`.
 
 ## Quy tắc
 
-- Giao tiếp và viết tài liệu bàn giao bằng tiếng Việt.
+- Communicate with the user in Vietnamese. Write new project content, documentation, handoffs, and release notes in English.
 - Với câu hỏi file/symbol/quan hệ, chạy `python -m graphify query "<câu hỏi>"` (hoặc `path` / `explain`) trước khi grep/mở code, rồi mở đúng `source_file:source_location`. Nếu graph thiếu hoặc lệnh lỗi, ghi lỗi trong checkpoint rồi đọc trực tiếp các file liên quan.
 - Chạy git trong repo này (`git -C <đường dẫn repo> ...` khi đứng ngoài repo).
 - Commit/push chỉ khi người dùng yêu cầu; commit không thêm `Co-authored-by`.

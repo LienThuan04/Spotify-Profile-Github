@@ -1,9 +1,13 @@
 # Decisions — Spotify-Profile-Github
 
-## 2026-11-12 — Timeline cho mọi theme
+## 2026-11-12 — Project language
 
-- Người dùng yêu cầu sửa tất cả theme còn thiếu thanh tiến trình và đồng hồ. Cả 15 theme dùng macro CSS timeline chung, chạy từ snapshot Spotify và dừng cùng cuối bài; không thêm JavaScript hoặc đổi fetching/cache.
-- Apple/Embed hiển thị elapsed và tổng thời lượng thật, bỏ số mẫu; thiếu timing giữ tĩnh. Mini tăng lên 96px, 5 theme cũ thêm 33px khi có timeline để dành chỗ cho mốc thời gian; offline giữ chiều cao cũ.
+- The user requested English for project content. Write new documentation, handoffs, UI copy, and release notes in English; continue communicating with the user in Vietnamese. The language rule in AGENTS.md records this preference.
+
+## 2026-11-12 — Timelines for every theme
+
+- The user requested progress bars and elapsed clocks for every remaining theme. All 15 themes share CSS timeline macros, project playback from the Spotify snapshot, and stop at the track duration. JavaScript, fetching, and caching remain unchanged.
+- Apple/Embed show real elapsed and total times instead of sample values; missing timing stays static. Mini grows to 96px and five classic themes gain 33px while displaying a timeline. Offline cards retain their previous heights.
 
 ## 2026-11-12 — Tên tác giả hiển thị thống nhất
 
