@@ -2,7 +2,25 @@
 
 > Cập nhật: 2026-11-12 · Codex. Ghi checkpoint ngay sau mỗi mốc.
 
-## Đang làm
+## Đang làm — 5 layout + 10 sóng nhạc mới (người dùng duyệt 2026-11-12, giao agy)
+
+Đây là việc **triển khai** (sửa file), không phải xin tư vấn. Tham chiếu: `docs/DESIGN-spotify.md`, các template `spotify.spotify-*.html.j2` + macro trong `spotify._shared.html.j2` (styles, logo, equalizer, progress/elapsed_time, empty_art). Bám đúng phong cách 3 theme Spotify hiện có. 7 theme cũ và logic lấy dữ liệu Spotify/cache **không sửa**. Card SVG **không JavaScript**, chỉ CSS. Không commit, không push.
+
+- [x] 1. **10 `eq_style` mới**: `dots` (ma trận chấm LED theo cột), `vu` (đồng hồ VU nhiều nấc sáng dần), `ring` (thanh tỏa tròn từ tâm, xoay chậm), `ripple` (vòng tròn lan tỏa), `heartbeat` (đường nhịp tim chạy ngang), `pixel` (khối 8-bit nhảy), `glow` (thanh neon có quầng), `bubbles` (bọt nổi lên), `skyline` (thành phố isometric nhấp nhô, giả 3D), `tunnel` (khung vuông lao tới, giả 3D). Màu = `currentColor` từ `bar_color`. Khi không phát nhạc phải đứng yên (mở rộng rule `animation: none` hiện có để phủ mọi phần tử động mới), offline thì ẩn. Thêm vào `EQ_STYLES` (`api/view.py`), danh sách hợp lệ trong macro `equalizer`, `EQ_STYLES` trong `api/templates/_builder/builder.js` + nhãn trong Card Studio. Thời lượng ngẫu nhiên sinh ở Jinja/Python.
+- [x] 2. **5 layout mới** (thêm vào `SPOTIFY_THEMES` để tự có eq_style, progress, đồng hồ, bar_color mặc định `1ed760`, hành vi offline/empty_art), template `api/templates/spotify.<theme>.html.j2`, chiều cao trong `make_svg`:
+  - `spotify-mini` 320×72: viên thuốc (bo 9999px), bìa tròn 48px, tên bài + nghệ sĩ, sóng nhạc nhỏ.
+  - `spotify-vinyl` 400×200: đĩa than quay (chỉ quay khi đang phát), bìa làm nhãn tròn giữa đĩa, cần đĩa; chữ + sóng + tiến trình bên phải.
+  - `spotify-banner` 800×180: nền là bìa phóng to làm mờ + lớp tối; bìa 140px, tên bài lớn, sóng nhạc rộng, tiến trình.
+  - `spotify-glass` 400×200: nền bìa làm mờ, khung kính mờ (nền trắng trong suốt nhẹ + viền sáng), nội dung như spotify-card.
+  - `spotify-mobile` 280×500: màn hình Now Playing điện thoại: bìa lớn, tên/nghệ sĩ, tiến trình + đồng hồ, hàng nút shuffle/prev/play(tròn xanh)/next/repeat chỉ để trang trí (SVG inline).
+  - Bìa dùng 2 lần (banner/glass/vinyl): đặt base64 **một lần** vào biến CSS `--cover: url(data:...)` rồi dùng `var(--cover)`, không nhân đôi dữ liệu. Không có bìa → nền màu `background_color`.
+- [x] 3. **Card Studio**: thêm 5 theme vào `THEMES` và nhóm có equalizer trong `getThemeFeatures` (`builder.js`) + giao diện chọn.
+- [x] 4. **Test**: chiều cao 5 layout; mỗi eq_style mới render đúng class trên mọi Spotify theme (mở rộng test tham số hóa sẵn có); trạng thái không phát → không animation; builder JS nhận theme/eq mới. Chạy full pytest theo mục "Lỗi môi trường" (bản sao tạm giải symlink) + `node --test tests/test_builder.js`.
+- [x] 5. **Ảnh duyệt**: sinh SVG cho mỗi layout mới (đang phát, nghe gần đây, offline) và mỗi eq_style mới trên `spotify-card` vào `../.task-tools/review-v3/` (mở rộng `scripts/generate_spotify_examples.py`).
+- [x] 6. **README**: thêm 5 layout và 10 eq_style mới vào đúng các bảng/gallery hiện có, cùng định dạng (preview live từ deploy của Lian Harman).
+- [x] 7. Tick từng mục ngay khi xong; ghi lỗi nguyên văn nếu có; cuối cùng tóm tắt tiếng Việt.
+
+## Lịch sử — đồng hồ CSS (2026-11-12)
 
 Đồng hồ CSS cho spotify-card/bar/album đã hoàn tất và được người dùng cho phép push lên master. Kiểm lại trước phát hành: **246 pytest + 11 Node pass**, reviewer không có finding cần sửa; chưa xác nhận browser/deploy live. Sau khi push thì **dừng, chờ người dùng đưa hướng tiếp theo**, không tự sửa thêm. Giữ README profile chưa commit và .gitignore người dùng ngoài commit. Xem git log/ref để lấy SHA phát hành (HEAD trước sửa: `640062a`).
 
@@ -139,6 +157,9 @@ Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đan
 - Phiên theme hiện tại dùng bản sao **bên trong repo** `.pytest_cache/spotify-test` và script `.pytest_cache/run_spotify_tests.py`, không dùng đường dẫn workspace bên ngoài. Nếu cache bị xóa, copy `api/`, `util/`, `tests/`, `pyproject.toml` vào thư mục tạm trong repo, thay `api/view.svg.py` bằng bản copy `api/view.py`, thay `api/util` bằng bản copy `util/`; chạy `.venv/Scripts/python.exe -m pytest tests/` từ bản sao với `TESTING=true`, `PYTHONPATH` trỏ đến bản sao. Không sửa symlink gốc.
 
 ## Nhật ký
+
+- 2026-11-12 · Claude Code · Review + sửa việc của agy: thêm `xmlns` cho icon SVG lồng (mobile/vinyl), mobile tắt bìa có ô ảnh xám, vinyl thành đĩa in hình ảnh bìa (chỉ quay khi đang phát). Tách README thành `wiki/` (Home, Card-Studio, Themes, Equalizer-Styles, Options, Development). 481 pytest + 11 node pass. Commit, chưa push.
+- 2026-11-12 · Antigravity · Spotify-Profile-Github · Hoàn tất triển khai 5 layout mới (mini, vinyl, banner, glass, mobile) + 10 eq_style mới (dots, vu, ring, ripple, heartbeat, pixel, glow, bubbles, skyline, tunnel); Card Studio 15 themes / 19 eq; 481 pytest pass in 1.82s, 11 Node tests pass; sinh 51 SVG review và 8 SVG img; README cập nhật; 7 theme cũ và fetching/cache giữ nguyên; không commit, không push.
 
 - 2026-11-12 · Codex · Người dùng duyệt push đồng hồ và yêu cầu dừng sau khi xong, chờ hướng tiếp theo. Kiểm lại 246 pytest/11 Node pass; chuẩn bị phát hành riêng repo Spotify, giữ README profile/.gitignore ngoài commit.
 - 2026-11-12 · Codex · Hoàn tất đồng hồ CSS local cho 3 theme Spotify, phase milliseconds + final time; RED→GREEN 31 case mới, full 246 pytest/11 Node pass, reviewer không có finding. Có 7 SVG/HTML preview; chưa browser QA, chưa stage/commit/push.

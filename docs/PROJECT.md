@@ -68,3 +68,7 @@ docker compose up                 # 3 service gunicorn: view:5003, login:5001, c
 - `util/` — `spotify.py` (gọi Spotify API), `firestore.py`, `profanity.py`, `remaster.py`.
 - `api/util` và `api/view.svg.py` là **symlink** git (trỏ `../util/` và `view.py`); trên Windows chúng thành file text — xem `docs/memory/gotchas.md`.
 - `img/*.svg` — ảnh minh hoạ theme cho README.
+
+## Tài liệu người dùng
+
+`README.md` chỉ giữ giới thiệu + quick start. Chi tiết theme (15), `eq_style` (19), tham số, Card Studio và hướng dẫn phát triển nằm trong `wiki/*.md`. Thêm theme/sóng nhạc mới → cập nhật `wiki/Themes.md` / `wiki/Equalizer-Styles.md`, không nhồi lại vào README.
