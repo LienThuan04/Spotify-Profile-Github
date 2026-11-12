@@ -72,7 +72,7 @@ You can customize the appearance by adding query parameters to your URL:
 | `background_color` | Background color (hex without #) | `121212` |
 | `border_radius` | Border radius in pixels | `10` |
 | `bar_color` | Equalizer bar color (hex without #) | `1ed760` for `spotify-card`, `spotify-bar`, `spotify-album`; `53b14f` otherwise |
-| `eq_style` | Equalizer for `spotify-card`, `spotify-bar`, `spotify-album`: `bars`, `spectrum`, `mirror`, `wave`, `pulse`, `none`. Unknown values fall back to `bars`. | `bars` |
+| `eq_style` | Equalizer for `spotify-card`, `spotify-bar`, `spotify-album`: `bars`, `spectrum`, `mirror`, `wave`, `pulse`, `iso` (3D isometric bars), `ribbon` (layered 3D waves), `floor` (perspective equalizer), `none`. Unknown values fall back to `bars`. | `bars` |
 | `bar_color_cover` | Extract bar color from album cover (`true`/`false`) | `false` |
 | `cover_image` | Show album cover image (`true`/`false`) | `true` |
 | `show_offline` | Show offline status when not playing (`true`/`false`) | `false` |

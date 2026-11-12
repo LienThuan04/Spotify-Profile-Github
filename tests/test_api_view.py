@@ -449,7 +449,7 @@ def test_spotify_dimensions_and_cover(render_spotify, theme, cover, width, heigh
 @pytest.mark.parametrize("theme", SPOTIFY_THEMES)
 @pytest.mark.parametrize("style,count", [
     ("bars", 4), ("spectrum", 40), ("mirror", 28), ("wave", 0),
-    ("pulse", 3), ("none", 0), ("invalid", 4),
+    ("pulse", 3), ("iso", 7), ("ribbon", 0), ("floor", 0), ("none", 0), ("invalid", 4),
 ])
 def test_spotify_equalizer_render(render_spotify, theme, style, count):
     root, svg = render_spotify(theme=theme, eq_style=style)

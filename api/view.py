@@ -33,7 +33,7 @@ CACHE_TOKEN_INFO = {}
 app = Flask(__name__)
 
 SPOTIFY_THEMES = ("spotify-card", "spotify-bar", "spotify-album")
-EQ_STYLES = ("bars", "spectrum", "mirror", "wave", "pulse", "none")
+EQ_STYLES = ("bars", "spectrum", "mirror", "wave", "pulse", "iso", "ribbon", "floor", "none")
 
 
 @functools.lru_cache(maxsize=128)
@@ -159,7 +159,7 @@ def make_svg(
 
     if theme in SPOTIFY_THEMES:
         cover_image = cover_image and bool(img)
-        num_bar = {"bars": 4, "spectrum": 40, "mirror": 28, "pulse": 3}.get(eq_style, 0)
+        num_bar = {"bars": 4, "spectrum": 40, "mirror": 28, "pulse": 3, "iso": 7, "floor": 60}.get(eq_style, 0)
         if theme == "spotify-card":
             height = 200
         elif theme == "spotify-bar":

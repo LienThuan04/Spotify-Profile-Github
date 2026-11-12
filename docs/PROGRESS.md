@@ -73,6 +73,7 @@ Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đan
 
 ## Nhật ký
 
+- 2026-11-12 · Claude Code · Thêm 3 kiểu sóng giả 3D (`iso`, `ribbon`, `floor`) vào `eq_style` + trang tạo link; three.js không dùng được vì ảnh SVG trên GitHub không chạy JS. `DESIGN-spotify.md` chuyển vào `docs/`. Push lên `Spotify-Profile-Github`.
 - 2026-11-12 · Claude Code · Sửa theo duyệt: offline có ô ảnh xám (spotify-card/bar), chữ offline xuống dòng ở cả 3 theme, album offline cao 114 (có bìa 336). 204 test pass, 7 theme cũ không đổi. Commit `feat`. Kế tiếp: mockup sóng giả 3D (CSS) chờ người dùng duyệt; three.js không chạy được trong ảnh SVG của GitHub.
 - 2026-11-12 · Codex · Spotify-Profile-Github · Hoàn tất mục 1–7: 3 theme, 6 eq, callback, 204 tests qua, 3 SVG README + 18 SVG review; giữ nguyên theme cũ/fetching; lỗi browser/graph đã ghi; chưa commit/push.
 - 2026-11-12 · Codex · Hoàn tất branding, credits, docs, kiểm thử, lịch sử mới và graph local; chưa push.

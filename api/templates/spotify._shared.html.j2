@@ -71,6 +71,24 @@
 .eq-pulse i:nth-child(2) { animation-delay: .2s; }
 .eq-pulse i:nth-child(3) { animation-delay: .4s; }
 @keyframes pulse { 0%, 100% { transform: scale(.5); opacity: .4; } 50% { transform: scale(1); opacity: 1; } }
+.eq-iso { align-items: flex-end; gap: 6px; height: 22px; padding: 4px 4px 0 0; }
+.song-row .eq-iso { height: 16px; gap: 5px; }
+.eq-iso i { position: relative; display: block; width: 6px; height: 50%; background: currentColor; animation: iso .9s ease-in-out infinite alternate; }
+.eq-iso i::after { content: ""; position: absolute; top: 0; left: 100%; width: 3px; height: 100%; background: currentColor; filter: brightness(.55); transform: skewY(-45deg); transform-origin: top left; }
+.eq-iso i::before { content: ""; position: absolute; bottom: 100%; left: 0; width: 6px; height: 3px; background: currentColor; filter: brightness(1.4); transform: skewX(-45deg); transform-origin: bottom left; }
+@keyframes iso { from { height: 15%; } to { height: 100%; } }
+.eq-ribbon { position: relative; width: 100%; max-width: 176px; height: 22px; overflow: hidden; }
+.song-row .eq-ribbon { height: 16px; }
+.eq-ribbon svg { position: absolute; left: 0; top: 0; width: 200%; height: 100%; animation: wave 2s linear infinite; }
+.eq-ribbon .l1 { opacity: .25; animation-duration: 3.2s; }
+.eq-ribbon .l2 { opacity: .55; animation-duration: 2.2s; }
+.eq-ribbon .l3 { animation-duration: 1.4s; }
+.eq-floor { flex-direction: column; align-items: center; justify-content: flex-end; width: 100%; max-width: 176px; height: 26px; }
+.song-row .eq-floor { height: 18px; }
+.eq-floor b { display: flex; align-items: flex-end; gap: 2px; width: 100%; height: 12px; }
+.eq-floor b i { display: block; flex: 1; min-width: 0; height: 45%; background: currentColor; border-radius: 1px 1px 0 0; animation: spectrum .8s ease-in-out infinite alternate; }
+.eq-floor .back { transform: scale(.62); opacity: .35; margin-bottom: -6px; }
+.eq-floor .mid { transform: scale(.8); opacity: .6; margin-bottom: -4px; }
 {% if not is_now_playing %}
 .eq i, .eq svg { animation: none; }
 {% endif %}
@@ -89,7 +107,7 @@
 
 {% macro equalizer() -%}
 {% set style = eq_style|default('bars') %}
-{% if style not in ['bars', 'spectrum', 'mirror', 'wave', 'pulse', 'none'] %}{% set style = 'bars' %}{% endif %}
+{% if style not in ['bars', 'spectrum', 'mirror', 'wave', 'pulse', 'iso', 'ribbon', 'floor', 'none'] %}{% set style = 'bars' %}{% endif %}
 {% if title_text != 'Not playing' and style != 'none' %}
 <span class="eq eq-{{style}}" aria-hidden="true">
   {% if style == 'bars' %}
@@ -105,6 +123,14 @@
   </svg>
   {% elif style == 'pulse' %}
   <i></i><i></i><i></i>
+  {% elif style == 'iso' %}
+    {% for i in range(7) %}<i style="animation-duration: {{range(450, 1051)|random}}ms; animation-delay: -{{range(0, 901)|random}}ms;"></i>{% endfor %}
+  {% elif style == 'ribbon' %}
+    {% for layer, dy, width in [('l1', 2, 6), ('l2', 38, 4), ('l3', 12, 2.5)] %}
+    <svg xmlns="http://www.w3.org/2000/svg" class="{{layer}}" viewBox="0 0 520 44" preserveAspectRatio="none"><path d="M0 22 Q32.5 {{dy}} 65 22 T130 22 T195 22 T260 22 T325 22 T390 22 T455 22 T520 22" fill="none" stroke="currentColor" stroke-width="{{width}}" stroke-linecap="round"/></svg>
+    {% endfor %}
+  {% elif style == 'floor' %}
+    {% for row in ['back', 'mid', 'front'] %}<b class="{{row}}">{% for i in range(20) %}<i style="animation-duration: {{range(450, 1051)|random}}ms; animation-delay: -{{range(0, 901)|random}}ms;"></i>{% endfor %}</b>{% endfor %}
   {% endif %}
 </span>
 {% endif %}
