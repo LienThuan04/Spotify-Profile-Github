@@ -38,6 +38,8 @@ catch_all(uid, query params)
 
 `api/templates/spotify.<theme>.html.j2`: `default`, `compact`, `natemoo-re`, `novatorem`, `karaoke`, `apple`, `spotify-embed`, `spotify-card`, `spotify-bar`, `spotify-album`. Ba theme mới dùng macro CSS/SVG trong `spotify._shared.html.j2`, hỗ trợ `eq_style` (`bars`, `spectrum`, `mirror`, `wave`, `pulse`, `iso`, `ribbon`, `floor`, `none`). Chiều cao + số thanh equalizer của mỗi theme nằm trong `make_svg()` (`api/view.py`). Thiết kế đã duyệt: `docs/DESIGN-spotify.md`. Thêm theme mới: `docs/skills/spotify-card/SKILL.md`.
 
+Ba theme Spotify mới có đồng hồ elapsed CSS steps/reels từ `calculate_clock_data()` và macro `elapsed_time()`: giữ pha milliseconds bằng delay âm, dừng ở tổng thời lượng cùng thanh tiến độ. Chỉ chạy khi đang phát và có progress/duration hợp lệ; recent tĩnh 0:00, offline ẩn player. Đây là dự đoán từ snapshot ảnh; pause/seek/đổi bài cần ảnh mới. Tổng thời lượng bên phải luôn tĩnh.
+
 ## Query params
 
 Bảng Options trong `README.md` của repo có đầy đủ 13 tùy chọn của `catch_all()` (gồm `profanity`, `hide_remaster`, `redirect`); `uid` lấy từ trang tạo link sau khi kết nối Spotify. README có preview live cho 10 theme, 9 kiểu sóng và 12 tùy chọn có ảnh; `redirect=true` dùng làm URL liên kết vì trả 302 sang bài hát.

@@ -131,6 +131,27 @@ def calculate_progress_data(progress_ms, duration_ms):
     }
 
 
+def calculate_clock_data(progress_ms, duration_ms):
+    """Phase CSS digit reels from the same playback snapshot as the progress bar."""
+    if progress_ms is None or duration_ms is None or duration_ms <= 0:
+        return None
+
+    progress_ms = max(0, min(progress_ms, duration_ms))
+    if progress_ms >= duration_ms:
+        return None
+
+    first_minute = progress_ms // 60000
+    last_minute = duration_ms // 60000
+    return {
+        "remaining_seconds": (duration_ms - progress_ms) / 1000,
+        "minute_values": range(first_minute, last_minute + 2),
+        "minute_steps": last_minute - first_minute + 1,
+        "minute_digits": len(str(last_minute)),
+        "minute_delay_seconds": (progress_ms % 60000) / 1000,
+        "second_delay_seconds": (progress_ms % 10000) / 1000,
+    }
+
+
 # @functools.lru_cache(maxsize=128)
 def make_svg(
     artist_name,
@@ -210,7 +231,8 @@ def make_svg(
     if theme in ["apple", "spotify-embed", *SPOTIFY_THEMES] and duration_ms is not None:
         if is_now_playing and progress_ms is not None:
             # Currently playing - show real progress
-            progress_data = calculate_progress_data(progress_ms, duration_ms)
+            timeline_progress = max(0, progress_ms) if theme in SPOTIFY_THEMES else progress_ms
+            progress_data = calculate_progress_data(timeline_progress, duration_ms)
         else:
             # Recently played - show 0 progress but real duration
             progress_data = calculate_progress_data(0, duration_ms)
@@ -233,6 +255,8 @@ def make_svg(
         "border_radius": border_radius,
         "total_time": format_time_ms(duration_ms),
         "progress_seconds": max(0, (duration_ms or 0) - max(0, progress_ms or 0)) / 1000,
+        "clock_data": calculate_clock_data(progress_ms, duration_ms)
+        if theme in SPOTIFY_THEMES and is_now_playing else None,
         "eq_style": eq_style,
     }
 

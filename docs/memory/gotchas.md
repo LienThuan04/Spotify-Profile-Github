@@ -4,6 +4,7 @@ Triệu chứng → nguyên nhân → cách xử lý. Ghi thêm sau khi xác min
 
 ## Card trên GitHub
 
+- Đồng hồ CSS phải dùng delay âm có cả milliseconds: mốc 59.8s chỉ còn 0.2s tới 1:00. Đồng hồ và thanh cùng mốc dừng, final time giữ tĩnh. Test timing/markup không xác nhận được clipping/baseline/animation thực trong browser; luôn ghi rõ giới hạn và kiểm preview trước khi khẳng định hiển thị chuẩn.
 - **Card Spotify/Discord hiện ảnh vỡ trên trang profile** → GitHub tải ảnh qua proxy `camo.githubusercontent.com`, bỏ cuộc nếu server phản hồi chậm (cold start Vercel 4s+) → đặt header `Cache-Control: public, ..., s-maxage=..., stale-while-revalidate=3600` để Vercel edge trả bản cache. Đã áp dụng cho cả 2 repo ngày 2026-11-11 (ảnh chụp lỗi: `LienThuan04/log/Screenshot 2026-11-11 150933.png`). Test assert header này trong `tests/test_api_view*.py` — đổi header thì sửa test.
 
 ## Repo

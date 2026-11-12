@@ -29,7 +29,7 @@
 .fill {
   height: 100%; border-radius: 9999px; background: #fff;
   width: {{progress_data.get('progress_percentage', 0)}}%;
-  {% if is_now_playing and progress_seconds|default(0) > 0 %}
+  {% if clock_data %}
   animation: progress {{progress_seconds}}s linear forwards;
   {% endif %}
 }
@@ -42,6 +42,28 @@
   color: #b3b3b3; font-size: 11px; line-height: 13px;
   font-variant-numeric: tabular-nums; white-space: nowrap;
 }
+{% if clock_data %}
+.clock { display: inline-grid; vertical-align: top; }
+.clock > span { grid-area: 1 / 1; }
+.clock-snapshot { visibility: hidden; }
+.clock-running {
+  display: inline-flex; height: 13px; overflow: hidden;
+  animation: clock-hide var(--clock-remaining) step-end forwards;
+}
+.clock-final {
+  visibility: hidden; text-align: right;
+  animation: clock-show var(--clock-remaining) step-end forwards;
+}
+.clock-window { display: block; width: 1ch; height: 13px; overflow: hidden; }
+.clock-reel { display: block; text-align: right; animation-name: clock-reel; animation-iteration-count: infinite; }
+.clock-reel > span { display: block; height: 13px; line-height: 13px; }
+@keyframes clock-reel {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-13px * var(--clock-rows))); }
+}
+@keyframes clock-hide { to { visibility: hidden; } }
+@keyframes clock-show { to { visibility: visible; } }
+{% endif %}
 .eq { display: inline-flex; flex-shrink: 0; color: #{{bar_color}}; }
 .eq-bars { align-items: flex-end; gap: 2px; height: 12px; }
 .eq-bars i {
@@ -136,15 +158,33 @@
 {% endif %}
 {%- endmacro %}
 
+{% macro elapsed_time() -%}
+{% if clock_data %}
+<span class="clock" style="--clock-remaining: {{clock_data.remaining_seconds}}s;" role="timer" aria-live="off" aria-label="{{progress_data.get('current_time', '0:00')}}">
+  <span class="clock-snapshot" aria-hidden="true">{{progress_data.get('current_time', '0:00')}}</span>
+  <span class="clock-running" aria-hidden="true">
+    <span class="clock-window" style="width: {{clock_data.minute_digits}}ch;">
+      <span class="clock-reel" style="--clock-rows: {{clock_data.minute_steps}}; animation-duration: {{clock_data.minute_steps * 60}}s; animation-timing-function: steps({{clock_data.minute_steps}}, end); animation-delay: -{{clock_data.minute_delay_seconds}}s;">{% for minute in clock_data.minute_values %}<span>{{minute}}</span>{% endfor %}</span>
+    </span><span>:</span><span class="clock-window">
+      <span class="clock-reel" style="--clock-rows: 6; animation-duration: 60s; animation-timing-function: steps(6, end); animation-delay: -{{clock_data.minute_delay_seconds}}s;">{% for digit in [0, 1, 2, 3, 4, 5, 0] %}<span>{{digit}}</span>{% endfor %}</span>
+    </span><span class="clock-window">
+      <span class="clock-reel" style="--clock-rows: 10; animation-duration: 10s; animation-timing-function: steps(10, end); animation-delay: -{{clock_data.second_delay_seconds}}s;">{% for digit in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] %}<span>{{digit}}</span>{% endfor %}</span>
+    </span>
+  </span>
+  <span class="clock-final" aria-hidden="true">{{total_time}}</span>
+</span>
+{% else %}{{progress_data.get('current_time', '0:00')}}{% endif %}
+{%- endmacro %}
+
 {% macro progress(inline=false) -%}
 {% if title_text != 'Not playing' %}
 <div class="progress{% if inline %} progress-inline{% endif %}">
-  {% if inline %}<span class="times">{{progress_data.get('current_time', '0:00')}}</span>{% endif %}
+  {% if inline %}<span class="times">{{elapsed_time()}}</span>{% endif %}
   <div class="track"><div class="fill"></div></div>
   {% if inline %}
   <span class="times">{{total_time|default('0:00')}}</span>
   {% else %}
-  <div class="times"><span>{{progress_data.get('current_time', '0:00')}}</span><span>{{total_time|default('0:00')}}</span></div>
+  <div class="times"><span>{{elapsed_time()}}</span><span>{{total_time|default('0:00')}}</span></div>
   {% endif %}
 </div>
 {% endif %}

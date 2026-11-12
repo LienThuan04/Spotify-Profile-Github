@@ -4,7 +4,26 @@
 
 ## Đang làm
 
-(trống) — Đã sửa CSS của “Set the mood” theo 2 ảnh trong `logError/`: mọi field bên dưới legend đều clear float, grid màu tự co 1/2 cột. 215 pytest/11 Node pass; chưa kiểm geometry bằng browser thực. Bản sửa phát hành tiếp lên master theo yêu cầu trước đó; xem git log/ref để lấy SHA (HEAD trước sửa: `dc35826`). `.gitignore` có thay đổi sẵn của người dùng (ignore `/logError`), giữ nguyên và không đưa vào commit agent.
+Đồng hồ CSS cho spotify-card/bar/album đã hoàn tất và được người dùng cho phép push lên master. Kiểm lại trước phát hành: **246 pytest + 11 Node pass**, reviewer không có finding cần sửa; chưa xác nhận browser/deploy live. Sau khi push thì **dừng, chờ người dùng đưa hướng tiếp theo**, không tự sửa thêm. Giữ README profile chưa commit và .gitignore người dùng ngoài commit. Xem git log/ref để lấy SHA phát hành (HEAD trước sửa: `640062a`).
+
+### Triển khai đồng hồ CSS · 2026-11-12
+
+- RED đã chạy: 16 failed / 15 passed / 111 deselected, đúng do thiếu clock và thanh vẫn tự chạy khi progress_ms=None. Log: `../.task-tools/spotify-readme-xlbb9rpk/clock-red.log`.
+- Đã thêm calculate_clock_data (pha milliseconds, phút/giây), macro elapsed_time và CSS steps/reels. Cùng mốc cuối bài, ẩn clock chạy và hiện thời lượng cuối; recent/missing/ended giữ text tĩnh, offline ẩn timeline. 7 theme cũ và fetching không sửa.
+- Focused GREEN: **31 passed / 111 deselected in 0.67s**. Test đánh giá cấu hình timing/markup SVG thực (không phải browser), gồm 59.8s→1:00, 9:59→10:00, dừng cuối bài và media 3 giờ dưới 60KB. Log: `clock-green.log` cùng thư mục artifact.
+- Full suite trên snapshot giải symlink Windows: **246 passed in 1.31s**; Node **11/11 pass**; 93 SVG README render hợp lệ; diff check qua. So AST 5 hàm fetching/cache với HEAD không đổi; 7 template cũ và util không có diff.
+- Reviewer độc lập đọc code/test và chạy thêm focused 45/45 pass; không có finding cần sửa. Có PytestCacheWarning do cache path không truy cập được ở lượt reviewer, không ảnh hưởng kết quả. Hạn chế: test mô phỏng timing từ markup chưa xác nhận actual transform/clipping/visibility/baseline trong browser.
+- Preview local gồm 3 layout đang chạy, end-of-track, 9:59→10:00, recent, offline; tất cả SVG qua XML và chứa clock không JS. Trang HTML có nút restart để người dùng xem lại animation.
+- Các clock chỉ dự đoán từ snapshot tạo SVG, giống thanh tiến độ; pause/seek/đổi bài cần response ảnh mới. Không tự gọi lại Spotify hay thay fetching/cache.
+- Graph refresh thành công: **527 nodes / 745 edges / 36 communities**, output ignored; index/các branch không thay đổi.
+
+### Chẩn đoán đồng hồ trên card · 2026-11-12
+
+- Người dùng hỏi vì sao thanh tiến độ nhạc chạy nhưng thời gian không chạy và yêu cầu xem repo Spotify.
+- `api/templates/spotify._shared.html.j2:33` chỉ animate `.fill` từ tỷ lệ ban đầu tới 100% trong `progress_seconds`; macro progress ở dòng 139–147 chèn `current_time`/`total_time` thành text. `.times` chỉ có style trình bày, không có animation cập nhật chữ. `api/view.py:234–235` gửi total_time chuỗi và giây còn lại, không tạo đồng hồ phía client.
+- Kiểm actual make_svg ở cả spotify-card/bar/album: progress_ms=196000, duration_ms=314000 cho `3:16` và `5:14`, thanh chạy 118s; render một ảnh mới với progress_ms=201000 cho `3:21`, thanh chạy 113s. Số chỉ đổi khi render/nhận ảnh mới; duration bên phải là tổng bài nên cố định là đúng. Artifact: `../.task-tools/spotify-readme-xlbb9rpk/progress-clock-diagnosis.json`.
+- Checkpoint triển khai cũ đã ghi rõ “giờ hiển thị tĩnh”; đây là phần chưa làm đếm giây, không phải thiếu dữ liệu thời lượng từ Spotify. Chưa triển khai cơ chế đồng hồ mới trong lượt kiểm tra này.
+- Lỗi tìm kiếm đầu tiên: rg nhận glob trong path Windows `api/templates/spotify.*.html.j2` báo os error 123; dùng `rg -g 'spotify.*.html.j2' ... api/templates` chạy được.
 
 ### Lỗi bố cục Set the mood · 2026-11-12
 
@@ -108,7 +127,7 @@ Phạm vi: chỉ thêm mới. 7 theme cũ (kể cả `default`) giữ nguyên t�
 
 ## Bước tiếp theo
 
-- Người dùng chờ Vercel build từ master rồi hard refresh và kiểm “Set the mood” khi chọn Classic, Karaoke, Compact, Apple/Embed và 3 theme Spotify. Kiểm ô màu không tràn panel/chồng nhau; một màu chiếm hàng, hai màu tự chia cột. Không sửa kết nối Vercel.
+- Hoàn tất push đã được phép rồi dừng, chờ người dùng nêu hướng tiếp theo. Người dùng kiểm bản deploy khi Vercel build xong; không tự sửa thêm hoặc đổi cấu hình deploy. README profile vẫn chưa được phép commit/push.
 - Chạy lại JS: `node --test tests/test_builder.js`. Python: cập nhật bản sao giải symlink rồi dùng `.venv/Scripts/python.exe ../.task-tools/spotify-readme-xlbb9rpk/verify_readme.py` (script dùng bản sao `source/`, phải copy thay đổi code vào đó trước khi chạy). Không dùng helper `.pytest_cache` cũ không truy cập được.
 
 Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đang phục vụ `https://spotify-github-profile-lian-harman.vercel.app` với `LienThuan04/Spotify-Profile-Github`, branch `master`; giữ biến môi trường hiện có.
@@ -121,6 +140,9 @@ Việc deploy để sau khi người dùng yêu cầu: nối project Vercel đan
 
 ## Nhật ký
 
+- 2026-11-12 · Codex · Người dùng duyệt push đồng hồ và yêu cầu dừng sau khi xong, chờ hướng tiếp theo. Kiểm lại 246 pytest/11 Node pass; chuẩn bị phát hành riêng repo Spotify, giữ README profile/.gitignore ngoài commit.
+- 2026-11-12 · Codex · Hoàn tất đồng hồ CSS local cho 3 theme Spotify, phase milliseconds + final time; RED→GREEN 31 case mới, full 246 pytest/11 Node pass, reviewer không có finding. Có 7 SVG/HTML preview; chưa browser QA, chưa stage/commit/push.
+- 2026-11-12 · Codex · Xác nhận cả 3 theme Spotify animate thanh nhưng timestamp là text tĩnh; render 196000/201000ms cho 3:16/3:21 trong ảnh khác nhau. Không sửa runtime, không stage/commit/push; profile README vẫn chờ người dùng kiểm.
 - 2026-11-12 · Codex · Sửa lỗi ô màu “Set the mood” bị ép sang phải khi field đầu bị ẩn: clear tất cả sibling sau legend, color-grid auto-fit. 215 pytest/11 Node pass; browser geometry cần người dùng xác nhận; giữ thay đổi .gitignore của người dùng ngoài commit.
 - 2026-11-12 · Codex · Đồng bộ tên hiển thị `LianHarman(LienThuan04)` ở README/LICENSE/footer/pyproject và docs hiện hành; tên upstream chỉ còn trong THIRD_PARTY_NOTICES.md, notice không thay đổi. 215 pytest/11 Node pass; phát hành theo yêu cầu push tiếp của người dùng.
 - 2026-11-12 · Codex · Đã push `a84746d` lên master bằng GitHub connector, tree khớp staged local, đã đồng bộ local; 215 pytest/11 Node pass trước push. Cập nhật checkpoint sau commit code; chưa xác nhận deploy live.

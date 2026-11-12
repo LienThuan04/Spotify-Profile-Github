@@ -514,6 +514,72 @@ def test_spotify_progress_boundaries(render_spotify, progress, duration, width, 
         assert f"animation: progress {seconds}s linear forwards" in svg
 
 
+def _clock_label_at(root, elapsed_seconds):
+    """Evaluate the emitted CSS steps timeline; this does not render a browser."""
+    import math
+    import re
+
+    def declarations(node):
+        return dict(part.strip().split(":", 1) for part in node.get("style", "").split(";") if ":" in part)
+
+    clock = root.find(f'.//{XHTML}span[@class="clock"]')
+    assert clock is not None, "Playing card must include an animated elapsed clock"
+    clock_style = declarations(clock)
+    stop_at = float(clock_style["--clock-remaining"].strip().removesuffix("s"))
+    if elapsed_seconds >= stop_at:
+        return clock.find(f'{XHTML}span[@class="clock-final"]').text
+    digits = []
+    for reel in clock.findall(f'.//{XHTML}span[@class="clock-reel"]'):
+        style = declarations(reel)
+        period = float(style["animation-duration"].strip().removesuffix("s"))
+        delay = float(style["animation-delay"].strip().removesuffix("s"))
+        steps = int(re.fullmatch(r"\s*steps\((\d+),\s*end\)\s*", style["animation-timing-function"]).group(1))
+        phase = ((elapsed_seconds - delay) % period) / period
+        row = math.floor(phase * steps + 1e-9)
+        digits.append(list(reel)[row].text)
+    return digits[0] + ":" + "".join(digits[1:])
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("progress,duration,samples", [
+    (196000, 314000, [(0, "3:16"), (1, "3:17"), (4, "3:20"), (118, "5:14"), (160, "5:14")]),
+    (59800, 62000, [(0, "0:59"), (.19, "0:59"), (.2, "1:00"), (1.2, "1:01"), (2.2, "1:02"), (8, "1:02")]),
+    (599000, 601000, [(0, "9:59"), (.99, "9:59"), (1, "10:00"), (2, "10:01"), (10, "10:01")]),
+    (0, 2500, [(0, "0:00"), (.99, "0:00"), (1, "0:01"), (2.49, "0:02"), (2.5, "0:02")]),
+])
+def test_spotify_elapsed_clock_ticks_and_stops(render_spotify, theme, progress, duration, samples):
+    root, svg = render_spotify(theme=theme, progress_ms=progress, duration_ms=duration)
+    for elapsed, expected in samples:
+        assert _clock_label_at(root, elapsed) == expected
+    clock = root.find(f'.//{XHTML}span[@class="clock"]')
+    remaining = float(dict(part.strip().split(":", 1) for part in clock.get("style").split(";") if ":" in part)["--clock-remaining"].removesuffix("s"))
+    assert remaining == (duration - progress) / 1000
+    assert f"animation: progress {remaining}s linear forwards" in svg
+    assert "<script" not in svg.lower()
+
+
+@pytest.mark.parametrize("theme", SPOTIFY_THEMES)
+@pytest.mark.parametrize("overrides", [
+    {"is_now_playing": False},
+    {"is_now_playing": False, "show_offline": True},
+    {"progress_ms": None},
+    {"duration_ms": None},
+    {"duration_ms": 0},
+    {"progress_ms": 400000, "duration_ms": 314000},
+])
+def test_spotify_elapsed_clock_requires_active_known_progress(render_spotify, theme, overrides):
+    root, svg = render_spotify(theme=theme, **overrides)
+    assert root.find(f'.//{XHTML}span[@class="clock"]') is None
+    assert "animation: progress " not in svg
+
+
+def test_spotify_elapsed_clock_scales_by_minutes_for_long_tracks(render_spotify):
+    root, svg = render_spotify(progress_ms=0, duration_ms=10800000, cover_image=False)
+    assert _clock_label_at(root, 6000) == "100:00"
+    assert _clock_label_at(root, 10801) == "180:00"
+    assert len(svg.encode("utf-8")) < 60000
+
+
 @pytest.mark.parametrize("cover,height", [(True, "336"), (False, "114")])
 def test_spotify_album_offline_shrinks(render_spotify, cover, height):
     root, _ = render_spotify(theme="spotify-album", cover_image=cover, is_now_playing=False, show_offline=True)
