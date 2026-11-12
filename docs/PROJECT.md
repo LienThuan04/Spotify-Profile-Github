@@ -72,3 +72,5 @@ docker compose up                 # 3 service gunicorn: view:5003, login:5001, c
 ## Tài liệu người dùng
 
 `README.md` chỉ giữ giới thiệu + quick start. Chi tiết theme (15), `eq_style` (19), tham số, Card Studio và hướng dẫn phát triển nằm trong `wiki/*.md`. Thêm theme/sóng nhạc mới → cập nhật `wiki/Themes.md` / `wiki/Equalizer-Styles.md`, không nhồi lại vào README.
+
+Tab Wiki trên GitHub (`Spotify-Profile-Github.wiki.git`, branch `master`) là bản sao của `wiki/`. Sửa ở `wiki/` trước, rồi đồng bộ: clone kho wiki, chép `wiki/*.md` sang, bỏ dòng điều hướng cuối trang, đổi link `Xxx.md` → `Xxx`, giữ `_Sidebar.md`/`_Footer.md`, commit + push. README trỏ link sang tab Wiki.

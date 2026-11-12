@@ -26,19 +26,19 @@ Spotify "now playing" cards for GitHub profiles, maintained by [LianHarman(LienT
 
 ## Documentation
 
-Everything else lives in the wiki so this page stays short:
+Everything else lives in the [wiki](https://github.com/LienThuan04/Spotify-Profile-Github/wiki) so this page stays short:
 
 | Page | Contents |
 |---|---|
-| [Card Studio](wiki/Card-Studio.md) | Build your card step by step |
-| [Themes](wiki/Themes.md) | 15 layouts with sizes and live previews |
-| [Equalizer styles](wiki/Equalizer-Styles.md) | 19 animations, including 3D styles |
-| [Options](wiki/Options.md) | Every URL parameter with defaults and previews |
-| [Development](wiki/Development.md) | Self-hosting on Vercel, Firebase setup, running tests |
+| [Card Studio](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Card-Studio) | Build your card step by step |
+| [Themes](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Themes) | 15 layouts with sizes and live previews |
+| [Equalizer styles](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Equalizer-Styles) | 19 animations, including 3D styles |
+| [Options](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Options) | Every URL parameter with defaults and previews |
+| [Development](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Development) | Self-hosting on Vercel, Firebase setup, running tests |
 
 ## Contributing
 
-Bugs and ideas go to [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues). Development setup is in [wiki/Development.md](wiki/Development.md).
+Bugs and ideas go to [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues). Development setup is in [wiki/Development.md](https://github.com/LienThuan04/Spotify-Profile-Github/wiki/Development).
 
 Known bug: local files (not from Spotify's catalogue) can return a 404/500 card.
 
