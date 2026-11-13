@@ -14,6 +14,8 @@ Tests: `tests/test_feedback.py` (3) and `tests/test_builder_template.py` pass, a
 
 Committed and pushed with `Co-authored-by: DanGuangLT`, at the owner's explicit request.
 
+Follow-up fix: the SOON label sat in the first 12px column of the inherited `.theme-mini` grid and overflowed the pill. `.theme-mini.theme-mini-soon` now uses its own centered flex layout, 40×20px, and is hidden at 370px or narrower like other minis. Checked at desktop (3×), 900px and 390px.
+
 ## Earlier
 
 None. The timeline fix and English documentation correction are released. Release bookkeeping is included in the final handoff commit.
