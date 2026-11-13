@@ -78,6 +78,8 @@ svg {
 }
 .brand-mark {
   color:var(--green);
+  display:block;
+  border-radius:26%;
 }
 .brand strong {
   font-weight:650;

@@ -1,3 +1,5 @@
+<p align="center"><img src="api/templates/_builder/icon.svg" width="112" alt="Spotify-Profile-Github icon: a cosmic flame with an equalizer badge" /></p>
+
 # Spotify-Profile-Github
 
 Spotify "now playing" cards for GitHub profiles, maintained by [LianHarman(LienThuan04)](https://github.com/LienThuan04). 15 layouts, 19 animated equalizers, all rendered as plain SVG so they work inside any README.
@@ -45,6 +47,10 @@ More themes and features are still in development. Have an idea for a theme or a
 Bugs and ideas go to [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues). Development setup is in the [Development wiki page](https://github.com/LienThuan04/Spotify-Profile-Github/wiki#development).
 
 Known bug: local files (not from Spotify's catalogue) can return a 404/500 card.
+
+## Icon
+
+The app icon ([api/templates/_builder/icon.svg](api/templates/_builder/icon.svg), inlined as Card Studio's favicon and header logo) is original artwork inspired by the owner's avatar: a cosmic flame rising from a spiked collar, here shading from purple to green, with an equalizer badge. It does not reproduce Spotify's logo or any other product's mark.
 
 ## License
 

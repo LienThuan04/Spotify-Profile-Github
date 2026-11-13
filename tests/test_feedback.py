@@ -37,3 +37,15 @@ def test_builder_shows_a_coming_soon_tile_and_footer_feedback_link():
 def test_builder_falls_back_to_the_github_profile_without_a_feedback_url():
     html = render()
     assert html.count('href="https://github.com/LienThuan04"') >= 2
+
+
+def test_builder_uses_the_original_app_icon_as_favicon_and_brand_mark():
+    from urllib.parse import unquote
+    html = render()
+    assert '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' in html
+    assert '<img class="brand-mark" src="data:image/svg+xml,' in html
+    icon = unquote(html.split('<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,', 1)[1].split('"', 1)[0])
+    assert icon.startswith("<svg") and icon.rstrip().endswith("</svg>")
+    # The old brand mark reproduced the platform's three-arc logo; the new icon is original artwork.
+    assert "M5.3 8.8c4.4-1.3" not in html
+    assert "<image" not in icon and "href=" not in icon.replace('url(#', '')

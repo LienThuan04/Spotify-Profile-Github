@@ -16,6 +16,10 @@ Committed and pushed with `Co-authored-by: DanGuangLT`, at the owner's explicit 
 
 Follow-up fix: the SOON label sat in the first 12px column of the inherited `.theme-mini` grid and overflowed the pill. `.theme-mini.theme-mini-soon` now uses its own centered flex layout, 40×20px, and is hidden at 370px or narrower like other minis. Checked at desktop (3×), 900px and 390px.
 
+## 2026-11-13 App icon
+
+New original app icon `api/templates/_builder/icon.svg`, inspired by the owner's avatar: a cosmic flame on a spiked collar, shading from purple to green, with an equalizer badge. Card Studio inlines it as the favicon and header logo, replacing the three-arc mark that resembled Spotify's logo. The README and wiki show it at the top. `tests/test_feedback.py` covers the favicon and brand mark.
+
 ## Earlier
 
 None. The timeline fix and English documentation correction are released. Release bookkeeping is included in the final handoff commit.

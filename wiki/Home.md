@@ -1,3 +1,5 @@
+<p align="center"><img src="https://github.com/LienThuan04/Spotify-Profile-Github/raw/master/api/templates/_builder/icon.svg" width="96" alt="Spotify-Profile-Github icon" /></p>
+
 # Spotify-Profile-Github Wiki
 
 Spotify "now playing" cards for GitHub profiles, by [LianHarman(LienThuan04)](https://github.com/LienThuan04). Everything is on this one page — use the contents to jump around.
