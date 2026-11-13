@@ -11,6 +11,7 @@ Spotify "now playing" cards for GitHub profiles, by [LianHarman(LienThuan04)](ht
 3. [Equalizer styles](#equalizer-styles)
 4. [Options](#options)
 5. [Development](#development)
+6. [Feedback and ideas](#feedback-and-ideas)
 
 ## Card Studio
 
@@ -22,6 +23,7 @@ Card Studio is the page you land on after connecting your Spotify account. It bu
 4. **Tune colors and shape** — background color, equalizer color (or take it from the album cover), corner radius, and appearance (light/dark) for `apple` and `spotify-embed`.
 5. **Playback options** — show the album cover, show "Not playing" when idle, swap artist/title, hide "Remastered" suffixes, censor profanity, and make the card open the song on click.
 6. **Copy** — choose Markdown, HTML or the plain image URL and paste it into your profile `README.md`. Use **Reset** to start over.
+7. **Share ideas** — the **Coming soon** tile after the themes and **Suggest a theme or feature** in the footer open the feedback page (`FEEDBACK_URL`, or the owner's GitHub profile).
 
 Every parameter Card Studio sets is documented in [Options](#options), so you can also edit the URL by hand.
 
@@ -293,5 +295,11 @@ pytest tests/ --maxfail=5 --disable-warnings -v
 
 ### Other Platforms
 - [Apple Music GitHub Profile](https://github.com/rayriffy/apple-music-github-profile)
+
+<sub>[↑ Back to contents](#contents)</sub>
+
+## Feedback and ideas
+
+More themes and features are still in development. Have an idea for a theme or a feature? Send it to me on [my website](https://lianharman.netlify.app) or through [my GitHub profile](https://github.com/LienThuan04). Card Studio links there too: the **Coming soon** tile under the themes and **Suggest a theme or feature** in the footer.
 
 <sub>[↑ Back to contents](#contents)</sub>

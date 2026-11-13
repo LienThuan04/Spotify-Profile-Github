@@ -36,6 +36,10 @@ Everything else lives on one [wiki page](https://github.com/LienThuan04/Spotify-
 | [Options](https://github.com/LienThuan04/Spotify-Profile-Github/wiki#options) | Every URL parameter with defaults and previews |
 | [Development](https://github.com/LienThuan04/Spotify-Profile-Github/wiki#development) | Self-hosting on Vercel, Firebase setup, running tests |
 
+## Feedback and ideas
+
+More themes and features are still in development. Have an idea for a theme or a feature? Send it to me on [my website](https://lianharman.netlify.app) or through [my GitHub profile](https://github.com/LienThuan04). Card Studio links there too: the **Coming soon** tile under the themes and **Suggest a theme or feature** in the footer.
+
 ## Contributing
 
 Bugs and ideas go to [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues). Development setup is in the [Development wiki page](https://github.com/LienThuan04/Spotify-Profile-Github/wiki#development).

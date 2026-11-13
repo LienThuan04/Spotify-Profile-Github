@@ -11,7 +11,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-from util import spotify
+from util import feedback, spotify
 
 print("Starting Server")
 
@@ -61,6 +61,7 @@ def catch_all(path):
     rendered_data = {
         "uid": user_id,
         "BASE_URL": spotify.BASE_URL,
+        "feedback_url": feedback.feedback_url(),
     }
 
     return render_template("callback.html.j2", **rendered_data)

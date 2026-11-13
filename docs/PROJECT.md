@@ -71,6 +71,8 @@ docker compose up                 # 3 service gunicorn: view:5003, login:5001, c
 
 ## Tài liệu người dùng
 
+Card Studio ends the theme grid with a **Coming soon** tile and adds **Suggest a theme or feature** to the footer. Both point to `FEEDBACK_URL` (`util/feedback.py`; any http(s) URL, else the owner's GitHub profile). `api/callback.py` passes it to the template as `feedback_url`.
+
 `README.md` chỉ giữ giới thiệu + quick start. Chi tiết theme (15), `eq_style` (19), tham số, Card Studio và hướng dẫn phát triển nằm trên **một trang** `wiki/Home.md` (người dùng muốn đọc từ trên xuống, có mục lục). Thêm theme/sóng nhạc mới → cập nhật mục tương ứng trong `wiki/Home.md`, không nhồi lại vào README, không tách thành nhiều trang.
 
 Tab Wiki trên GitHub (`Spotify-Profile-Github.wiki.git`, branch `master`) là bản sao của `wiki/`. Sửa `wiki/Home.md` trước, rồi đồng bộ: clone kho wiki, chép đè `Home.md` (link nội bộ là anchor `#...`, không cần đổi), giữ `_Sidebar.md`/`_Footer.md`, commit + push. README trỏ link sang tab Wiki.

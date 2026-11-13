@@ -4,6 +4,18 @@ Updated: 2026-11-12 by Codex. Resolve final hashes from Git refs; V1.0.1 is the 
 
 ## In progress
 
+None.
+
+## 2026-11-13 Coming soon tile
+
+The owner asked for this. Card Studio gains a **Coming soon** theme tile and a footer link, both pointing to `FEEDBACK_URL` (`util/feedback.py`, falling back to `https://github.com/LienThuan04`). The README and wiki gain a "Feedback and ideas" section.
+
+Tests: `tests/test_feedback.py` (3) and `tests/test_builder_template.py` pass, and `node --test tests/test_builder.js` passes 11/11. The FIREBASE-dependent tests error identically on the base commit, because there is no local `FIREBASE`.
+
+Committed and pushed with `Co-authored-by: DanGuangLT`, at the owner's explicit request.
+
+## Earlier
+
 None. The timeline fix and English documentation correction are released. Release bookkeeping is included in the final handoff commit.
 
 ## Release

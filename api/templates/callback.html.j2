@@ -37,6 +37,9 @@
               <span class="theme-option-content"><span class="theme-mini theme-mini-{{shape}}" aria-hidden="true"><i></i><b></b><b></b><b></b></span><span><strong>{{title}}</strong><small>{{description}}</small></span><span class="theme-check" aria-hidden="true">✓</span></span>
             </label>
             {% endfor %}
+            <a class="theme-option theme-soon" href="{{ feedback_url or 'https://github.com/LienThuan04' }}" target="_blank" rel="noopener noreferrer" aria-label="More themes coming soon. Suggest a theme or feature (opens in a new tab)">
+              <span class="theme-option-content"><span class="theme-mini theme-mini-soon" aria-hidden="true">SOON</span><span><strong>Coming soon</strong><small>Suggest one ↗</small></span></span>
+            </a>
           </div>
         </fieldset>
 
@@ -83,7 +86,7 @@
     </div>
   </main>
 
-  <footer class="site-footer"><span>Spotify-Profile-Github <span class="footer-dot">·</span> By <a href="https://github.com/LienThuan04">LianHarman(LienThuan04)</a></span><a href="https://github.com/LienThuan04/Spotify-Profile-Github#options" target="_blank" rel="noopener noreferrer">Explore the docs ↗</a></footer>
+  <footer class="site-footer"><span>Spotify-Profile-Github <span class="footer-dot">·</span> By <a href="https://github.com/LienThuan04">LianHarman(LienThuan04)</a></span><a href="{{ feedback_url or 'https://github.com/LienThuan04' }}" target="_blank" rel="noopener noreferrer">Suggest a theme or feature ↗</a><a href="https://github.com/LienThuan04/Spotify-Profile-Github#options" target="_blank" rel="noopener noreferrer">Explore the docs ↗</a></footer>
   <noscript><p class="noscript-message">Enable JavaScript to customize your card and generate embed code.</p></noscript>
   <script id="builder-config" type="application/json">{{ {'uid': uid, 'baseUrl': BASE_URL} | tojson }}</script>
   <script>{% include '_builder/builder.js' %}</script>
