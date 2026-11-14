@@ -1,6 +1,6 @@
 # PROGRESS - Spotify-SPARK
 
-Updated: 2026-11-14 by Claude Code. Rename + host change committed and pushed.
+Updated: 2026-11-14 by Claude Code. Rename + host change pushed; wiki synced.
 
 ## In progress
 
@@ -8,7 +8,11 @@ Updated: 2026-11-14 by Claude Code. Rename + host change committed and pushed.
 
 ## Next step
 
-Wait for user feedback. Wiki page still mirrors the new README/host after push; sync the GitHub wiki when asked. Future commits/pushes require a new user request.
+Wait for user feedback. Future commits/pushes require a new user request.
+
+## Journal
+
+- 2026-11-14 - Claude Code - Renamed product and repo to Spotify-SPARK (SPARK = Spotify Presence Activity Render Kit), moved production host to `spotify-spark.vercel.app`, synced GitHub wiki. Commits `b0123f2` (rename+host, Co-authored-by DanGuangLT) and `2078b80` (checkpoint) on `master`; profile README `b779d08` on `LienThuan04/main`; wiki `379231e`.
 
 ## 2026-11-13 Coming soon tile
 
