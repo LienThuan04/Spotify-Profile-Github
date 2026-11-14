@@ -1,7 +1,9 @@
-# Spotify-Profile-Github — Spotify "Now Playing" card
+# Spotify-SPARK — Spotify Presence Activity Render Kit
 
-- Repo: `github.com/LienThuan04/Spotify-Profile-Github` (branch **`master`**), duy trì bởi `LianHarman(LienThuan04)`. Giấy phép gốc: `THIRD_PARTY_NOTICES.md`.
-- Deploy: Vercel → `https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=<spotify_uid>`.
+SPARK renders the current Spotify presence (now playing, or a recent track) as an SVG card for GitHub profiles.
+
+- Repo: `github.com/LienThuan04/Spotify-SPARK` (branch **`master`**), duy trì bởi `LianHarman(LienThuan04)`. Renamed from `Spotify-Profile-Github` on 2026-11-14. Giấy phép gốc: `THIRD_PARTY_NOTICES.md`.
+- Deploy: Vercel → `https://spotify-spark.vercel.app/api/view?uid=<spotify_uid>`.
 - Stack: Python ≥3.12 (CI chạy 3.11 + 3.12), Flask 3, Firebase Firestore, Pillow + colorgram, Jinja2 templates, pytest.
 
 ## Endpoints (`api/app.py` gom tất cả cho Vercel / chạy local)
@@ -79,4 +81,4 @@ Card Studio ends the theme grid with a **Coming soon** tile and adds **Suggest a
 
 `README.md` chỉ giữ giới thiệu + quick start. Chi tiết theme (15), `eq_style` (19), tham số, Card Studio và hướng dẫn phát triển nằm trên **một trang** `wiki/Home.md` (người dùng muốn đọc từ trên xuống, có mục lục). Thêm theme/sóng nhạc mới → cập nhật mục tương ứng trong `wiki/Home.md`, không nhồi lại vào README, không tách thành nhiều trang.
 
-Tab Wiki trên GitHub (`Spotify-Profile-Github.wiki.git`, branch `master`) là bản sao của `wiki/`. Sửa `wiki/Home.md` trước, rồi đồng bộ: clone kho wiki, chép đè `Home.md` (link nội bộ là anchor `#...`, không cần đổi), giữ `_Sidebar.md`/`_Footer.md`, commit + push. README trỏ link sang tab Wiki.
+Tab Wiki trên GitHub (`Spotify-SPARK.wiki.git`, branch `master`) là bản sao của `wiki/`. Sửa `wiki/Home.md` trước, rồi đồng bộ: clone kho wiki, chép đè `Home.md` (link nội bộ là anchor `#...`, không cần đổi), giữ `_Sidebar.md`/`_Footer.md`, commit + push. README trỏ link sang tab Wiki.

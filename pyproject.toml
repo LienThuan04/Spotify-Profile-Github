@@ -1,5 +1,5 @@
 [project]
-name = "spotify-profile-github"
+name = "spotify-spark"
 version = "1.0.0"
 authors = [{ name = "LianHarman(LienThuan04)" }]
 requires-python = ">=3.12"

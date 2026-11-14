@@ -1,7 +1,7 @@
-# AGENTS.md — Spotify-Profile-Github
+# AGENTS.md — Spotify-SPARK
 
-Spotify-Profile-Github của `LianHarman(LienThuan04)`. API sinh card Spotify now playing bằng Python, Flask và Firestore.
-Repo: `https://github.com/LienThuan04/Spotify-Profile-Github`. Branch: `master`.
+Spotify-SPARK (Spotify Presence Activity Render Kit) của `LianHarman(LienThuan04)`. API sinh card Spotify now playing bằng Python, Flask và Firestore.
+Repo: `https://github.com/LienThuan04/Spotify-SPARK`. Branch: `master`. Tên cũ `Spotify-Profile-Github` không còn dùng.
 
 ## Bắt đầu phiên
 

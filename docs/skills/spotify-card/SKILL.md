@@ -1,9 +1,9 @@
 ---
 name: spotify-card
-description: Change the Spotify now-playing card in Spotify-Profile-Github — add or edit a theme template, add a query parameter, fix token/Firestore issues, or run it locally. Use whenever the task touches spotify-github-profile/.
+description: Change the Spotify now-playing card in Spotify-SPARK (Spotify Presence Activity Render Kit) — add or edit a theme template, add a query parameter, fix token/Firestore issues, or run it locally. Use whenever the task touches spotify-github-profile/.
 ---
 
-# Spotify card (Spotify-Profile-Github)
+# Spotify card (Spotify-SPARK)
 
 Bối cảnh repo và luồng request: `docs/PROJECT.md`. Branch mặc định là **`master`**.
 

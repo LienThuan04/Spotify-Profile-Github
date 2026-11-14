@@ -1,4 +1,9 @@
-# Decisions — Spotify-Profile-Github
+# Decisions — Spotify-SPARK
+
+## 2026-11-14 — Product name is Spotify-SPARK
+
+- The owner renamed the GitHub repository to `LienThuan04/Spotify-SPARK`. SPARK means Spotify Presence Activity Render Kit.
+- Use `Spotify-SPARK` in the README, wiki, Card Studio, error links, and docs. Do not revive `Spotify-Profile-Github`. Production host is `spotify-spark.vercel.app`. Package and image slug: `spotify-spark`.
 
 ## 2026-11-14 — Split the card cache headers
 
@@ -22,7 +27,7 @@
 ## 2026-11-12 — Repo độc lập của Lian Harman
 
 - **Lý do:** người dùng yêu cầu tên sản phẩm/repo mới và lịch sử commit mới; giữ ghi công tác giả gốc.
-- **Hệ quả:** origin là `https://github.com/LienThuan04/Spotify-Profile-Github.git`, branch `master`. README/LICENSE đứng tên tác giả hiện tại theo quy ước ở trên, giấy phép gốc upstream ở `THIRD_PARTY_NOTICES.md`; code giữ nguyên hành vi; commit không thêm `Co-authored-by`. Push theo yêu cầu người dùng.
+- **Hệ quả:** origin là `https://github.com/LienThuan04/Spotify-SPARK.git`, branch `master`. README/LICENSE đứng tên tác giả hiện tại theo quy ước ở trên, giấy phép gốc upstream ở `THIRD_PARTY_NOTICES.md`; code giữ nguyên hành vi; commit không thêm `Co-authored-by`. Push theo yêu cầu người dùng.
 
 ## 2026-11-12 — Bộ nhớ và hướng dẫn nằm trong repo
 

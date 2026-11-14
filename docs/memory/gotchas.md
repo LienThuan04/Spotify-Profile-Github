@@ -1,4 +1,4 @@
-# Gotchas — Spotify-Profile-Github
+# Gotchas — Spotify-SPARK
 
 Triệu chứng → nguyên nhân → cách xử lý. Ghi thêm sau khi xác minh; bỏ mục đã hết hiệu lực.
 

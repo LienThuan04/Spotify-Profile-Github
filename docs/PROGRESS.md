@@ -1,10 +1,14 @@
-# PROGRESS - Spotify-Profile-Github
+# PROGRESS - Spotify-SPARK
 
-Updated: 2026-11-14 by Claude Code. Cache-header fix is local only, not deployed.
+Updated: 2026-11-14 by Claude Code. Rename + host change ready to commit.
 
 ## In progress
 
-None. `apply_card_cache()` in `api/view.py` now sends `Cache-Control: public, max-age=60` (what GitHub Camo keeps) and `Vercel-CDN-Cache-Control: public, s-maxage=60, stale-while-revalidate=86400` (Vercel CDN only). This is the shared API, so every embed of this host gets it after one deploy of this project. Not committed or pushed. Check: `TESTING=true .venv/Scripts/python.exe -m pytest tests/test_api_view.py -k "cache or offline or now_playing or without_uid or redirect"` — 26 passed.
+(empty)
+
+## Next step
+
+Commit and push per owner request, then post-deploy Camo recheck.
 
 ## 2026-11-13 Coming soon tile
 
@@ -27,7 +31,7 @@ None. The timeline fix and English documentation correction are released. Releas
 ## Release
 
 - Runtime fix: `3e5f70d`; English project additions and language rule: `ab8350e`. Master and annotated tag V1.0.1 are aligned with the final released HEAD. V1.0.0 remains at `31bdbc7`.
-- Release: https://github.com/LienThuan04/Spotify-Profile-Github/releases/tag/V1.0.1 . Title and notes are English. Existing release ID 442704488 was externally retagged during publication; its metadata was updated after checking its ID and update timestamp.
+- Release: https://github.com/LienThuan04/Spotify-SPARK/releases/tag/V1.0.1 . Title and notes are English. Existing release ID 442704488 was externally retagged during publication; its metadata was updated after checking its ID and update timestamp.
 - GitHub Wiki synchronized at `956a583`; only Home.md changed. New project content and release notes must be English; user-facing conversation remains Vietnamese. See AGENTS.md.
 - Verification: 706 pytest passed in 2.40s, 11 Node tests passed, 105 SVG previews validated. Independent review ran 602 view tests and found no issues. Runtime/tests are unchanged by subsequent documentation commits; whitespace and English-addition scans passed.
 - All 15 themes share CSS progress/clock behavior. Fetching, caching, Firestore, symlink stubs, and original license notices remain unchanged. Mini is 96px tall (72px offline); five classic themes gain 33px when showing a timeline.

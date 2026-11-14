@@ -1,10 +1,10 @@
-<p align="center"><img src="https://github.com/LienThuan04/Spotify-Profile-Github/raw/master/api/templates/_builder/icon.svg" width="96" alt="Spotify-Profile-Github icon" /></p>
+<p align="center"><img src="https://github.com/LienThuan04/Spotify-SPARK/raw/master/api/templates/_builder/icon.svg" width="96" alt="Spotify-SPARK icon" /></p>
 
-# Spotify-Profile-Github Wiki
+# Spotify-SPARK Wiki
 
-Spotify "now playing" cards for GitHub profiles, by [LianHarman(LienThuan04)](https://github.com/LienThuan04). Everything is on this one page — use the contents to jump around.
+**SPARK** is the Spotify Presence Activity Render Kit: SVG cards of what is playing on Spotify, for GitHub profiles, by [LianHarman(LienThuan04)](https://github.com/LienThuan04). Everything is on this one page — use the contents to jump around.
 
-**Quick start:** [connect with Spotify](https://spotify-github-profile-lian-harman.vercel.app/api/login) → build your card in [Card Studio](#card-studio) → paste the code into your profile README.
+**Quick start:** [connect with Spotify](https://spotify-spark.vercel.app/api/login) → build your card in [Card Studio](#card-studio) → paste the code into your profile README.
 
 ## Contents
 
@@ -19,7 +19,7 @@ Spotify "now playing" cards for GitHub profiles, by [LianHarman(LienThuan04)](ht
 
 Card Studio is the page you land on after connecting your Spotify account. It builds your card URL for you, with a live preview.
 
-1. **Connect** — open [https://spotify-github-profile-lian-harman.vercel.app/api/login](https://spotify-github-profile-lian-harman.vercel.app/api/login) and allow access to your currently playing and recently played tracks.
+1. **Connect** — open [https://spotify-spark.vercel.app/api/login](https://spotify-spark.vercel.app/api/login) and allow access to your currently playing and recently played tracks.
 2. **Choose a layout** — pick one of the 15 [themes](#themes). Controls that do not apply to the chosen theme are hidden.
 3. **Pick an equalizer** — Spotify themes support 19 [equalizer styles](#equalizer-styles).
 4. **Tune colors and shape** — background color, equalizer color (or take it from the album cover), corner radius, and appearance (light/dark) for `apple` and `spotify-embed`.
@@ -52,35 +52,35 @@ All 15 themes include a progress bar with elapsed time and total duration. Durin
 
 <table>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-card</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card" width="100%" alt="theme=spotify-card" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-bar</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-bar" width="100%" alt="theme=spotify-bar" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-card</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card" width="100%" alt="theme=spotify-card" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-bar</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-bar" width="100%" alt="theme=spotify-bar" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-album</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-album" width="100%" alt="theme=spotify-album" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-mini</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-mini" width="100%" alt="theme=spotify-mini" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-album</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-album" width="100%" alt="theme=spotify-album" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-mini</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-mini" width="100%" alt="theme=spotify-mini" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-vinyl</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-vinyl" width="100%" alt="theme=spotify-vinyl" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-banner</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-banner" width="100%" alt="theme=spotify-banner" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-vinyl</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-vinyl" width="100%" alt="theme=spotify-vinyl" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-banner</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-banner" width="100%" alt="theme=spotify-banner" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-glass</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-glass" width="100%" alt="theme=spotify-glass" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-mobile</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-mobile" width="100%" alt="theme=spotify-mobile" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-glass</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-glass" width="100%" alt="theme=spotify-glass" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-mobile</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-mobile" width="100%" alt="theme=spotify-mobile" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=default</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=default" width="100%" alt="theme=default" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=compact</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=compact" width="100%" alt="theme=compact" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=default</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=default" width="100%" alt="theme=default" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=compact</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=compact" width="100%" alt="theme=compact" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=natemoo-re</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=natemoo-re" width="100%" alt="theme=natemoo-re" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=novatorem</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=novatorem" width="100%" alt="theme=novatorem" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=natemoo-re</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=natemoo-re" width="100%" alt="theme=natemoo-re" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=novatorem</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=novatorem" width="100%" alt="theme=novatorem" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=karaoke</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=karaoke" width="100%" alt="theme=karaoke" /></td>
-    <td align="center" valign="top" width="50%"><code>theme=apple</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=apple" width="100%" alt="theme=apple" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=karaoke</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=karaoke" width="100%" alt="theme=karaoke" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=apple</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=apple" width="100%" alt="theme=apple" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>theme=spotify-embed</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-embed" width="100%" alt="theme=spotify-embed" /></td>
+    <td align="center" valign="top" width="50%"><code>theme=spotify-embed</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-embed" width="100%" alt="theme=spotify-embed" /></td>
     <td align="center" valign="top" width="50%"></td>
   </tr>
 </table>
@@ -103,43 +103,43 @@ Equalizers animate only while a track is playing; recently played cards show the
 
 <table>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=bars</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=bars" width="100%" alt="theme=spotify-card&eq_style=bars" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=spectrum</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=spectrum" width="100%" alt="theme=spotify-card&eq_style=spectrum" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=bars</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=bars" width="100%" alt="theme=spotify-card&eq_style=bars" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=spectrum</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=spectrum" width="100%" alt="theme=spotify-card&eq_style=spectrum" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=mirror</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=mirror" width="100%" alt="theme=spotify-card&eq_style=mirror" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=wave</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=wave" width="100%" alt="theme=spotify-card&eq_style=wave" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=mirror</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=mirror" width="100%" alt="theme=spotify-card&eq_style=mirror" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=wave</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=wave" width="100%" alt="theme=spotify-card&eq_style=wave" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=pulse</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=pulse" width="100%" alt="theme=spotify-card&eq_style=pulse" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=iso</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=iso" width="100%" alt="theme=spotify-card&eq_style=iso" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=pulse</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=pulse" width="100%" alt="theme=spotify-card&eq_style=pulse" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=iso</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=iso" width="100%" alt="theme=spotify-card&eq_style=iso" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=ribbon</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=ribbon" width="100%" alt="theme=spotify-card&eq_style=ribbon" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=floor</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=floor" width="100%" alt="theme=spotify-card&eq_style=floor" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=ribbon</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=ribbon" width="100%" alt="theme=spotify-card&eq_style=ribbon" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=floor</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=floor" width="100%" alt="theme=spotify-card&eq_style=floor" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=dots</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=dots" width="100%" alt="theme=spotify-card&eq_style=dots" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=vu</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=vu" width="100%" alt="theme=spotify-card&eq_style=vu" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=dots</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=dots" width="100%" alt="theme=spotify-card&eq_style=dots" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=vu</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=vu" width="100%" alt="theme=spotify-card&eq_style=vu" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=ring</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=ring" width="100%" alt="theme=spotify-card&eq_style=ring" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=ripple</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=ripple" width="100%" alt="theme=spotify-card&eq_style=ripple" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=ring</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=ring" width="100%" alt="theme=spotify-card&eq_style=ring" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=ripple</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=ripple" width="100%" alt="theme=spotify-card&eq_style=ripple" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=heartbeat</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=heartbeat" width="100%" alt="theme=spotify-card&eq_style=heartbeat" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=pixel</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=pixel" width="100%" alt="theme=spotify-card&eq_style=pixel" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=heartbeat</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=heartbeat" width="100%" alt="theme=spotify-card&eq_style=heartbeat" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=pixel</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=pixel" width="100%" alt="theme=spotify-card&eq_style=pixel" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=glow</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=glow" width="100%" alt="theme=spotify-card&eq_style=glow" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=bubbles</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=bubbles" width="100%" alt="theme=spotify-card&eq_style=bubbles" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=glow</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=glow" width="100%" alt="theme=spotify-card&eq_style=glow" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=bubbles</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=bubbles" width="100%" alt="theme=spotify-card&eq_style=bubbles" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=skyline</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=skyline" width="100%" alt="theme=spotify-card&eq_style=skyline" /></td>
-    <td align="center" valign="top" width="50%"><code>eq_style=tunnel</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=tunnel" width="100%" alt="theme=spotify-card&eq_style=tunnel" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=skyline</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=skyline" width="100%" alt="theme=spotify-card&eq_style=skyline" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=tunnel</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=tunnel" width="100%" alt="theme=spotify-card&eq_style=tunnel" /></td>
   </tr>
   <tr>
-    <td align="center" valign="top" width="50%"><code>eq_style=none</code><br/><img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=none" width="100%" alt="theme=spotify-card&eq_style=none" /></td>
+    <td align="center" valign="top" width="50%"><code>eq_style=none</code><br/><img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=none" width="100%" alt="theme=spotify-card&eq_style=none" /></td>
     <td align="center" valign="top" width="50%"></td>
   </tr>
 </table>
@@ -152,31 +152,31 @@ Add these as query parameters to your card URL alongside your `uid`. The preview
 
 | Parameter | Description | Default | Live preview |
 |-----------|-------------|---------|--------------|
-| `theme` | Card layout — see [Themes](#themes). | `default` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card" width="260" alt="theme=spotify-card" /> |
-| `eq_style` | Equalizer for Spotify themes — see [Equalizer styles](#equalizer-styles). Unknown values fall back to `bars`. | `bars` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=iso" width="260" alt="theme=spotify-card&eq_style=iso" /> |
-| `background_color` | Background color (hex without `#`). | `121212` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;background_color=0d1117" width="260" alt="theme=spotify-card&background_color=0d1117" /> |
-| `border_radius` | Border radius in pixels. | `10` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;border_radius=24" width="260" alt="theme=spotify-card&border_radius=24" /> |
-| `bar_color` | Equalizer color (hex without `#`). | `1ed760` for Spotify themes; `53b14f` otherwise | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=spectrum&amp;bar_color=ff4fd8" width="260" alt="theme=spotify-card&eq_style=spectrum&bar_color=ff4fd8" /> |
-| `bar_color_cover` | Take the equalizer color from the album cover (`true`/`false`). | `false` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=spectrum&amp;bar_color_cover=true" width="260" alt="theme=spotify-card&eq_style=spectrum&bar_color_cover=true" /> |
-| `cover_image` | Show the album cover (`true`/`false`). | `true` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;cover_image=false" width="260" alt="theme=spotify-card&cover_image=false" /> |
-| `show_offline` | Show "Not playing" instead of a recently played track when nothing is playing (`true`/`false`). | `false` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;show_offline=true" width="260" alt="theme=spotify-card&show_offline=true" /> |
-| `interchange` | Swap artist and song name positions (`true`/`false`). | `false` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;interchange=true" width="260" alt="theme=spotify-card&interchange=true" /> |
-| `mode` | Color mode for `apple` and `spotify-embed` (`light`/`dark`). | `light` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=apple&amp;mode=dark" width="260" alt="theme=apple&mode=dark" /> |
-| `hide_remaster` | Strip "Remastered" suffixes from song titles (`true`/`false`). | `false` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;hide_remaster=true" width="260" alt="theme=spotify-card&hide_remaster=true" /> |
-| `profanity` | Censor profanity in titles (`true`/`false`). | `false` | <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;profanity=true" width="260" alt="theme=spotify-card&profanity=true" /> |
+| `theme` | Card layout — see [Themes](#themes). | `default` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card" width="260" alt="theme=spotify-card" /> |
+| `eq_style` | Equalizer for Spotify themes — see [Equalizer styles](#equalizer-styles). Unknown values fall back to `bars`. | `bars` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=iso" width="260" alt="theme=spotify-card&eq_style=iso" /> |
+| `background_color` | Background color (hex without `#`). | `121212` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;background_color=0d1117" width="260" alt="theme=spotify-card&background_color=0d1117" /> |
+| `border_radius` | Border radius in pixels. | `10` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;border_radius=24" width="260" alt="theme=spotify-card&border_radius=24" /> |
+| `bar_color` | Equalizer color (hex without `#`). | `1ed760` for Spotify themes; `53b14f` otherwise | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=spectrum&amp;bar_color=ff4fd8" width="260" alt="theme=spotify-card&eq_style=spectrum&bar_color=ff4fd8" /> |
+| `bar_color_cover` | Take the equalizer color from the album cover (`true`/`false`). | `false` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;eq_style=spectrum&amp;bar_color_cover=true" width="260" alt="theme=spotify-card&eq_style=spectrum&bar_color_cover=true" /> |
+| `cover_image` | Show the album cover (`true`/`false`). | `true` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;cover_image=false" width="260" alt="theme=spotify-card&cover_image=false" /> |
+| `show_offline` | Show "Not playing" instead of a recently played track when nothing is playing (`true`/`false`). | `false` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;show_offline=true" width="260" alt="theme=spotify-card&show_offline=true" /> |
+| `interchange` | Swap artist and song name positions (`true`/`false`). | `false` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;interchange=true" width="260" alt="theme=spotify-card&interchange=true" /> |
+| `mode` | Color mode for `apple` and `spotify-embed` (`light`/`dark`). | `light` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=apple&amp;mode=dark" width="260" alt="theme=apple&mode=dark" /> |
+| `hide_remaster` | Strip "Remastered" suffixes from song titles (`true`/`false`). | `false` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;hide_remaster=true" width="260" alt="theme=spotify-card&hide_remaster=true" /> |
+| `profanity` | Censor profanity in titles (`true`/`false`). | `false` | <img src="https://spotify-spark.vercel.app/api/view?uid=316jq374l35difgshqzgcymbjolu&amp;theme=spotify-card&amp;profanity=true" width="260" alt="theme=spotify-card&profanity=true" /> |
 | `redirect` | Open the current or recently played track on Spotify instead of returning an image — use it as the link target (`true`/`false`). | `false` | — |
 
 ### Example
 
 ```
-https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=YOUR_UID&theme=spotify-card&eq_style=iso&cover_image=true&show_offline=true
+https://spotify-spark.vercel.app/api/view?uid=YOUR_UID&theme=spotify-card&eq_style=iso&cover_image=true&show_offline=true
 ```
 
 Wrap it in a link with `redirect=true` so clicking the card opens the song:
 
 ```html
-<a href="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=YOUR_UID&amp;redirect=true">
-  <img src="https://spotify-github-profile-lian-harman.vercel.app/api/view?uid=YOUR_UID&amp;theme=spotify-card&amp;eq_style=iso" alt="Spotify Now Playing" />
+<a href="https://spotify-spark.vercel.app/api/view?uid=YOUR_UID&amp;redirect=true">
+  <img src="https://spotify-spark.vercel.app/api/view?uid=YOUR_UID&amp;theme=spotify-card&amp;eq_style=iso" alt="Spotify Now Playing" />
 </a>
 ```
 
@@ -288,12 +288,12 @@ pytest tests/ --maxfail=5 --disable-warnings -v
 ### How to Contribute
 
 - Develop locally and submit a pull request!
-- Submit newly encountered bugs to the [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues) page
-- Submit feature suggestions to the [Issues](https://github.com/LienThuan04/Spotify-Profile-Github/issues) page, with the label [Feature Suggestion]
+- Submit newly encountered bugs to the [Issues](https://github.com/LienThuan04/Spotify-SPARK/issues) page
+- Submit feature suggestions to the [Issues](https://github.com/LienThuan04/Spotify-SPARK/issues) page, with the label [Feature Suggestion]
 
 ### Known Bugs
 
-[404/500 Error when playing local files](https://github.com/LienThuan04/Spotify-Profile-Github/issues)
+[404/500 Error when playing local files](https://github.com/LienThuan04/Spotify-SPARK/issues)
 
 ### Other Platforms
 - [Apple Music GitHub Profile](https://github.com/rayriffy/apple-music-github-profile)

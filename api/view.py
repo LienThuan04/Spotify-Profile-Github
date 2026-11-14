@@ -496,7 +496,7 @@ def catch_all(path):
 
         # Handle invalid token
         return Response(
-            "Error: Invalid Spotify access_token or refresh_token. Possibly the token revoked. Please re-login at https://github.com/LienThuan04/Spotify-Profile-Github"
+            "Error: Invalid Spotify access_token or refresh_token. Possibly the token revoked. Please re-login at https://github.com/LienThuan04/Spotify-SPARK"
         )
 
     if (show_offline and not is_now_playing) or (item is None):

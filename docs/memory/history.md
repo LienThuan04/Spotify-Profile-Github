@@ -2,7 +2,7 @@
 
 ## Earlier work - archived on 2026-11-12
 
-- Established the independent repository at `https://github.com/LienThuan04/Spotify-Profile-Github`, branch `master`. The original upstream MIT notice remains in `THIRD_PARTY_NOTICES.md`; displayed attribution is `LianHarman(LienThuan04)`.
+- Established the independent repository on branch `master` (then named `Spotify-Profile-Github`). On 2026-11-14 the owner renamed it to `https://github.com/LienThuan04/Spotify-SPARK` (Spotify Presence Activity Render Kit). The original upstream MIT notice remains in `THIRD_PARTY_NOTICES.md`; displayed attribution is `LianHarman(LienThuan04)`.
 - Early commits: root `64f5304`, documentation `2cd1a79`, Spotify layouts `ba38dde`, and simulated 3D equalizers `b337d19`. A full-history bundle was verified before the repository history was replaced.
 - Added Spotify card/bar/album layouts, shared CSS macros, six equalizer styles, and local SVG previews. The initial expanded suite passed 204 tests. Seven classic themes and Spotify fetching/caching were preserved at that stage.
 - Added iso/ribbon/floor equalizers and Card Studio controls. Card Studio generates URL, Markdown, and HTML embeds with theme-aware options, cover-derived colors, debounced previews, copy tabs, and reset behavior.

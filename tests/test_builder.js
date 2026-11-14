@@ -78,7 +78,7 @@ test('invalid enums/colors/radius normalize to working supported values', () => 
 });
 
 test('disabling song links keeps the project as the link destination', () => {
-  assert.equal(build({ open_song: false }).linkUrl, 'https://github.com/LienThuan04/Spotify-Profile-Github');
+  assert.equal(build({ open_song: false }).linkUrl, 'https://github.com/LienThuan04/Spotify-SPARK');
 });
 
 function pageFixture() {

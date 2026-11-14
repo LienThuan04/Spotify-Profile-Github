@@ -1,6 +1,6 @@
 (function () {
   'use strict';
-  const PROJECT_URL = 'https://github.com/LienThuan04/Spotify-Profile-Github';
+  const PROJECT_URL = 'https://github.com/LienThuan04/Spotify-SPARK';
   const THEMES = ['spotify-card', 'spotify-bar', 'spotify-album', 'spotify-mini', 'spotify-vinyl', 'spotify-banner', 'spotify-glass', 'spotify-mobile', 'default', 'compact', 'natemoo-re', 'novatorem', 'karaoke', 'apple', 'spotify-embed'];
   const EQ_STYLES = ['bars', 'spectrum', 'mirror', 'wave', 'pulse', 'iso', 'ribbon', 'floor', 'dots', 'vu', 'ring', 'ripple', 'heartbeat', 'pixel', 'glow', 'bubbles', 'skyline', 'tunnel', 'none'];
   const DEFAULT_STATE = Object.freeze({ theme: 'spotify-card', eq_style: 'bars', bar_color: null, background_color: '121212', border_radius: 10, mode: 'dark', cover_image: true, open_song: true, show_offline: false, interchange: false, hide_remaster: false, profanity: false, bar_color_cover: false });
@@ -48,7 +48,7 @@
     const escapeAttribute = (value) => value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
     return {
       imageUrl, linkUrl,
-      markdown: `[![Spotify-Profile-Github](${imageUrl})](${linkUrl})`,
+      markdown: `[![Spotify-SPARK](${imageUrl})](${linkUrl})`,
       html: `<a href="${escapeAttribute(linkUrl)}">\n  <img src="${escapeAttribute(imageUrl)}" alt="Spotify now playing" />\n</a>`
     };
   }
