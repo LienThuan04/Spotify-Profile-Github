@@ -31,7 +31,9 @@ catch_all(uid, query params)
   ├─ load_image() bìa album → base64 (+ colorgram nếu bar_color_cover=true)
   ├─ profanity_check() / remove_remaster() (tuỳ chọn)
   └─ make_svg() → render_template("spotify.<theme>.html.j2")
-→ image/svg+xml, Cache-Control: public, max-age=0, s-maxage=10, stale-while-revalidate=3600
+→ image/svg+xml
+  Cache-Control: public, max-age=60
+  Vercel-CDN-Cache-Control: public, s-maxage=60, stale-while-revalidate=86400
 ```
 
 ## Themes

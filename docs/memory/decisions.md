@@ -1,5 +1,10 @@
 # Decisions — Spotify-Profile-Github
 
+## 2026-11-14 — Split the card cache headers
+
+- GitHub Camo only reads `Cache-Control`. Putting `s-maxage` on that header made Vercel strip it and send `max-age=0`, so every README view refetched the SVG and a cold start (~5s) became a broken image link.
+- `apply_card_cache()` now sets `Cache-Control: public, max-age=60` for Camo and `Vercel-CDN-Cache-Control: public, s-maxage=60, stale-while-revalidate=86400` for the Vercel CDN only. Do not put `s-maxage` back on `Cache-Control`. The 2026-11-11 cache note below is superseded.
+
 ## 2026-11-12 — Project language
 
 - The user requested English for project content. Write new documentation, handoffs, UI copy, and release notes in English; continue communicating with the user in Vietnamese. The language rule in AGENTS.md records this preference.
@@ -32,4 +37,4 @@
 ## 2026-11-11 — Cache card ở Vercel edge
 
 - **Lý do:** GitHub camo timeout khi Vercel cold start.
-- **Hệ quả:** `s-maxage=10, stale-while-revalidate=3600`. Presence/now playing có thể trễ vài chục giây.
+- **Hệ quả:** lúc đó `s-maxage=10, stale-while-revalidate=3600`. Đã bị thay bởi mục 2026-11-14: Camo không thấy `s-maxage` trên `Cache-Control`.

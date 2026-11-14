@@ -446,6 +446,17 @@ def get_song_info(uid, show_offline):
     return item, is_now_playing, progress_ms, duration_ms
 
 
+def apply_card_cache(resp):
+    # Camo only reads Cache-Control. s-maxage on that header is stripped by
+    # Vercel, leaving max-age=0, so every README view refetches and a cold
+    # start (~5s) becomes a broken image. CDN freshness stays on the Vercel header.
+    resp.headers["Cache-Control"] = "public, max-age=60"
+    resp.headers["Vercel-CDN-Cache-Control"] = (
+        "public, s-maxage=60, stale-while-revalidate=86400"
+    )
+    return resp
+
+
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def catch_all(path):
@@ -514,8 +525,7 @@ def catch_all(path):
             eq_style=eq_style,
         )
         resp = Response(svg, mimetype="image/svg+xml")
-        resp.headers["Cache-Control"] = "public, max-age=0, s-maxage=10, stale-while-revalidate=86400"
-        return resp
+        return apply_card_cache(resp)
 
     currently_playing_type = item.get("currently_playing_type", "track")
 
@@ -603,7 +613,7 @@ def catch_all(path):
     )
 
     resp = Response(svg, mimetype="image/svg+xml")
-    resp.headers["Cache-Control"] = "public, max-age=0, s-maxage=10, stale-while-revalidate=86400"
+    resp = apply_card_cache(resp)
 
     print("cache size:", getsizeof(CACHE_TOKEN_INFO))
 

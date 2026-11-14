@@ -1,10 +1,10 @@
 # PROGRESS - Spotify-Profile-Github
 
-Updated: 2026-11-12 by Codex. Resolve final hashes from Git refs; V1.0.1 is the release tag.
+Updated: 2026-11-14 by Claude Code. Cache-header fix is local only, not deployed.
 
 ## In progress
 
-None.
+None. `apply_card_cache()` in `api/view.py` now sends `Cache-Control: public, max-age=60` (what GitHub Camo keeps) and `Vercel-CDN-Cache-Control: public, s-maxage=60, stale-while-revalidate=86400` (Vercel CDN only). This is the shared API, so every embed of this host gets it after one deploy of this project. Not committed or pushed. Check: `TESTING=true .venv/Scripts/python.exe -m pytest tests/test_api_view.py -k "cache or offline or now_playing or without_uid or redirect"` — 26 passed.
 
 ## 2026-11-13 Coming soon tile
 
