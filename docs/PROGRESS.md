@@ -1,6 +1,6 @@
 # PROGRESS - Spotify-SPARK
 
-Updated: 2026-11-14 by Claude Code. Rename + host change ready to commit.
+Updated: 2026-11-14 by Claude Code. Rename + host change committed and pushed.
 
 ## In progress
 
@@ -8,7 +8,7 @@ Updated: 2026-11-14 by Claude Code. Rename + host change ready to commit.
 
 ## Next step
 
-Commit and push per owner request, then post-deploy Camo recheck.
+Wait for user feedback. Wiki page still mirrors the new README/host after push; sync the GitHub wiki when asked. Future commits/pushes require a new user request.
 
 ## 2026-11-13 Coming soon tile
 
